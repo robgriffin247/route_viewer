@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 
 with duckdb.connect(os.getenv("DB")) as con:
     worlds = con.sql(f"""SELECT WORLD FROM INTERMEDIATE.OBT_FIT""").to_df()
-    world = st.selectbox("World", worlds.world.unique())
+    world = st.selectbox("World", worlds.world.unique(), index=len(list(worlds.world.unique()))-1)
 
     routes = con.sql(f"""SELECT ROUTE FROM INTERMEDIATE.OBT_FIT WHERE WORLD='{world}'""").to_df()
     route = st.selectbox("Route", routes.route.unique())
