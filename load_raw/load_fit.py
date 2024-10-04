@@ -4,7 +4,6 @@ import os
 import duckdb
 
 from dotenv import load_dotenv
-
 load_dotenv('..')
 
 def extract_fit(fit_file):   
