@@ -39,6 +39,14 @@ with duckdb.connect("data/data.duckdb") as con:
                        FROM INTERMEDIATE.OBT_FIT 
                        WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
 
+    notes_data = con.sql(f"""SELECT 
+                            name AS segment, 
+                            start, 
+                            "end", 
+                            note
+                            FROM INTERMEDIATE.INT_ANNOTATIONS 
+                            WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
+
 # Frontend:        
 profile_plot = go.Figure()
 
@@ -58,5 +66,7 @@ profile_plot.update_layout(
 profile_plot = st.plotly_chart(profile_plot)
 
 # User input to set the number of laps to generate
-st.number_input("Laps", min_value=1, max_value=1, value=1, step=1)
+r2_1, r2_2 = st.columns([5,11])
+r2_1.number_input("Laps", min_value=1, max_value=1, value=1, step=1)
 
+st.dataframe(notes_data)

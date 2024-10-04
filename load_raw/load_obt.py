@@ -15,10 +15,13 @@ def load_obt():
         obt.append(data)
 
     obt = pd.concat(obt, ignore_index=True)
-        
+    
+    annotations = pd.read_csv("data/annotations.csv")
+
     with duckdb.connect(os.getenv('DB')) as con:
         con.sql(f"CREATE SCHEMA IF NOT EXISTS {os.getenv('INT_SCHEMA')}")
         con.sql(f"""CREATE OR REPLACE TABLE {os.getenv('INT_SCHEMA')}.obt_fit AS 
             SELECT world, route, position_lat, position_long, altitude, distance
             FROM obt 
             WHERE position_lat IS NOT NULL""")
+        con.sql(f"""CREATE OR REPLACE TABLE {os.getenv('INT_SCHEMA')}.int_annotations AS SELECT * FROM annotations""")
