@@ -3,6 +3,9 @@ import pandas as pd
 import os
 import duckdb
 
+from dotenv import load_dotenv
+
+load_dotenv('../.env')
 
 def extract_fit(fit_file):   
 
