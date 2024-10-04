@@ -7,13 +7,15 @@ import plotly.graph_objects as go
 #load_dotenv()
 #load_dotenv('variables.env')
 
+col1, col2 = st.columns(2)
+
 #with duckdb.connect(os.getenv("DB")) as con:
 with duckdb.connect("data/data.duckdb") as con:
     worlds = con.sql(f"""SELECT WORLD FROM INTERMEDIATE.OBT_FIT""").to_df()
-    world = st.selectbox("World", worlds.world.unique(), index=len(list(worlds.world.unique()))-1)
+    world = col1.selectbox("World", worlds.world.unique(), index=len(list(worlds.world.unique()))-1)
 
     routes = con.sql(f"""SELECT ROUTE FROM INTERMEDIATE.OBT_FIT WHERE WORLD='{world}'""").to_df()
-    route = st.selectbox("Route", routes.route.unique())
+    route = col2.selectbox("Route", routes.route.unique())
 
 #with duckdb.connect(os.getenv("DB")) as con:
 with duckdb.connect("data/data.duckdb") as con:
