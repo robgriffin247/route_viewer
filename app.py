@@ -14,7 +14,7 @@ with duckdb.connect("data/data.duckdb") as con:
     route = col2.selectbox("Route", routes.route.unique())
 
     # User input to set the number of laps to generate
-    col3.number_input("Laps", min_value=1, max_value=1, value=1, step=1)
+    # col3.number_input("Laps", min_value=1, max_value=1, value=1, step=1)
 
     # User input to set units
     metric = st.toggle("Metric", value=True)
@@ -34,8 +34,8 @@ with duckdb.connect("data/data.duckdb") as con:
     fit_data = con.sql(f"""SELECT 
                             distance/1000 * {distance_scale} AS distance,
                             altitude * {altitude_scale} AS altitude,
-                            ROUND(distance/1000 * {distance_scale}, 2) AS distance_fmt,
-                            ROUND(altitude * {altitude_scale}, 2) AS altitude_fmt
+                            CONCAT(ROUND(distance/1000 * {distance_scale}, 2), '{distance_unit}')  AS distance_fmt,
+                            CONCAT(ROUND(altitude * {altitude_scale}, 2), '{altitude_unit}')  AS altitude_fmt
                        FROM INTERMEDIATE.OBT_FIT 
                        WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
     
@@ -46,8 +46,8 @@ route_profile.add_trace(go.Scatter(
     x=fit_data["distance"], 
     y=fit_data["altitude"], 
     mode="lines",
-    customdata=[["distance_fmt", "altitude_fmt"]],
-    hovertemplate="<b>Distance: %{customdata[0]}km</b><br>" + "<b>Altitude: %{customdata[1]}m</b><br>" + "<extra></extra>"
+    customdata=fit_data[["distance_fmt", "altitude_fmt"]],
+    hovertemplate="<b>Distance: %{customdata[0]}</b><br>" + "<b>Altitude: %{customdata[1]}</b><br>" + "<extra></extra>"
     ))
 
 route_profile.update_layout(
