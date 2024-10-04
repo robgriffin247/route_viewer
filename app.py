@@ -30,19 +30,51 @@ with duckdb.connect("data/data.duckdb") as con:
     route = r1_2.selectbox("Route", routes.route.unique())
 
     # Get the route data
-    fit_data = con.sql(f"""SELECT 
-                            distance/1000 * {distance_scale} AS distance,
-                            altitude * {altitude_scale} AS altitude,
-                            CONCAT(ROUND(distance/1000 * {distance_scale}, 2), '{distance_unit}')  AS distance_fmt,
-                            CONCAT(ROUND(altitude * {altitude_scale}, 2), '{altitude_unit}')  AS altitude_fmt,
-                            CASE WHEN LAG(altitude) OVER () IS NOT NULL THEN altitude - LAG(altitude) OVER () ELSE 0 END AS altitude_change
-                       FROM INTERMEDIATE.OBT_FIT 
-                       WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
+    fit_data = con.sql(f"""WITH route AS (
+                            SELECT ROW_NUMBER() OVER () AS row, *, 
+                            FROM INTERMEDIATE.OBT_FIT 
+                            WHERE WORLD='{world}' AND ROUTE='{route}'
+                        ),
+                        
+                       added_changes AS (
+                            SELECT *,
+                                    CASE WHEN LAG(distance) OVER () IS NOT NULL THEN distance - LAG(distance) OVER () ELSE 0 END AS distance_change,
+                                    CASE WHEN LAG(altitude) OVER () IS NOT NULL THEN altitude - LAG(altitude) OVER () ELSE 0 END AS altitude_change
+                            FROM route
+                        ),
+
+                        added_rollsums AS (
+                            SELECT *,
+                                sum(distance_change) OVER (ROWS BETWEEN 0 PRECEDING AND 20 FOLLOWING) AS distance_change_rollsum,
+                                sum(altitude_change) OVER (ROWS BETWEEN 0 PRECEDING AND 20 FOLLOWING) AS altitude_change_rollsum
+                            FROM added_changes
+                        ),
+
+                        added_rolling_gradient AS (
+                            SELECT *, altitude_change_rollsum/distance_change_rollsum*100 AS grade
+                            FROM added_rollsums
+                        ),
+
+                        scaled_units AS(
+                            SELECT 
+                                world,
+                                route,
+                                distance/1000 * {distance_scale} AS distance,
+                                altitude * {altitude_scale} AS altitude,
+                                CONCAT(ROUND(distance/1000 * {distance_scale}, 2), ' ', '{distance_unit}')  AS distance_fmt,
+                                CONCAT(ROUND(altitude * {altitude_scale}, 2), ' ', '{altitude_unit}')  AS altitude_fmt,
+                                grade
+                            FROM added_rolling_gradient
+                        )
+
+                        SELECT * FROM scaled_units    
+                       
+                       """).to_df()
 
     notes_data = con.sql(f"""SELECT 
                             name AS segment, 
-                            start, 
-                            "end", 
+                            round(start * {distance_scale}, 1) AS start, 
+                            round("end" * {distance_scale}, 1) AS "end", 
                             note
                             FROM INTERMEDIATE.INT_ANNOTATIONS 
                             WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
@@ -54,6 +86,8 @@ profile_plot.add_trace(go.Scatter(
     x=fit_data["distance"], 
     y=fit_data["altitude"], 
     mode="lines",
+    fill="tozeroy",
+    # fillcolor="red", # create a gradient connected to grade variable
     customdata=fit_data[["distance_fmt", "altitude_fmt"]],
     hovertemplate="<b>Distance: %{customdata[0]}</b><br>" + "<b>Altitude: %{customdata[1]}</b><br>" + "<extra></extra>"
     ))
