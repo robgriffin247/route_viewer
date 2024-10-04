@@ -16,21 +16,42 @@ with duckdb.connect("data/data.duckdb") as con:
     # User input to set the number of laps to generate
     col3.number_input("Laps", min_value=1, max_value=1, value=1, step=1)
 
+    # User input to set units
+    metric = st.toggle("Metric", value=True)
+    
+    if metric:
+        distance_scale = 1
+        altitude_scale = 1
+        distance_unit = "km"
+        altitude_unit = "m"
+    else:
+        distance_scale = 0.62137
+        altitude_scale = 3.28084
+        distance_unit = "miles"
+        altitude_unit = "ft"
+
     # Get the route data
-    fit_data = con.sql(f"""SELECT * 
+    fit_data = con.sql(f"""SELECT 
+                            distance/1000 * {distance_scale} AS distance,
+                            altitude * {altitude_scale} AS altitude,
+                            ROUND(distance/1000 * {distance_scale}, 2) AS distance_fmt,
+                            ROUND(altitude * {altitude_scale}, 2) AS altitude_fmt
                        FROM INTERMEDIATE.OBT_FIT 
                        WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
-
+    
 # Frontend:        
 route_profile = go.Figure()
 
 route_profile.add_trace(go.Scatter(
     x=fit_data["distance"], 
     y=fit_data["altitude"], 
-    mode="lines"))
+    mode="lines",
+    customdata=[["distance_fmt", "altitude_fmt"]],
+    hovertemplate="<b>Distance: %{customdata[0]}km</b><br>" + "<b>Altitude: %{customdata[1]}m</b><br>" + "<extra></extra>"
+    ))
 
 route_profile.update_layout(
-    xaxis_title="Distance (km)", 
-    yaxis_title="Altitude (m)")
+    xaxis_title=f"Distance ({distance_unit})", 
+    yaxis_title=f"Altitude ({altitude_unit})")
 
 st.plotly_chart(route_profile)
