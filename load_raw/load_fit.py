@@ -5,20 +5,20 @@ import duckdb
 
 from dotenv import load_dotenv
 
-load_dotenv('../.env')
+load_dotenv('..')
 
 def extract_fit(fit_file):   
 
     # Get world and route from filename
-    world = fit_file.split("__")[0]
-    route = fit_file.split("__")[1]
+    world = fit_file.split("__")[0].replace("_", " ")
+    route = fit_file.split("__")[1].replace("_", " ")
 
     print(world + " " + route)
 
     # Read the fit file into a dataframe
     data = []
 
-    with fitdecode.FitReader(f"{os.getenv('FIT_LOC')}/{fit_file}.fit") as f:
+    with fitdecode.FitReader(f"{os.getenv('FIT_DIR')}/{fit_file}.fit") as f:
     #with fitdecode.FitReader(f"data/fit_files/{fit_file}.fit") as f:
         for frame in f:
             if isinstance(frame, fitdecode.records.FitDataMessage):
