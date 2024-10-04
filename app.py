@@ -2,12 +2,13 @@ import streamlit as st
 import duckdb
 import os
 import plotly.graph_objects as go
+#from dotenv import load_dotenv
 
-from dotenv import load_dotenv
-load_dotenv()
-load_dotenv('variables.env')
+#load_dotenv()
+#load_dotenv('variables.env')
 
-with duckdb.connect(os.getenv("DB")) as con:
+#with duckdb.connect(os.getenv("DB")) as con:
+with duckdb.connect("data/data.duckdb") as con:
     worlds = con.sql(f"""SELECT WORLD FROM INTERMEDIATE.OBT_FIT""").to_df()
     world = st.selectbox("World", worlds.world.unique(), index=len(list(worlds.world.unique()))-1)
 
