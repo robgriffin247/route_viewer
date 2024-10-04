@@ -65,6 +65,7 @@ profile_plot.update_layout(
 
 profile_plot = st.plotly_chart(profile_plot)
 
+
 # User input to set the number of laps to generate
 r2_1, r2_2 = st.columns([5,11])
 r2_1.number_input("Laps", min_value=1, max_value=1, value=1, step=1)
