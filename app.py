@@ -38,22 +38,23 @@ with duckdb.connect("data/data.duckdb") as con:
                             altitude * {altitude_scale} AS altitude,
                             CONCAT(ROUND(distance/1000 * {distance_scale}, 2), '{distance_unit}')  AS distance_fmt,
                             CONCAT(ROUND(altitude * {altitude_scale}, 2), '{altitude_unit}')  AS altitude_fmt,
-                            CASE WHEN LAG(altitude) OVER () IS NOT NULL AND LAG(altitude) OVER () - altitude <0 THEN altitude - LAG(altitude) OVER () ELSE 0 END AS step_elevation_gain
+                            CASE WHEN LAG(altitude) OVER () IS NOT NULL THEN altitude - LAG(altitude) OVER () ELSE 0 END AS altitude_change
                        FROM INTERMEDIATE.OBT_FIT 
                        WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
     
-x_range = st.slider("", value=(0.0, fit_data["distance"].max()), min_value=0.0, max_value=fit_data["distance"].max(), step=0.01)
-vis_data = fit_data[(fit_data["distance"]>=x_range[0]) & (fit_data["distance"]<=x_range[1])]
+    st.write(fit_data)
+#x_range = st.slider("", value=(0.0, fit_data["distance"].max()), min_value=0.0, max_value=fit_data["distance"].max(), step=0.01)
+#vis_data = fit_data[(fit_data["distance"]>=x_range[0]) & (fit_data["distance"]<=x_range[1])]
 
 
 # Frontend:        
 profile_plot = go.Figure()
 
 profile_plot.add_trace(go.Scatter(
-    x=vis_data["distance"], 
-    y=vis_data["altitude"], 
+    x=fit_data["distance"], 
+    y=fit_data["altitude"], 
     mode="lines",
-    customdata=vis_data[["distance_fmt", "altitude_fmt"]],
+    customdata=fit_data[["distance_fmt", "altitude_fmt"]],
     hovertemplate="<b>Distance: %{customdata[0]}</b><br>" + "<b>Altitude: %{customdata[1]}</b><br>" + "<extra></extra>"
     ))
 
@@ -65,16 +66,16 @@ profile_plot = st.plotly_chart(profile_plot)
 
 
 
-distance = vis_data.iloc[-1]["distance"] - vis_data.iloc[0]["distance"]
-elevation_diff = vis_data.iloc[-1]["altitude"] - vis_data.iloc[0]["altitude"]
-elevation_gain = sum(vis_data["step_elevation_gain"])
-if metric:
-    grade = elevation_diff / distance / 10
-else:
-    grade = (elevation_diff*0.0189393939) / distance
+#distance = vis_data.iloc[-1]["distance"] - vis_data.iloc[0]["distance"]
+#elevation_diff = vis_data.iloc[-1]["altitude"] - vis_data.iloc[0]["altitude"]
+#elevation_gain = sum(vis_data["step_elevation_gain"])
+#if metric:
+#    grade = elevation_diff / distance / 10
+#else:
+#    grade = (elevation_diff*0.0189393939) / distance
 
-col4, col5, col6 = st.columns(3)
+#col4, col5, col6 = st.columns(3)
 
-col4.write(f"Length: {round(distance,2)} {distance_unit}")
-col5.write(f"Total Climb: {int(elevation_gain)} {altitude_unit}")
-col6.write(f"Average Grade: {round(grade,2)}%")
+#col4.write(f"Length: {round(distance,2)} {distance_unit}")
+#col5.write(f"Total Climb: {int(elevation_gain)} {altitude_unit}")
+#col6.write(f"Average Grade: {round(grade,2)}%")
