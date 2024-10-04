@@ -3,6 +3,9 @@ import duckdb
 import os
 import plotly.graph_objects as go
 
+from dotenv import load_dotenv
+load_dotenv()
+load_dotenv('variables.env')
 
 with duckdb.connect(os.getenv("DB")) as con:
     worlds = con.sql(f"""SELECT WORLD FROM INTERMEDIATE.OBT_FIT""").to_df()
