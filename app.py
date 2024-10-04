@@ -45,8 +45,8 @@ with duckdb.connect("data/data.duckdb") as con:
 
                         added_rollsums AS (
                             SELECT *,
-                                sum(distance_change) OVER (ROWS BETWEEN 0 PRECEDING AND 20 FOLLOWING) AS distance_change_rollsum,
-                                sum(altitude_change) OVER (ROWS BETWEEN 0 PRECEDING AND 20 FOLLOWING) AS altitude_change_rollsum
+                                sum(distance_change) OVER (ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING) AS distance_change_rollsum,
+                                sum(altitude_change) OVER (ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING) AS altitude_change_rollsum
                             FROM added_changes
                         ),
 
@@ -63,7 +63,8 @@ with duckdb.connect("data/data.duckdb") as con:
                                 altitude * {altitude_scale} AS altitude,
                                 CONCAT(ROUND(distance/1000 * {distance_scale}, 2), ' ', '{distance_unit}')  AS distance_fmt,
                                 CONCAT(ROUND(altitude * {altitude_scale}, 2), ' ', '{altitude_unit}')  AS altitude_fmt,
-                                grade
+                                grade,
+                                CONCAT(ROUND(grade,1), '%') AS grade_fmt
                             FROM added_rolling_gradient
                         )
 
@@ -88,8 +89,8 @@ profile_plot.add_trace(go.Scatter(
     mode="lines",
     fill="tozeroy",
     # fillcolor="red", # create a gradient connected to grade variable
-    customdata=fit_data[["distance_fmt", "altitude_fmt"]],
-    hovertemplate="<b>Distance: %{customdata[0]}</b><br>" + "<b>Altitude: %{customdata[1]}</b><br>" + "<extra></extra>"
+    customdata=fit_data[["distance_fmt", "altitude_fmt", "grade_fmt"]],
+    hovertemplate="<b>Distance: %{customdata[0]}</b><br>" + "<b>Altitude: %{customdata[1]}</b><br>" + "<b>Grade: %{customdata[2]}</b><br>" + "<extra></extra>"
     ))
 
 profile_plot.update_layout(
