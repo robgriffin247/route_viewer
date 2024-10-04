@@ -15,7 +15,8 @@ with duckdb.connect("data/data.duckdb") as con:
     routes = con.sql(f"""SELECT ROUTE FROM INTERMEDIATE.OBT_FIT WHERE WORLD='{world}'""").to_df()
     route = st.selectbox("Route", routes.route.unique())
 
-with duckdb.connect(os.getenv("DB")) as con:
+#with duckdb.connect(os.getenv("DB")) as con:
+with duckdb.connect("data/data.duckdb") as con:
     fit_data = con.sql(f"""SELECT * FROM INTERMEDIATE.OBT_FIT WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
             
     route_profile = go.Figure()
