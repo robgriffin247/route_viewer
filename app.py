@@ -106,3 +106,19 @@ r2_1, r2_2 = st.columns([5,11])
 r2_1.number_input("Laps", min_value=1, max_value=1, value=1, step=1)
 
 st.dataframe(notes_data)
+
+#race_notes = st.data_editor(notes_data,
+#                            column_config={
+#                                "segment":"Segment",
+#                                "start":"From",
+#                                "end":"To",
+#                                "note":st.column_config.TextColumn(
+#                                    "Notes",
+#                                    width="large"
+#                                )
+#                            })
+
+# Add grade to notes table
+# Add profile to notes table (if max grade >=5% or average >=2%)
+# Add loop variable to routes data - make laps control action max 1 if not loop
+# Trim fit data to one lap per route
