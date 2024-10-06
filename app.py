@@ -1,7 +1,7 @@
 import streamlit as st
 import duckdb
 import plotly.graph_objects as go
-
+import pandas as pd
 
 # User input to select route and set units
 r1_1, r1_2, r1_3 = st.columns([5,8,3], vertical_alignment="bottom")
@@ -73,6 +73,7 @@ with duckdb.connect("data/data.duckdb") as con:
                        """).to_df()
 
     notes_data = con.sql(f"""SELECT 
+                            true AS highlight,
                             name AS segment, 
                             round(start * {distance_scale}, 1) AS start, 
                             round("end" * {distance_scale}, 1) AS "end", 
@@ -81,6 +82,58 @@ with duckdb.connect("data/data.duckdb") as con:
                             WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
 
 # Frontend:        
+
+# User input to set the number of laps to generate
+r2_1, r2_2, r2_3 = st.columns([5,5,6], vertical_alignment="bottom")
+r2_1.number_input("Laps", min_value=1, max_value=1, value=1, step=1)
+add_custom = r2_2.toggle("Custom Notes", value=False)
+
+if add_custom:
+    custom_notes = st.data_editor(pd.DataFrame({"highlight":[bool()], "segment":[None], "start":[None], "end":[None], "note":[None]}),
+                                num_rows="dynamic",
+                                column_config={
+                                    "highlight":st.column_config.CheckboxColumn("Highlight", default=True),
+                                    "segment":st.column_config.TextColumn("Segment"),
+                                    "start":st.column_config.NumberColumn("From", format="%.1f"),
+                                    "end":st.column_config.NumberColumn("To", format="%.1f"),
+                                    "note":st.column_config.TextColumn("Notes", width="large"
+                                    )
+                                })
+    
+    notes_data = pd.concat([custom_notes, notes_data])
+    
+    #r3_1, r3_2, r3_3, r3_4, r3_5 = st.columns([4,2,2,6,2])
+    #r3_1.text_input("Segment", value="")
+    #r3_2.number_input("Start", min_value=0.0, format="%.1f")
+    #r3_3.number_input("End", min_value=0.0, format="%.1f")
+    #r3_4.text_input("Note", value="")
+    #r3_5.button("add")
+
+    race_notes = st.data_editor(notes_data,
+                                column_config={
+                                    "highlight":st.column_config.CheckboxColumn("Highlight", default=True),
+                                    "segment":st.column_config.TextColumn("Segment"),
+                                    "start":st.column_config.NumberColumn("From", format="%.1f"),
+                                    "end":st.column_config.NumberColumn("To", format="%.1f"),
+                                    "note":st.column_config.TextColumn("Notes", width="large"
+                                    )                                    
+                                })
+
+else:
+    race_notes = st.data_editor(notes_data,
+                                column_config={
+                                    "highlight":st.column_config.CheckboxColumn("Highlight", default=True),
+                                    "segment":st.column_config.TextColumn("Segment"),
+                                    "start":st.column_config.NumberColumn("From", format="%.1f"),
+                                    "end":st.column_config.NumberColumn("To", format="%.1f"),
+                                    "note":st.column_config.TextColumn("Notes", width="large"
+                                    )                                    
+                                })
+# Add grade to notes table
+# Add profile to notes table (if max grade >=5% or average >=2%)
+# Add loop variable to routes data - make laps control action max 1 if not loop
+# Trim fit data to one lap per route
+
 profile_plot = go.Figure()
 
 profile_plot.add_trace(go.Scatter(
@@ -93,32 +146,15 @@ profile_plot.add_trace(go.Scatter(
     hovertemplate="<b>Distance: %{customdata[0]}</b><br>" + "<b>Altitude: %{customdata[1]}</b><br>" + "<b>Grade: %{customdata[2]}</b><br>" + "<extra></extra>"
     ))
 
+for s in race_notes.iterrows():
+    if s[1].highlight:
+        profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="red", opacity=0.2)
+        # Cont from here - add fill colors and remove borders
+
 profile_plot.update_layout(
     xaxis_title=f"Distance ({distance_unit})", 
     yaxis_title=f"Altitude ({altitude_unit})")
 
 
-profile_plot = st.plotly_chart(profile_plot)
+st_profile_plot = st.plotly_chart(profile_plot)
 
-
-# User input to set the number of laps to generate
-r2_1, r2_2 = st.columns([5,11])
-r2_1.number_input("Laps", min_value=1, max_value=1, value=1, step=1)
-
-st.dataframe(notes_data)
-
-#race_notes = st.data_editor(notes_data,
-#                            column_config={
-#                                "segment":"Segment",
-#                                "start":"From",
-#                                "end":"To",
-#                                "note":st.column_config.TextColumn(
-#                                    "Notes",
-#                                    width="large"
-#                                )
-#                            })
-
-# Add grade to notes table
-# Add profile to notes table (if max grade >=5% or average >=2%)
-# Add loop variable to routes data - make laps control action max 1 if not loop
-# Trim fit data to one lap per route
