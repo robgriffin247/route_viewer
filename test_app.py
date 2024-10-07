@@ -39,7 +39,7 @@ st.html("""
 st.header("RouteViewer")
 
 #in_platform, in_world = st.columns(2)
-in_world, in_route, in_metric = st.columns([3,5,2])
+in_world, in_route, in_metric = st.columns([3,5,2], vertical_alignment="bottom")
 #in_route, in_metric = st.columns([55,9], vertical_alignment="bottom")
 profile_plot_container = st.container()
 route_notes_container = st.container()
@@ -120,7 +120,7 @@ with duckdb.connect("data/data.duckdb") as con:
 # Notes Table =====================================================================================================
 with duckdb.connect("data/data.duckdb") as con:
     base_notes = con.sql(f"""SELECT 
-                                CASE WHEN type IN ('lead-in', 'finish') THEN false ELSE true END AS highlight,
+                                CASE WHEN type IN ('finish') THEN false ELSE true END AS highlight,
                                 name AS segment, 
                                 type,
                                 start * {st.session_state['distance_scale']} AS start, 
