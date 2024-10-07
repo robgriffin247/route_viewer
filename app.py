@@ -39,7 +39,7 @@ st.html("""
 st.header("RouteViewer")
 
 #in_platform, in_world = st.columns(2)
-in_world, in_route, in_metric = st.columns([3,5,2], vertical_alignment="bottom")
+in_world, in_route, in_metric = st.columns([3,5,2])
 #in_route, in_metric = st.columns([55,9], vertical_alignment="bottom")
 profile_plot_container = st.container()
 route_notes_container = st.container()
@@ -54,10 +54,10 @@ with duckdb.connect("data/data.duckdb") as con:
     #    options=con.sql(f"""SELECT DISTINCT(PLATFORM) FROM CORE.DIM_FIT ORDER BY PLATFORM""").to_df(), 
     #)
     platform="Zwift"
-    
+
     world = in_world.selectbox(
         label="**World**", 
-        index=3, 
+        index=0, 
         options=con.sql(f"""SELECT DISTINCT(WORLD) FROM CORE.DIM_FIT WHERE PLATFORM='{platform}' ORDER BY WORLD""").to_df(), 
     )
 

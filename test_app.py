@@ -54,10 +54,10 @@ with duckdb.connect("data/data.duckdb") as con:
     #    options=con.sql(f"""SELECT DISTINCT(PLATFORM) FROM CORE.DIM_FIT ORDER BY PLATFORM""").to_df(), 
     #)
     platform="Zwift"
-    
+
     world = in_world.selectbox(
         label="**World**", 
-        index=3, 
+        index=0, 
         options=con.sql(f"""SELECT DISTINCT(WORLD) FROM CORE.DIM_FIT WHERE PLATFORM='{platform}' ORDER BY WORLD""").to_df(), 
     )
 
