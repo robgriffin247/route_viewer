@@ -108,8 +108,8 @@ with duckdb.connect("data/data.duckdb") as con:
 
                             FORMAT AS (
                                 SELECT *,
-                                    CONCAT(ROUND(altitude, 1), '{st.session_state["altitude_unit"]}') AS altitude_fmt,
-                                    CONCAT(ROUND(distance, 1), '{st.session_state["distance_unit"]}') AS distance_fmt,
+                                    CONCAT(ROUND(altitude, 1), ' {st.session_state["altitude_unit"]}') AS altitude_fmt,
+                                    CONCAT(ROUND(distance, 1), ' {st.session_state["distance_unit"]}') AS distance_fmt,
                                     CONCAT(ROUND(grade, 1), '%') AS grade_fmt
                                 FROM SCALE
                             )
@@ -124,15 +124,20 @@ with duckdb.connect("data/data.duckdb") as con:
                                 name AS segment, 
                                 type,
                                 start * {st.session_state['distance_scale']} AS start, 
-                                "end" * {st.session_state['distance_scale']} AS "end", 
-                                format('{{:0.2f}}', start * {st.session_state['distance_scale']}) AS from, 
-                                format('{{:0.2f}}', "end" * {st.session_state['distance_scale']}) AS to, 
+                                "end" * {st.session_state['distance_scale']} AS "end",
                                 note
                                 FROM CORE.DIM_ANNOTATIONS 
                                 WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
 
 if len(base_notes) != 0:
-    route_notes_container.dataframe(base_notes[["segment", "from", "to", "note"]], hide_index=True)
+    route_notes_container.dataframe(base_notes[["segment", "start", "end", "note"]], 
+                                    hide_index=True, 
+                                    column_config={
+                                        "segment":st.column_config.TextColumn("Segment"),
+                                        "start":st.column_config.NumberColumn("From", format="%.2f"),
+                                        "end":st.column_config.NumberColumn("To", format="%.2f"),
+                                        "note":st.column_config.TextColumn("Notes"  )
+                                    })
 
 
 # Main Plot =====================================================================================================
