@@ -39,7 +39,7 @@ st.html("""
 st.header("RouteViewer")
 
 #in_platform, in_world = st.columns(2)
-in_world, in_route, in_metric = st.columns([3,5,2])
+in_world, in_route, in_metric = st.columns([3,5,2], vertical_alignment="bottom")
 #in_route, in_metric = st.columns([55,9], vertical_alignment="bottom")
 profile_plot_container = st.container()
 route_notes_container = st.container()
