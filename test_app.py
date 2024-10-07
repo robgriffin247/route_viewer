@@ -109,7 +109,7 @@ with duckdb.connect("data/data.duckdb") as con:
                             FORMAT AS (
                                 SELECT *,
                                     CONCAT(ROUND(altitude, 1), ' {st.session_state["altitude_unit"]}') AS altitude_fmt,
-                                    CONCAT(ROUND(distance, 1), ' {st.session_state["distance_unit"]}') AS distance_fmt,
+                                    CONCAT(ROUND(distance, 2), ' {st.session_state["distance_unit"]}') AS distance_fmt,
                                     CONCAT(ROUND(grade, 1), '%') AS grade_fmt
                                 FROM SCALE
                             )
