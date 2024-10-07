@@ -57,7 +57,7 @@ with duckdb.connect("data/data.duckdb") as con:
 
     world = in_world.selectbox(
         label="**World**", 
-        index=0, 
+        index=3, 
         options=con.sql(f"""SELECT DISTINCT(WORLD) FROM CORE.DIM_FIT WHERE PLATFORM='{platform}' ORDER BY WORLD""").to_df(), 
     )
 
