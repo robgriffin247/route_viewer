@@ -8,6 +8,7 @@ st.header("RouteViewer")
 st.markdown("*Visualisation and route notes for Zwift*")
 st.html("<hr/>")
 
+
 # ROUTE SELECTION ===========================================================================================================================================
 #in_platform, in_world, in_route = st.columns([3,3,6]) # Add platform later
 in_world, in_route = st.columns([4,6]) # Add platform later
@@ -33,16 +34,24 @@ with duckdb.connect("data/data.duckdb") as con:
     )
 
 # ROUTE DATA =================================================================================================================================================
-if len(st.session_state)==0:
+if "metric" not in st.session_state:
     st.session_state["metric"] = True
+
+if "distance_unit" not in st.session_state:
     st.session_state["distance_unit"] = "km"
+
+if "altitude_unit" not in st.session_state:
     st.session_state["altitude_unit"] = "m"
+
+if "distance_scale" not in st.session_state:
     st.session_state["distance_scale"] = 1
+
+if "altitude_scale" not in st.session_state:
     st.session_state["altitude_scale"] = 1
+
 
 def handle_metric():
     if st.session_state["metric"]:
-        st.session_state["metric"] = True
         st.session_state["distance_unit"] = "km"
         st.session_state["altitude_unit"] = "m"
         st.session_state["distance_scale"] = 1
@@ -54,9 +63,9 @@ def handle_metric():
         st.session_state["distance_scale"] = 0.621371192
         st.session_state["altitude_scale"] = 1/0.3048
 
-
-
 plot_container = st.container()
+
+in_metric = st.toggle("Metric", value=st.session_state["metric"], on_change=handle_metric, key="metric")
 
 with duckdb.connect("data/data.duckdb") as con:
 
@@ -105,7 +114,6 @@ with duckdb.connect("data/data.duckdb") as con:
                             SELECT * FROM FORMAT
                             """).to_df()
     
-
 profile_plot = go.Figure()
 profile_plot.add_trace(go.Scatter(
     x=route_data["distance"],
@@ -114,43 +122,31 @@ profile_plot.add_trace(go.Scatter(
     mode="lines",
     customdata=route_data[["distance_fmt", "altitude_fmt", "grade_fmt"]],
     hovertemplate="<b>Distance: %{customdata[0]}</b><br>" + "<b>Altitude: %{customdata[1]}</b><br>" + "<b>Grade: %{customdata[2]}</b><br>" + "<extra></extra>"
-
-))
+    ))
 
 profile_plot.update_layout(
     xaxis_title=f"Distance ({st.session_state['distance_unit']})", 
-    yaxis_title=f"Altitude ({st.session_state['altitude_unit']})")
-
-
-
-in_metric = st.toggle("Metric", value=st.session_state["metric"], on_change=handle_metric, key="metric")
+    yaxis_title=f"Altitude ({st.session_state['altitude_unit']})"
+    )
 
 
 # RACE NOTES ==================================================================================================================
 st.subheader("Route Notes")
+
 with duckdb.connect("data/data.duckdb") as con:
-    base_notes = con.sql(f"""SELECT 
-                            CASE WHEN type IN ('lead-in', 'finish') THEN false ELSE true END AS highlight,
-                            name AS segment, 
-                            type,
-                            start * {st.session_state['distance_scale']} AS start, 
-                            "end" * {st.session_state['distance_scale']} AS "end", 
-                            note
-                            FROM INTERMEDIATE.INT_ANNOTATIONS 
-                            WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
+    race_notes = con.sql(f"""SELECT 
+                                CASE WHEN type IN ('lead-in', 'finish') THEN false ELSE true END AS highlight,
+                                name AS segment, 
+                                type,
+                                start * {st.session_state['distance_scale']} AS start, 
+                                "end" * {st.session_state['distance_scale']} AS "end", 
+                                format('{{:0.2f}}', start * {st.session_state['distance_scale']}) AS from, 
+                                format('{{:0.2f}}', "end" * {st.session_state['distance_scale']}) AS to, 
+                                note
+                                FROM INTERMEDIATE.INT_ANNOTATIONS 
+                                WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
 
-
-race_notes = st.data_editor(
-    base_notes,
-    num_rows="dynamic",
-    column_config={
-        "highlight":st.column_config.CheckboxColumn("Show", default=True),
-        "segment":st.column_config.TextColumn("Segment"),
-        "type":st.column_config.SelectboxColumn("Type", options=["", "sprint", "climb", "finish"]),
-        "start":st.column_config.NumberColumn("Start", format="%.1f"),
-        "end":st.column_config.NumberColumn("End", format="%.1f"),
-        "note":st.column_config.TextColumn("Note")
-    })
+st.dataframe(race_notes[["segment", "from", "to", "note"]], hide_index=True)
 
 for s in race_notes.iterrows():
     if s[1].highlight:
