@@ -6,8 +6,9 @@ import duckdb
 def fit_to_df(fit_file):   
 
     # Get world and route from filename
-    world = fit_file.split("__")[0]
-    route = fit_file.split("__")[1]
+    platform = fit_file.split("__")[0]
+    world = fit_file.split("__")[1]
+    route = fit_file.split("__")[2]
 
     # Read the fit file into a dataframe
     data = []
@@ -24,6 +25,7 @@ def fit_to_df(fit_file):
     data = pd.DataFrame(data)
 
     # Add world and route to allow use of one-big-table (OBT) later
+    data["platform"] = platform.replace("_", " ")
     data["world"] = world.replace("_", " ")
     data["route"] = route.replace("_", " ")
 
