@@ -130,8 +130,7 @@ with duckdb.connect("data/data.duckdb") as con:
                                 FROM INTERMEDIATE.INT_ANNOTATIONS 
                                 WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
 
-if len(base_notes) != 0:
-    route_notes_container.dataframe(base_notes[["segment", "from", "to", "note"]], hide_index=True)
+route_notes_container.dataframe(base_notes[["segment", "from", "to", "note"]], hide_index=True)
 
 
 # Main Plot =====================================================================================================
@@ -162,7 +161,6 @@ for s in base_notes.iterrows():
 
         else:
             profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="blue", opacity=0.2)
-
 
 profile_plot_container.plotly_chart(profile_plot)
 
