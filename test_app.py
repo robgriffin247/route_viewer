@@ -3,7 +3,6 @@ import duckdb
 import pandas as pd
 import plotly.express as px
 
-
 if "metric" not in st.session_state:
     st.session_state["altitude_scale"] = 1
     st.session_state["altitude_unit"] = "m"
@@ -39,8 +38,9 @@ st.html("""
 
 st.header("RouteViewer")
 
-in_platform, in_world = st.columns(2)
-in_route, in_metric = st.columns([55,9], vertical_alignment="bottom")
+#in_platform, in_world = st.columns(2)
+in_world, in_route, in_metric = st.columns([3,5,2])
+#in_route, in_metric = st.columns([55,9], vertical_alignment="bottom")
 profile_plot_container = st.container()
 route_notes_container = st.container()
 st.html("<p class='footnote'>Produced by Rob Griffin</p>")
@@ -48,22 +48,23 @@ st.html("<p class='footnote'>Produced by Rob Griffin</p>")
 # Populate dropdown menus for route selection and define logic for metric toggle ===================================
 # Dynamic lists of valid platforms/worlds/routes; produces dropdown menus (selectbox)
 with duckdb.connect("data/data.duckdb") as con:
-    platform = in_platform.selectbox(
-        label="**Platform**", 
-        index=0, 
-        options=con.sql(f"""SELECT DISTINCT(PLATFORM) FROM INTERMEDIATE.OBT_FIT ORDER BY PLATFORM""").to_df(), 
-    )
-
+    #platform = in_platform.selectbox(
+    #    label="**Platform**", 
+    #    index=0, 
+    #    options=con.sql(f"""SELECT DISTINCT(PLATFORM) FROM CORE.DIM_FIT ORDER BY PLATFORM""").to_df(), 
+    #)
+    platform="Zwift"
+    
     world = in_world.selectbox(
         label="**World**", 
         index=3, 
-        options=con.sql(f"""SELECT DISTINCT(WORLD) FROM INTERMEDIATE.OBT_FIT WHERE PLATFORM='{platform}' ORDER BY WORLD""").to_df(), 
+        options=con.sql(f"""SELECT DISTINCT(WORLD) FROM CORE.DIM_FIT WHERE PLATFORM='{platform}' ORDER BY WORLD""").to_df(), 
     )
 
     route = in_route.selectbox(
         label="**Route**", 
         index=0, 
-        options=con.sql(f"""SELECT DISTINCT(ROUTE) FROM INTERMEDIATE.OBT_FIT WHERE PLATFORM='{platform}' AND WORLD='{world}' ORDER BY ROUTE""").to_df(), 
+        options=con.sql(f"""SELECT DISTINCT(ROUTE) FROM CORE.DIM_FIT WHERE PLATFORM='{platform}' AND WORLD='{world}' ORDER BY ROUTE""").to_df(), 
     )
 
 in_metric.toggle("Metric", value=st.session_state["metric"], on_change=handle_metric, key="metric")
@@ -76,7 +77,7 @@ with duckdb.connect("data/data.duckdb") as con:
                                 SELECT 
                                     distance, 
                                     altitude
-                                FROM INTERMEDIATE.OBT_FIT
+                                FROM CORE.DIM_FIT
                                 WHERE platform='{platform}'
                                     AND world='{world}'
                                     AND route='{route}'
@@ -127,10 +128,11 @@ with duckdb.connect("data/data.duckdb") as con:
                                 format('{{:0.2f}}', start * {st.session_state['distance_scale']}) AS from, 
                                 format('{{:0.2f}}', "end" * {st.session_state['distance_scale']}) AS to, 
                                 note
-                                FROM INTERMEDIATE.INT_ANNOTATIONS 
+                                FROM CORE.DIM_ANNOTATIONS 
                                 WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
 
-route_notes_container.dataframe(base_notes[["segment", "from", "to", "note"]], hide_index=True)
+if len(base_notes) != 0:
+    route_notes_container.dataframe(base_notes[["segment", "from", "to", "note"]], hide_index=True)
 
 
 # Main Plot =====================================================================================================
@@ -161,6 +163,7 @@ for s in base_notes.iterrows():
 
         else:
             profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="blue", opacity=0.2)
+
 
 profile_plot_container.plotly_chart(profile_plot)
 
