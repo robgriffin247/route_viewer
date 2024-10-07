@@ -1,6 +1,7 @@
 import streamlit as st
 import duckdb
 import plotly.graph_objects as go
+import plotly.express as px
 import pandas as pd
 
 
@@ -75,9 +76,9 @@ with duckdb.connect("data/data.duckdb") as con:
                                     distance, 
                                     altitude
                                 FROM INTERMEDIATE.OBT_FIT
-                                WHERE PLATFORM='{platform}'
-                                    AND WORLD='{world}'
-                                    AND ROUTE='{route}'
+                                WHERE platform='{platform}'
+                                    AND world='{world}'
+                                    AND route='{route}'
                             ),
 
                             DELTA AS (
@@ -111,9 +112,9 @@ with duckdb.connect("data/data.duckdb") as con:
                                 FROM SCALE
                             )
 
-                            SELECT * FROM FORMAT
+                            SELECT *, FROM FORMAT
                             """).to_df()
-    
+
 profile_plot = go.Figure()
 profile_plot.add_trace(go.Scatter(
     x=route_data["distance"],
@@ -147,6 +148,7 @@ with duckdb.connect("data/data.duckdb") as con:
                                 WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
 
 st.dataframe(race_notes[["segment", "from", "to", "note"]], hide_index=True)
+
 
 for s in race_notes.iterrows():
     if s[1].highlight:
