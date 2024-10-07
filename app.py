@@ -26,6 +26,14 @@ def handle_metric():
 # Generate Layout ==================================================================================================
 st.html("""
         <style> 
+            .st-emotion-cache-13ln4jf {
+                padding: 3rem 1rem 10rem;
+            }
+            h2 {
+                padding: 0 auto 2em auto;
+                margin: 0 auto 1.2em auto;
+                border-bottom: 1px solid #304d4b;
+            }
             .footnote {
                 color: #304d4b;
                 font-style:italic;
@@ -54,7 +62,7 @@ with duckdb.connect("data/data.duckdb") as con:
     #    options=con.sql(f"""SELECT DISTINCT(PLATFORM) FROM CORE.DIM_FIT ORDER BY PLATFORM""").to_df(), 
     #)
     platform="Zwift"
-    
+
     world = in_world.selectbox(
         label="**World**", 
         index=3, 
@@ -100,6 +108,7 @@ with duckdb.connect("data/data.duckdb") as con:
 
                             SCALE AS (
                                 SELECT
+                                    altitude_delta,
                                     grade,                                  
                                     altitude*{st.session_state["altitude_scale"]} AS altitude,
                                     distance*{st.session_state["distance_scale"]} AS distance
@@ -171,4 +180,3 @@ for s in base_notes.iterrows():
 
 
 profile_plot_container.plotly_chart(profile_plot)
-
