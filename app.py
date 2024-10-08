@@ -55,11 +55,7 @@ st.html("<p class='footnote'>Produced by Rob Griffin. It's early days - this pro
 # Populate dropdown menus for route selection and define logic for metric toggle ===================================
 # Dynamic lists of valid platforms/worlds/routes; produces dropdown menus (selectbox)
 with duckdb.connect("data/data.duckdb") as con:
-    #platform = in_platform.selectbox(
-    #    label="**Platform**", 
-    #    index=0, 
-    #    options=con.sql(f"""SELECT DISTINCT(PLATFORM) FROM CORE.DIM_FIT ORDER BY PLATFORM""").to_df(), 
-    #)
+
     platform="Zwift"
 
     world = in_world.selectbox(
