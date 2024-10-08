@@ -158,20 +158,23 @@ profile_plot.update_traces(mode="lines",
 
 for s in base_notes.iterrows():
     if s[1].highlight:
-        if s[1].type=="lead-in":
-            profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="orange", opacity=0.2)
+        if s[1].type=="lead":
+            profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="orange", opacity=0.3)
         
         elif s[1].type=="sprint":
-            profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="green", opacity=0.2)
+            profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="green", opacity=0.3)
             
         elif s[1].type=="climb":
-            profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="red", opacity=0.2)
+            profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="red", opacity=0.3)
+        
+        elif s[1].type=="highlight":
+            profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="yellow", opacity=0.3)
             
         elif s[1].type=="finish":
             profile_plot.add_vline(x=s[1].end, line_color="red", opacity=0.5)
 
         else:
-            profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="blue", opacity=0.2)
-
+#            profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="blue", opacity=0.2)
+            pass
 
 profile_plot_container.plotly_chart(profile_plot)
