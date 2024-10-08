@@ -51,8 +51,7 @@ in_world, in_route, in_metric = st.columns([3,5,2], vertical_alignment="bottom")
 #in_route, in_metric = st.columns([55,9], vertical_alignment="bottom")
 profile_plot_container = st.container()
 route_notes_container = st.container()
-st.html("<p class='footnote'>Produced by Rob Griffin</p>")
-
+st.html("<p class='footnote'>Produced by Rob Griffin. It's early days - this project is very much in its infancy and requires more data. I'm running a bot around various routes to generate more route data, while watching races to develop notes. It takes time, but it'll be worth   the wait!</p>")
 # Populate dropdown menus for route selection and define logic for metric toggle ===================================
 # Dynamic lists of valid platforms/worlds/routes; produces dropdown menus (selectbox)
 with duckdb.connect("data/data.duckdb") as con:
@@ -65,7 +64,7 @@ with duckdb.connect("data/data.duckdb") as con:
 
     world = in_world.selectbox(
         label="**World**", 
-        index=3, 
+        index=0, 
         options=con.sql(f"""SELECT DISTINCT(WORLD) FROM CORE.DIM_FIT WHERE PLATFORM='{platform}' ORDER BY WORLD""").to_df(), 
     )
 
