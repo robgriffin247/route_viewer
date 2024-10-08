@@ -124,7 +124,7 @@ with duckdb.connect("data/data.duckdb") as con:
 # Notes Table =====================================================================================================
 with duckdb.connect("data/data.duckdb") as con:
     base_notes = con.sql(f"""SELECT 
-                                CASE WHEN type IN ('finish') THEN false ELSE true END AS highlight,
+                                CASE WHEN type IS NULL THEN false ELSE true END AS highlight,
                                 name AS segment, 
                                 type,
                                 start * {st.session_state['distance_scale']} AS start, 
