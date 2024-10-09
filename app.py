@@ -3,6 +3,8 @@ import duckdb
 import pandas as pd
 import plotly.express as px
 
+st.html("html/google_analytics.html")
+
 if "metric" not in st.session_state:
     st.session_state["altitude_scale"] = 1
     st.session_state["altitude_unit"] = "m"
