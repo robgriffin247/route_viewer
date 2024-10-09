@@ -26,13 +26,13 @@ def handle_metric():
 # Generate Layout ==================================================================================================
 st.html("""
         <style> 
-            .st-emotion-cache-13ln4jf {
-                padding: 3rem 1rem 10rem;
-            }
             h2 {
                 padding: 0 auto 2em auto;
                 margin: 0 auto 1.2em auto;
                 border-bottom: 1px solid #304d4b;
+            }
+            .stDataFrame {
+                width: 100% !important;
             }
             .footnote {
                 color: #304d4b;
@@ -137,10 +137,10 @@ if len(base_notes) != 0:
     route_notes_container.dataframe(base_notes[["segment", "start", "end", "note"]], 
                                     hide_index=True, 
                                     column_config={
-                                        "segment":st.column_config.TextColumn("Segment"),
-                                        "start":st.column_config.NumberColumn("From", format="%.2f"),
-                                        "end":st.column_config.NumberColumn("To", format="%.2f"),
-                                        "note":st.column_config.TextColumn("Notes"  )
+                                        "segment":st.column_config.TextColumn("Segment", width="medium"),
+                                        "start":st.column_config.NumberColumn("From", format="%.2f", width="small"),
+                                        "end":st.column_config.NumberColumn("To", format="%.2f", width="small"),
+                                        "note":st.column_config.TextColumn("Notes", width="large")
                                     })
 
 
