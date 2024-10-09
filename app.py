@@ -183,3 +183,4 @@ with streamlit_analytics.track():
             pass
     profile_plot_container.plotly_chart(profile_plot)
 
+
