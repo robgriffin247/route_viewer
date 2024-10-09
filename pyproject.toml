@@ -13,6 +13,7 @@ fitdecode = "^0.10.0"
 streamlit = "^1.39.0"
 plotly = "^5.24.1"
 dash = "^2.18.1"
+streamlit-analytics = "^0.4.1"
 
 
 [build-system]
