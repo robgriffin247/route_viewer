@@ -33,9 +33,7 @@ with streamlit_analytics.track():
                     margin: 0 auto 1.2em auto;
                     border-bottom: 1px solid #304d4b;
                 }
-                .stDataFrame {
-                    width: 100% !important;
-                }
+            
                 .footnote {
                     color: #304d4b;
                     font-style:italic;
@@ -125,19 +123,26 @@ with streamlit_analytics.track():
 
     # Notes Table =====================================================================================================
     with duckdb.connect("data/data.duckdb") as con:
-        base_notes = con.sql(f"""SELECT 
-                                    CASE WHEN type IS NULL THEN false ELSE true END AS highlight,
-                                    name AS segment, 
-                                    type,
+        base_notes = con.sql(f"""
+                             WITH SOURCE AS (
+                                SELECT 
+                                    CASE WHEN LAG(name) OVER () = name THEN '' ELSE name END AS segment, 
+                                type,
                                     start * {st.session_state['distance_scale']} AS start, 
                                     "end" * {st.session_state['distance_scale']} AS "end",
                                     note
-                                    FROM CORE.DIM_ANNOTATIONS 
-                                    WHERE WORLD='{world}' AND ROUTE='{route}'""").to_df()
+                                FROM CORE.DIM_ANNOTATIONS 
+                                WHERE WORLD='{world}' AND ROUTE='{route}')
+                                    
+                                SELECT * FROM SOURCE
+                            """).to_df()
 
     if len(base_notes) != 0:
-        route_notes_container.dataframe(base_notes[["segment", "start", "end", "note"]], 
+        route_notes_table = route_notes_container.dataframe(base_notes[["segment", "start", "end", "note"]], 
+                                        on_select="rerun",
+                                        selection_mode=["multi-row"],
                                         hide_index=True, 
+                                        use_container_width=True,
                                         column_config={
                                             "segment":st.column_config.TextColumn("Segment", width="medium"),
                                             "start":st.column_config.NumberColumn("From", format="%.2f", width="small"),
@@ -158,25 +163,23 @@ with streamlit_analytics.track():
                             hovertemplate="<b>Distance: %{customdata[0]}</b><br>" + "<b>Altitude: %{customdata[1]}</b><br>" + "<b>Grade: %{customdata[2]}</b><br>" + "<extra></extra>"
                             )
 
-    for s in base_notes.iterrows():
-        if s[1].highlight:
-            if s[1].type=="lead":
-                profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="orange", opacity=0.3)
-            
-            elif s[1].type=="sprint":
-                profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="green", opacity=0.3)
-                
-            elif s[1].type=="climb":
-                profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="red", opacity=0.3)
-            
-            elif s[1].type=="highlight":
-                profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="yellow", opacity=0.3)
-                
-            elif s[1].type=="finish":
-                profile_plot.add_vline(x=s[1].end, line_color="red", opacity=0.5)
+    if len([i for i in route_notes_table["selection"]["rows"]])>0:
+        highlights = base_notes.iloc[[i for i in route_notes_table["selection"]["rows"]]]
+    else:
+        highlights = base_notes.loc[base_notes["type"]!=None]
 
-            else:
-    #            profile_plot.add_vrect(x0=s[1].start, x1=s[1].end, line_width=0, fillcolor="blue", opacity=0.2)
-                pass
-
+    for i in highlights.iterrows():
+        if i[1].type=="lead":
+                profile_plot.add_vrect(x0=i[1].start, x1=i[1].end, line_width=0, fillcolor="orange", opacity=0.3)
+        elif i[1].type=="sprint":
+            profile_plot.add_vrect(x0=i[1].start, x1=i[1].end, line_width=0, fillcolor="green", opacity=0.3)
+        elif i[1].type=="climb":
+            profile_plot.add_vrect(x0=i[1].start, x1=i[1].end, line_width=0, fillcolor="red", opacity=0.3)
+        elif i[1].type=="finish":
+            profile_plot.add_vline(x=i[1].end, line_color="red", opacity=0.5)
+        elif len([i for i in route_notes_table["selection"]["rows"]])>0:
+            profile_plot.add_vrect(x0=i[1].start, x1=i[1].end, line_width=0, fillcolor="blue", opacity=0.2)    
+        else:
+            pass
     profile_plot_container.plotly_chart(profile_plot)
+
