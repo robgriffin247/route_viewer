@@ -19,7 +19,6 @@ def dim_fit():
                             F.ROUTE=N.ROUTE
                            WHERE F.DISTANCE/1000<=N.X""").to_df()
 
-        #fit_data = con.sql("""SELECT * FROM STAGING.STG_FIT""").to_df()
         con.sql("""CREATE SCHEMA IF NOT EXISTS CORE""")
         con.sql("""CREATE OR REPLACE TABLE CORE.DIM_FIT AS SELECT * FROM fit_data""")
 

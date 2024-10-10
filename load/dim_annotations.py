@@ -10,5 +10,5 @@ def dim_annotations():
         annotations_data = con.sql("""SELECT * FROM STAGING.STG_ANNOTATIONS""").to_df()
 
         con.sql("""CREATE SCHEMA IF NOT EXISTS CORE""")
-        con.sql("""CREATE OR REPLACE TABLE CORE.DIM_ANNOTATIONS AS SELECT * FROM annotations_data""")
+        con.sql("""CREATE OR REPLACE TABLE CORE.DIM_ANNOTATIONS AS SELECT * FROM annotations_data ORDER BY platform, world, route, start""")
 

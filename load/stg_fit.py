@@ -12,6 +12,7 @@ def stg_fit():
     files = os.listdir(f"{os.getenv('FIT_DIR')}")
     for f in files:
         data.append(fit_to_df(f.replace(".fit", "")))
+        print(f)
 
     data = pd.concat(data, ignore_index=True)
 

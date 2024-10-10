@@ -33,7 +33,7 @@ with streamlit_analytics.track():
                     margin: 0 auto 1.2em auto;
                     border-bottom: 1px solid #304d4b;
                 }
-            
+
                 .footnote {
                     color: #304d4b;
                     font-style:italic;
