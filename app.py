@@ -5,6 +5,8 @@ import plotly.express as px
 import streamlit_analytics
 
 with streamlit_analytics.track():
+    st.set_page_config(page_title="RouteViewer", page_icon=":bike:")
+
     if "metric" not in st.session_state:
         st.session_state["altitude_scale"] = 1
         st.session_state["altitude_unit"] = "m"
