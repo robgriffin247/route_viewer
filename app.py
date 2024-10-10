@@ -68,7 +68,7 @@ with streamlit_analytics.track():
             label="**Route**", 
             index=0, 
             options=con.sql(f"""SELECT DISTINCT(ROUTE) FROM CORE.DIM_FIT WHERE PLATFORM='{platform}' AND WORLD='{world}' ORDER BY ROUTE""").to_df(), 
-        )
+        ) 
 
     in_metric.toggle("Metric", value=st.session_state["metric"], on_change=handle_metric, key="metric")
 
