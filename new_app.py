@@ -25,5 +25,3 @@ profile_plot = create_profile_plot(data=focal_route_data, metric=metric_value)
 notes_table = create_notes_table(data=notes_data)
 
 # TODO: Work on notes table
-
-
