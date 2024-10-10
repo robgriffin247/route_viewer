@@ -26,4 +26,3 @@ def stg_annotations():
                     note               
                 FROM annotations""")
         
-        print(con.sql("SELECT * FROM STAGING.STG_ANNOTATIONS").to_df())

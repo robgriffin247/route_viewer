@@ -16,5 +16,4 @@ dim_annotations()
 dim_fit()
 
 with duckdb.connect("data/data.duckdb") as con:
-    print(con.sql("SHOW ALL TABLES"))
-    print(con.sql("SELECT * FROM CORE.DIM_FIT"))
+    print(con.sql("SELECT DISTINCT(PLATFORM), WORLD, ROUTE FROM CORE.DIM_FIT"))

@@ -181,6 +181,7 @@ with streamlit_analytics.track():
             profile_plot.add_vrect(x0=i[1].start, x1=i[1].end, line_width=0, fillcolor="blue", opacity=0.2)    
         else:
             pass
+        
     profile_plot_container.plotly_chart(profile_plot)
 
 
