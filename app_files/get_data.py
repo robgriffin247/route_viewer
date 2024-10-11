@@ -80,10 +80,11 @@ def get_notes(world="", route="", metric=True):
     with duckdb.connect("data/data.duckdb") as con:
         data = con.sql(f"""
             SELECT 
-                name AS Segment,
-                start*{distance_scale} AS From, 
-                "end"*{distance_scale} AS To,
-                note AS Notes
+                name AS segment,
+                type,
+                start*{distance_scale} AS from, 
+                "end"*{distance_scale} AS to,
+                note AS notes
             FROM CORE.DIM_ANNOTATIONS WHERE WORLD = '{world}' AND ROUTE = '{route}'
         """).to_df()
 
