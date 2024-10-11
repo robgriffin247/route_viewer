@@ -1,7 +1,9 @@
 import duckdb
 import os
 
-def int_fits():
+# Much of the logic here is maybe better suited to core, but that's not important enough to move right now
+
+def int_fits(verbose=False):
     with duckdb.connect(f"{os.getenv('DB')}") as con:
         con.sql(f"CREATE SCHEMA IF NOT EXISTS {os.getenv('INT_SCHEMA')}")
 
@@ -46,13 +48,70 @@ def int_fits():
         
         con.sql(f"CREATE OR REPLACE TABLE {os.getenv('INT_SCHEMA')}.int_fits AS SELECT * FROM fit_df")
 
-        print(con.sql(f"SELECT * FROM {os.getenv('INT_SCHEMA')}.int_fits LIMIT 50"))
+        if verbose:
+            print(con.sql(f"SELECT * FROM {os.getenv('INT_SCHEMA')}.int_fits LIMIT 5"))
 
-def int_notes():
-    print("generating int_notes")
-    # Cast string to decimal:
-    # --TRY_CAST(REPLACE("start", ',', '.') AS FLOAT) as from_km,
+def int_notes(verbose=False):
+    with duckdb.connect(f"{os.getenv('DB')}") as con:
+        con.sql(f"CREATE SCHEMA IF NOT EXISTS {os.getenv('INT_SCHEMA')}")
 
+        notes_df = con.sql(f"""
+                            WITH SOURCE AS (
+                                SELECT * FROM {os.getenv('STG_SCHEMA')}.stg_notes
+                            ),
 
-def int_routes():
-    print("generating int_routes")
+                            RENAME AS (
+                                SELECT 
+                                    world, route, 
+                                    name AS segment,
+                                    type,
+                                    start AS from_met,
+                                    "end" AS to_met,
+                                    note AS notes
+                                FROM SOURCE
+                            ),
+
+                            BLANKS AS (
+                                SELECT * EXCLUDE(segment),
+                                    CASE WHEN segment = LAG(segment) OVER() THEN '' ELSE segment END AS segment
+                                FROM RENAME
+                            ),
+
+                            NUMERICS AS (
+                                SELECT * EXCLUDE(from_met, to_met),
+                                    TRY_CAST(REPLACE(from_met, ',', '.') AS FLOAT) AS from_met,
+                                    TRY_CAST(REPLACE(to_met, ',', '.') AS FLOAT) AS to_met,
+                                    TRY_CAST(REPLACE(from_met, ',', '.') AS FLOAT)/1.609344 AS from_imp, 
+                                    TRY_CAST(REPLACE(to_met, ',', '.') AS FLOAT)/1.609344 AS to_imp 
+                                FROM BLANKS
+                            ),
+
+                            FORMATS AS (
+                                SELECT *,
+                                    CONCAT(CAST(ROUND(CAST(from_met AS DECIMAL(10,2)), 2) as varchar), ' km') AS from_met_fmt,
+                                    CONCAT(CAST(ROUND(CAST(to_met AS DECIMAL(10,2)), 2) as varchar), ' km') AS to_met_fmt,
+                                    CONCAT(CAST(ROUND(CAST(from_imp AS DECIMAL(10,2)), 2) as varchar), ' mi') AS from_imp_fmt,
+                                    CONCAT(CAST(ROUND(CAST(to_imp AS DECIMAL(10,2)), 2) as varchar), ' mi') AS to_imp_fmt
+                                FROM NUMERICS
+                            )
+                            
+                            SELECT * FROM FORMATS
+                            """)
+        
+        con.sql(f"CREATE OR REPLACE TABLE {os.getenv('INT_SCHEMA')}.int_notes AS SELECT * FROM notes_df")
+
+        if verbose:
+            print(con.sql(f"SELECT * FROM {os.getenv('INT_SCHEMA')}.int_notes LIMIT 5"))
+    
+
+def int_routes(verbose=False):
+    with duckdb.connect(f"{os.getenv('DB')}") as con:
+        con.sql(f"CREATE SCHEMA IF NOT EXISTS {os.getenv('INT_SCHEMA')}")
+
+        con.sql(f"""CREATE OR REPLACE TABLE {os.getenv('INT_SCHEMA')}.int_routes AS 
+                    SELECT DISTINCT(world), route 
+                    FROM {os.getenv('STG_SCHEMA')}.stg_fits 
+                    GROUP BY world, route""")
+        
+        if verbose:
+            print(con.sql(f"SELECT * FROM {os.getenv('INT_SCHEMA')}.int_routes LIMIT 5"))
