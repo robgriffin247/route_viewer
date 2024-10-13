@@ -28,8 +28,8 @@ def int_fits(verbose=False):
                         SELECT *,
                             CONCAT(CAST(ROUND(CAST(distance_met AS DECIMAL(10,2)), 2) as varchar), ' km') AS distance_met_fmt,
                             CONCAT(CAST(ROUND(CAST(distance_imp AS DECIMAL(10,2)), 2) as varchar), ' miles') AS distance_imp_fmt,
-                            CONCAT(CAST(ROUND(CAST(altitude_met AS DECIMAL(10,2)), 2) as varchar), ' m') AS altitude_met_fmt,
-                            CONCAT(CAST(ROUND(CAST(altitude_imp AS DECIMAL(10,2)), 2) as varchar), ' ft') AS altitude_imp_fmt
+                            CONCAT(CAST(ROUND(CAST(altitude_met AS DECIMAL(10,1)), 1) as varchar), ' m') AS altitude_met_fmt,
+                            CONCAT(CAST(ROUND(CAST(altitude_imp AS DECIMAL(10,1)), 1) as varchar), ' ft') AS altitude_imp_fmt
                         FROM CONVERT
                     ),
 
@@ -42,9 +42,15 @@ def int_fits(verbose=False):
                     GRADIENT AS (
                         SELECT *,
                             CASE WHEN ROW_NUMBER() OVER() = 1 THEN 0 ELSE altitude_delta/distance_delta*100 END AS gradient
-                        FROM CHANGE)
+                        FROM CHANGE),
+                    
+                    FORMAT_GRADIENT AS (
+                        SELECT *,
+                            CONCAT(CAST(ROUND(CAST(gradient AS DECIMAL(10,1)), 1) as varchar), '%') AS gradient_fmt
+                        FROM GRADIENT
+                    )
 
-                SELECT * EXCLUDE(distance_delta, altitude_delta) FROM GRADIENT""").to_df()
+                SELECT * EXCLUDE(distance_delta, altitude_delta) FROM FORMAT_GRADIENT""").to_df()
         
         con.sql(f"CREATE OR REPLACE TABLE {os.getenv('INT_SCHEMA')}.int_fits AS SELECT * FROM fit_df")
 
@@ -65,8 +71,8 @@ def int_notes(verbose=False):
                                     world, route, 
                                     name AS segment,
                                     type,
-                                    start AS from_met,
-                                    "end" AS to_met,
+                                    start AS start_km,
+                                    "end" AS end_km,
                                     note AS notes
                                 FROM SOURCE
                             ),
@@ -78,13 +84,13 @@ def int_notes(verbose=False):
                             ),
 
                             NUMERICS AS (
-                                SELECT * EXCLUDE(from_met, to_met),
-                                    TRY_CAST(REPLACE(from_met, ',', '.') AS FLOAT) AS from_met,
-                                    TRY_CAST(REPLACE(to_met, ',', '.') AS FLOAT) AS to_met,
-                                    TRY_CAST(REPLACE(from_met, ',', '.') AS FLOAT)/1.609344 AS from_imp, 
-                                    TRY_CAST(REPLACE(to_met, ',', '.') AS FLOAT)/1.609344 AS to_imp 
+                                SELECT * EXCLUDE(start_km, end_km),
+                                    TRY_CAST(REPLACE(start_km, ',', '.') AS FLOAT) AS start_km,
+                                    TRY_CAST(REPLACE(end_km, ',', '.') AS FLOAT) AS end_km
+                                    --TRY_CAST(REPLACE(from_met, ',', '.') AS FLOAT)/1.609344 AS from_imp, 
+                                    --TRY_CAST(REPLACE(to_met, ',', '.') AS FLOAT)/1.609344 AS to_imp 
                                 FROM BLANKS
-                            ),
+                            )/*,
 
                             FORMATS AS (
                                 SELECT *,
@@ -93,9 +99,11 @@ def int_notes(verbose=False):
                                     CONCAT(CAST(ROUND(CAST(from_imp AS DECIMAL(10,2)), 2) as varchar), ' mi') AS from_imp_fmt,
                                     CONCAT(CAST(ROUND(CAST(to_imp AS DECIMAL(10,2)), 2) as varchar), ' mi') AS to_imp_fmt
                                 FROM NUMERICS
-                            )
+                            )*/
+
+
                             
-                            SELECT * FROM FORMATS
+                            SELECT * FROM NUMERICS
                             """)
         
         con.sql(f"CREATE OR REPLACE TABLE {os.getenv('INT_SCHEMA')}.int_notes AS SELECT * FROM notes_df")

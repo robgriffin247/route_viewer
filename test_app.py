@@ -1,10 +1,8 @@
 import streamlit as st 
 from app_files.input_menu import input_menu
-#from app_files.get_notes import get_notes
-
-
-import duckdb
-import os
+from app_files.get_notes import get_notes
+from app_files.get_plot import get_plot
+import plotly.express as px 
 
 st.set_page_config(
     page_title="RouteViewer",
@@ -16,18 +14,9 @@ st.write("Racing Notes for Zwift")
 st.html("<hr/>")
 
 input_menu()
-world = st.session_state["world"] 
-route = st.session_state["route"] 
-metric = st.session_state["metric"] 
+plot = st.container()
+get_notes()
+get_plot()
+plot.plotly_chart(st.session_state["profile_plot"])
 
 
-
-# Develop the function here then move to get_notes() - to reduce save and refresh process
-def get_notes(world, route):
-    with duckdb.connect(os.getenv('DB')) as con:
-        return con.sql(f"""SELECT * 
-                            FROM {os.getenv('PRD_SCHEMA')}.dim_notes 
-                            WHERE world='{world}' AND route='{route}'""").to_df()
-    
-st.write(get_notes(world, route))
- 

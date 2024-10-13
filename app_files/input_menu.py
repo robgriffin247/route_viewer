@@ -25,3 +25,13 @@ def input_menu():
                 value=True,
                 key="metric")
 
+
+    if st.session_state["metric"]:
+        st.session_state["d_unit"] = "km"
+        st.session_state["a_unit"] = "m"
+        st.session_state["convert_scale"] = 1
+    else:
+        st.session_state["d_unit"] = "mi"
+        st.session_state["a_unit"] = "ft"
+        st.session_state["convert_scale"] = 1.609344
+
