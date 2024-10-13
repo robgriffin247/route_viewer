@@ -1,10 +1,9 @@
 import streamlit as st 
-import os 
 import duckdb
 import plotly.express as px 
 
 def get_plot():
-    with duckdb.connect(os.getenv('DB')) as con:
+    with duckdb.connect("data/data.duckdb") as con:
         df = con.sql(f"""
                      SELECT 
                         CASE WHEN {st.session_state['metric']} THEN distance_met ELSE distance_imp END AS distance,
@@ -12,7 +11,7 @@ def get_plot():
                         CASE WHEN {st.session_state['metric']} THEN altitude_met ELSE altitude_imp END AS altitude,
                         CASE WHEN {st.session_state['metric']} THEN altitude_met_fmt ELSE altitude_imp_fmt END AS altitude_fmt,
                         gradient_fmt
-                     FROM {os.getenv('PRD_SCHEMA')}.dim_fits 
+                     FROM CORE.dim_fits 
                      WHERE world='{st.session_state['world']}' 
                         AND route='{st.session_state['route']}'
                     """).to_df()

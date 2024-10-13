@@ -1,10 +1,9 @@
 import streamlit as st 
-import os 
 import duckdb
 
 def get_notes():
 
-    with duckdb.connect(os.getenv('DB')) as con:
+    with duckdb.connect("data/data.duckdb") as con:
         st.session_state["notes"] = con.sql(f"""SELECT 
                                 world, 
                                 route, 
@@ -13,7 +12,7 @@ def get_notes():
                                 CASE WHEN type IN ('sprint', 'climb') THEN true ELSE false END AS highlight,
                                 start_km/{st.session_state['convert_scale']} AS start_point, 
                                 end_km/{st.session_state['convert_scale']} AS end_point, notes 
-                            FROM {os.getenv('PRD_SCHEMA')}.dim_notes 
+                            FROM CORE.dim_notes 
                             WHERE world='{st.session_state['world']}' AND route='{st.session_state['route']}'""").to_df()
         
     st.session_state["notes_data_editor"] = st.data_editor(st.session_state["notes"][["highlight", "segment", "start_point","end_point", "notes"]],

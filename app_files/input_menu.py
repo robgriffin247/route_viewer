@@ -1,11 +1,10 @@
 import streamlit as st 
 import duckdb
 import pandas as pd
-import os
 
 def input_menu():
-    with duckdb.connect(f"{os.getenv('DB')}") as con:
-        routes = con.sql(f"SELECT * FROM {os.getenv('PRD_SCHEMA')}.dim_routes").to_df()
+    with duckdb.connect("data/data.duckdb") as con:
+        routes = con.sql(f"SELECT * FROM CORE.dim_routes").to_df()
 
 
     world, route, metric = st.columns([4,6,3], vertical_alignment="bottom")
