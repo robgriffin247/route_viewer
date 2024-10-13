@@ -13,4 +13,4 @@ int_routes(verbose=v)
 
 dim_fits(verbose=v)
 dim_notes(verbose=v)
-dim_routes(verbose=v)
+dim_routes(verbose=True)
