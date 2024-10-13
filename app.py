@@ -4,6 +4,10 @@ from app_files.get_notes import get_notes
 from app_files.get_plot import get_plot
 import plotly.express as px 
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 st.set_page_config(
     page_title="RouteViewer",
     page_icon=":bike:"
