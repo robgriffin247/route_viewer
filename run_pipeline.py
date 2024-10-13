@@ -5,7 +5,7 @@ from pipeline.core import dim_fits, dim_notes, dim_routes
 v = False
 
 stg_fits(verbose=v)
-stg_notes(refresh=False, verbose=v)
+stg_notes(refresh=True, verbose=v)
 
 int_fits(verbose=v)
 int_notes(verbose=v)
