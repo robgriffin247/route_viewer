@@ -1,5 +1,5 @@
 ,world,route,name,type,start,end,note
-0,Watopia,Glyph Heights,Lead in,lead,"0,00","6,50",
+0,Watopia,Glyph Heights,Lead in,lead,"0,00","8,62",
 1,Watopia,Glyph Heights,Acropolis Sprint,sprint,"2,62","3,08",Slight downhill to banner
 2,Watopia,Glyph Heights,Stoneway Sprint,sprint,"5,25","5,67",Bump at start
 3,Watopia,Glyph Heights,Mayan Mountainside KOM,climb,"6,62","8,62",
@@ -28,7 +28,7 @@
 26,Watopia,Glyph Heights,Mayan Mountainside KOM,,"31,93","32,51",3-5%
 27,Watopia,Glyph Heights,Mayan Mountainside KOM,,"32,51","33,59",3-5%
 28,Watopia,Glyph Heights,Mayan Mountainside KOM,,"33,67","33,91",Flat to the banner
-29,Watopia,Glyph Heights,Finish,finish,"33,91","33,91",
+29,Watopia,Glyph Heights,Finish/lap banner,finish,"33,91","33,91",
 30,Scotland,BRAEk-fast Crits and Grits,Lead in,lead,"0,00","1,32",Includes the Sggur South KOM!
 31,Scotland,BRAEk-fast Crits and Grits,Sggur South KOM,climb,"0,35","1,35","Steep 300m at start and 100m towards end, flat finish"
 32,Scotland,BRAEk-fast Crits and Grits,Sggur descent,,"1,35","2,90",
@@ -46,4 +46,4 @@
 44,Scotland,BRAEk-fast Crits and Grits,Climbs to pens,,"19,45","20,04",3-5%
 45,Scotland,BRAEk-fast Crits and Grits,Climbs to pens,,"20,30","20,65",3-5%
 46,Scotland,BRAEk-fast Crits and Grits,Sggur South KOM,climb,"21,18","22,17","Steep 300m at start and 100m towards end, flat finish"
-47,Scotland,BRAEk-fast Crits and Grits,Finish,finish,"22,17","22,17",
+47,Scotland,BRAEk-fast Crits and Grits,Finish/lap banner,finish,"22,17","22,17",

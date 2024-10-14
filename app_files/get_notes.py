@@ -1,21 +1,71 @@
 import streamlit as st 
 import duckdb
-
+import pandas as pd
 def get_notes():
 
+    #with duckdb.connect("data/data.duckdb") as con:
+    #    st.session_state["notes"] = con.sql(f"""SELECT 
+    #                            world, 
+    #                            route, 
+    #                            segment, 
+    #                            type,
+    #                            CASE WHEN type IN ('sprint', 'climb') THEN true ELSE false END AS highlight,
+    #                            start_km/{st.session_state['convert_scale']} AS start_point, 
+    #                            end_km/{st.session_state['convert_scale']} AS end_point, notes 
+    #                        FROM CORE.dim_notes 
+    #                        WHERE world='{st.session_state['world']}' AND route='{st.session_state['route']}'""").to_df()
+
     with duckdb.connect("data/data.duckdb") as con:
-        st.session_state["notes"] = con.sql(f"""SELECT 
+        st.session_state["lead_length"] = con.sql(f"""
+                                    SELECT end_km/{st.session_state['convert_scale']} AS x
+                                    FROM CORE.dim_notes 
+                                    WHERE world='{st.session_state['world']}' 
+                                        AND route='{st.session_state['route']}' 
+                                        AND type=='lead'""").to_df()["x"][0]
+        
+        st.session_state["lead_notes"] = con.sql(f"""SELECT 
                                 world, 
                                 route, 
                                 segment, 
                                 type,
                                 CASE WHEN type IN ('sprint', 'climb') THEN true ELSE false END AS highlight,
                                 start_km/{st.session_state['convert_scale']} AS start_point, 
-                                end_km/{st.session_state['convert_scale']} AS end_point, notes 
+                                end_km/{st.session_state['convert_scale']} AS end_point, 
+                                notes,
+                                0 AS lap
                             FROM CORE.dim_notes 
-                            WHERE world='{st.session_state['world']}' AND route='{st.session_state['route']}'""").to_df()
+                            WHERE world='{st.session_state['world']}' AND route='{st.session_state['route']}' AND end_point<={st.session_state["lead_length"] }""").to_df()
+        
+        lead_notes = st.session_state["lead_notes"]
+
+        st.session_state["lap_notes"] = con.sql(f"""SELECT 
+                                world, 
+                                route, 
+                                segment, 
+                                type,
+                                CASE WHEN type IN ('sprint', 'climb') THEN true ELSE false END AS highlight,
+                                start_km/{st.session_state['convert_scale']} AS start_point, 
+                                end_km/{st.session_state['convert_scale']} AS end_point, 
+                                notes,
+                                1 AS lap
+                            FROM CORE.dim_notes 
+                            WHERE world='{st.session_state['world']}' AND route='{st.session_state['route']}' 
+                                AND {st.session_state["lead_length"] }<=start_point""").to_df()
+        
+        
+    st.session_state["notes"] = pd.concat([st.session_state["lead_notes"], st.session_state["lap_notes"]])
+    st.session_state["lap_length"] = float(st.session_state["lap_notes"].loc[st.session_state["lap_notes"]["type"]=="finish", "end_point"]) - st.session_state["lead_length"] 
+
+
+    temp = st.session_state["lap_notes"]
+    for lap in range(st.session_state["laps"]):
+        temp["start_point"] += st.session_state["lap_length"]
+        temp["end_point"] += st.session_state["lap_length"]
+        temp["lap"] += 1
+        st.session_state["notes"] = pd.concat([st.session_state["notes"], temp])
 
     # Dupicate non-lead in (cut to those pre lead, not just filter where type!=lead)
+    # Split the above, then join tables <lead> and <laps>*nlaps
 
     n_rows = st.session_state["notes"].shape[0]
 

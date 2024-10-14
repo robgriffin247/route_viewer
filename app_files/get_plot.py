@@ -1,6 +1,7 @@
 import streamlit as st 
 import duckdb
 import plotly.express as px 
+import pandas as pd
 
 def get_plot():
     with duckdb.connect("data/data.duckdb") as con:
@@ -16,13 +17,14 @@ def get_plot():
                         AND route='{st.session_state['route']}'
                     """).to_df()
 
+   
     st.session_state["profile_plot"] = px.line(df, x="distance", y="altitude", labels={
                                                     "distance":f"Distance ({st.session_state['d_unit']})",
                                                     "altitude":f"Altitude ({st.session_state['a_unit']})"
                                                     })
     
     for row, _ in enumerate(st.session_state["notes"].values):
-        if st.session_state["notes_data_editor"].iloc[row].highlight:
+        if st.session_state["notes_data_editor"].iloc[row].highlight and st.session_state["notes"].iloc[row].lap<2:
             if st.session_state["notes"].iloc[row].type == "sprint":
                 color = "green"
             elif st.session_state["notes"].iloc[row].type == "climb":
