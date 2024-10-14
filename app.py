@@ -21,5 +21,3 @@ lap_menu()
 get_notes()
 get_plot()
 plot.plotly_chart(st.session_state["profile_plot"])
-
-
