@@ -15,12 +15,17 @@ st.title("RouteViewer")
 st.write("Racing Notes for Zwift")
 st.html("<hr/>")
 
+
 route_menu()
 plot = st.container()
 lap_menu()
 get_notes()
 get_plot()
 plot.plotly_chart(st.session_state["profile_plot"])
+
+
+
+# FIX PLOTTING OF LAPS/HIGHLIGHTS WHEN MILES - NEED TO CONVERT LAP LENGTH?
 
 
 
