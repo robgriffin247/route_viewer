@@ -14,9 +14,14 @@ def get_notes():
                                 end_km/{st.session_state['convert_scale']} AS end_point, notes 
                             FROM CORE.dim_notes 
                             WHERE world='{st.session_state['world']}' AND route='{st.session_state['route']}'""").to_df()
-        
+
+    # Dupicate non-lead in (cut to those pre lead, not just filter where type!=lead)
+
+    n_rows = st.session_state["notes"].shape[0]
+
     st.session_state["notes_data_editor"] = st.data_editor(st.session_state["notes"][["highlight", "segment", "start_point","end_point", "notes"]],
                                     hide_index=True, 
+                                    height=int(35.2*(n_rows+1)),
                                     use_container_width=False,
                                     column_config={
                                         "highlight":st.column_config.CheckboxColumn("🚨"),
