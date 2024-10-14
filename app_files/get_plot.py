@@ -10,8 +10,8 @@ def get_plot():
                         CASE WHEN {st.session_state['metric']} THEN distance_met ELSE distance_imp END AS distance,
                         CASE WHEN {st.session_state['metric']} THEN distance_met_fmt ELSE distance_imp_fmt END AS distance_fmt,
                         CASE WHEN {st.session_state['metric']} THEN altitude_met ELSE altitude_imp END AS altitude,
-                        CASE WHEN {st.session_state['metric']} THEN altitude_met_fmt ELSE altitude_imp_fmt END AS altitude_fmt,
-                        gradient_fmt
+                        CASE WHEN {st.session_state['metric']} THEN altitude_met_fmt ELSE altitude_imp_fmt END AS altitude_fmt--,
+                        --gradient_fmt
                      FROM CORE.dim_fits 
                      WHERE world='{st.session_state['world']}' 
                         AND route='{st.session_state['route']}'
@@ -38,7 +38,8 @@ def get_plot():
             elif st.session_state["notes"].iloc[row].type == "climb":
                 color = "red"
             elif st.session_state["notes"].iloc[row].type == "lead":
-                color = "pink"
+                color = None
+                st.session_state["profile_plot"].add_vline(x=st.session_state["notes"].iloc[row].end_point,line_color="pink")
             elif st.session_state["notes"].iloc[row].type == "finish":
                 st.session_state["profile_plot"].add_vline(x=st.session_state["notes"].iloc[row].end_point,line_color="orange")
             else:

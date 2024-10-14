@@ -45,8 +45,8 @@ def int_fits(verbose=False):
                         FROM CHANGE),
                     
                     FORMAT_GRADIENT AS (
-                        SELECT *,
-                            CONCAT(CAST(ROUND(CAST(gradient AS DECIMAL(10,1)), 1) as varchar), '%') AS gradient_fmt
+                        SELECT *--,
+                            --CONCAT(CAST(ROUND(CAST(gradient AS DECIMAL(10,1)), 1) as varchar), '%') AS gradient_fmt
                         FROM GRADIENT
                     )
 

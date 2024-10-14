@@ -7,8 +7,8 @@ v = False
 stg_fits(verbose=v)
 stg_notes(refresh=True, verbose=v)
 
-int_fits(verbose=v)
-int_notes(verbose=v)
+int_fits(verbose=True)
+int_notes(verbose=True)
 int_routes(verbose=v)
 
 dim_fits(verbose=v)
