@@ -43,7 +43,7 @@ def get_notes():
                                 route, 
                                 segment, 
                                 type,
-                                CASE WHEN type IN ('sprint', 'climb') THEN true ELSE false END AS highlight,
+                                CASE WHEN type IN ('sprint', 'climb', 'finish') THEN true ELSE false END AS highlight,
                                 start_km/{st.session_state['convert_scale']} AS start_point, 
                                 end_km/{st.session_state['convert_scale']} AS end_point, 
                                 notes,
@@ -58,7 +58,7 @@ def get_notes():
 
 
     temp = st.session_state["lap_notes"]
-    for lap in range(st.session_state["laps"]):
+    for lap in range(st.session_state["laps"]-1):
         temp["start_point"] += st.session_state["lap_length"]
         temp["end_point"] += st.session_state["lap_length"]
         temp["lap"] += 1
