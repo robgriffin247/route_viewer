@@ -1,35 +1,43 @@
 import duckdb
 import os
 
-def dim_fits(verbose=False):
+def dim_fits():
     with duckdb.connect(os.getenv('DB')) as con:
 
         fits = con.sql(f"""
-                WITH FITS AS (
-                    SELECT * FROM {os.getenv('INT_SCHEMA')}.int_fits
+                WITH SOURCE AS (
+                    SELECT world, route, altitude, distance, gradient 
+                    FROM {os.getenv('INT_SCHEMA')}.int_fits
                 ),
 
-                STARTS AS (
-                    SELECT world, route, end_km FROM {os.getenv('INT_SCHEMA')}.int_notes WHERE type='lead'
+                NOTES AS (
+                    SELECT world, route, end_km*1000 AS end_km, type
+                    FROM {os.getenv('INT_SCHEMA')}.int_notes
                 ),
 
-                ENDS AS (
-                    SELECT world, route, end_km FROM {os.getenv('INT_SCHEMA')}.int_notes WHERE type='finish'
+                LEAD_END AS (
+                    SELECT world, route, end_km FROM NOTES WHERE type='lead'
                 ),
 
-                LEAD_ZONE AS (
-                    SELECT FITS.*, 
-                        CASE WHEN STARTS.end_km>=FITS.distance_met THEN 'leadin' ELSE 'lap' END AS zone
-                    FROM FITS LEFT JOIN STARTS ON FITS.world=STARTS.world AND FITS.route=STARTS.route 
+                LAP_END AS (
+                    SELECT world, route, end_km FROM NOTES WHERE type='finish'
                 ),
 
-                FINISH_LINE_CUT AS (
-                    SELECT L.* 
-                    FROM LEAD_ZONE AS L LEFT JOIN ENDS AS E ON L.world=E.world AND L.route=E.route
-                    WHERE E.end_km>=L.distance_met
+                -- 0=lead, 1=main    
+                ADD_LAP AS ( 
+                    SELECT S.world, S.route, S.altitude, S.distance, S.gradient, 
+                        CASE WHEN L.end_km>=S.distance THEN 0 ELSE 1 END AS lap
+                    FROM SOURCE AS S LEFT JOIN LEAD_END AS L ON S.world=L.world AND S.route=L.route 
+                ),
+
+                CUT_TO_FINISH AS (
+                    SELECT A.world, A.route, A.lap, A.altitude, A.distance, A.gradient
+                    FROM ADD_LAP AS A LEFT JOIN LAP_END AS L ON A.world=L.world AND A.route=L.route
+                    WHERE L.end_km>=A.distance
                 )
 
-                SELECT * FROM FINISH_LINE_CUT
+                SELECT world, route, lap, altitude, distance, gradient 
+                FROM CUT_TO_FINISH
 
                 """).to_df()
 
@@ -39,11 +47,8 @@ def dim_fits(verbose=False):
                     SELECT * 
                     FROM fits""")
 
-        if verbose:
-            print(con.sql(f"SELECT * FROM {os.getenv('PRD_SCHEMA')}.dim_fits LIMIT 5"))
 
-
-def dim_notes(verbose=False):
+def dim_notes():
     with duckdb.connect(os.getenv('DB')) as con:
         con.sql(f"CREATE SCHEMA IF NOT EXISTS {os.getenv('PRD_SCHEMA')}")
 
@@ -51,20 +56,11 @@ def dim_notes(verbose=False):
                     SELECT * 
                     FROM {os.getenv('INT_SCHEMA')}.int_notes""")
 
-        if verbose:
-            print(con.sql(f"SELECT * FROM {os.getenv('PRD_SCHEMA')}.dim_notes LIMIT 5"))
 
-
-
-def dim_routes(verbose=False):
+def dim_routes():
     with duckdb.connect(os.getenv('DB')) as con:
         con.sql(f"CREATE SCHEMA IF NOT EXISTS {os.getenv('PRD_SCHEMA')}")
 
         con.sql(f"""CREATE OR REPLACE TABLE {os.getenv('PRD_SCHEMA')}.dim_routes AS
                     SELECT * 
                     FROM {os.getenv('INT_SCHEMA')}.int_routes""")
-
-        if verbose:
-            print(con.sql(f"SELECT * FROM {os.getenv('PRD_SCHEMA')}.dim_routes LIMIT 5"))
-
-

@@ -11,7 +11,6 @@ st.set_page_config(
     page_icon=":bike:"
 )
 
-
 st.title("RouteViewer")
 st.write("Racing Notes for Zwift")
 st.html("<hr/>")
@@ -22,6 +21,5 @@ lap_menu()
 get_notes()
 get_plot()
 plot.plotly_chart(st.session_state["profile_plot"])
-
 
 

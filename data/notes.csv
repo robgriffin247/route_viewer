@@ -1,4 +1,4 @@
-,world,route,name,type,start,end,note
+,world,route,segment,type,start_km,end_km,note
 0,Watopia,Glyph Heights,Lead in,lead,"0,00","8,62",
 1,Watopia,Glyph Heights,Acropolis Sprint,sprint,"2,62","3,08",Slight downhill to banner
 2,Watopia,Glyph Heights,Stoneway Sprint,sprint,"5,25","5,67",Bump at start
