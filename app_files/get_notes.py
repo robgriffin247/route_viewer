@@ -12,7 +12,7 @@ def get_notes():
         """).to_df()
 
     lead_length = float(notes[notes["type"]=="lead"]["end_km"])
-    st.session_state["lap_length"] = float(notes[notes["type"]=="finish"]["end_km"]) - (lead_length/st.session_state["convert_scale"])
+    st.session_state["lap_length"] = float(notes[notes["type"]=="finish"]["end_km"]) - (lead_length)#/st.session_state["convert_scale"])
 
     lap_data = notes[notes["start_km"]>lead_length]
     for lap in range(st.session_state["laps"]-1):
