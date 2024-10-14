@@ -64,9 +64,6 @@ def get_notes():
         temp["lap"] += 1
         st.session_state["notes"] = pd.concat([st.session_state["notes"], temp])
 
-    # Dupicate non-lead in (cut to those pre lead, not just filter where type!=lead)
-    # Split the above, then join tables <lead> and <laps>*nlaps
-
     n_rows = st.session_state["notes"].shape[0]
 
     st.session_state["notes_data_editor"] = st.data_editor(st.session_state["notes"][["highlight", "segment", "start_point","end_point", "notes"]],
