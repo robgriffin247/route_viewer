@@ -21,6 +21,7 @@ def get_notes():
         lap_data["end_km"] += st.session_state["lap_length"]
         notes = pd.concat([notes, lap_data])
 
+
     notes["start_point"] = (notes["start_km"]/st.session_state['convert_scale'])
     notes["end_point"] = (notes["end_km"]/st.session_state['convert_scale'])
 

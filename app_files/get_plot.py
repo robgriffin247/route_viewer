@@ -16,6 +16,7 @@ def get_plot():
             WHERE world='{st.session_state['world']}' AND route='{st.session_state['route']}'
         """).to_df()
     
+    
     # Duplicate data for lapping
     lap_data = route_data[route_data["lap"]==1]
     for lap in range(st.session_state["laps"]-1):
