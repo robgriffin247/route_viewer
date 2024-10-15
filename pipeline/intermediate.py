@@ -79,7 +79,8 @@ def int_routes():
                         GROUP BY world, route, type)
                         
                         SELECT world, route, CASE WHEN COUNT(can_lap) >1 THEN false ELSE true END AS can_lap FROM SOURCE GROUP BY world, route""")
-        
+        print(df)
+
         con.sql(f"""CREATE OR REPLACE TABLE {os.getenv('INT_SCHEMA')}.int_routes AS 
                     SELECT *
                     FROM df""")

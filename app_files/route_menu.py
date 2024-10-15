@@ -11,7 +11,7 @@ def route_menu():
     world.selectbox("World", 
                     label_visibility="hidden",
                     index=routes.index[routes.world=="Watopia"].tolist()[0], # gets Watopia
-                    options=routes.world,
+                    options=routes.world.unique(),
                     key="world")
 
     route.selectbox("Route", 
