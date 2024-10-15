@@ -4,7 +4,7 @@ import pandas as pd
 
 def route_menu():
     with duckdb.connect("data/data.duckdb") as con:
-        routes = con.sql(f"SELECT * FROM CORE.dim_routes ORDER BY world, routes").to_df()
+        routes = con.sql(f"SELECT * FROM CORE.dim_routes ORDER BY world, route").to_df()
    
     world, route, metric = st.columns([4,6,3], vertical_alignment="bottom")
 
