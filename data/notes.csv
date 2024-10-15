@@ -28,7 +28,7 @@
 26,Watopia,Glyph Heights,Mayan Mountainside KOM,,"31,93","32,51",3-5%
 27,Watopia,Glyph Heights,Mayan Mountainside KOM,,"32,51","33,59",3-5%
 28,Watopia,Glyph Heights,Mayan Mountainside KOM,,"33,67","33,91",Flat to the banner
-29,Watopia,Glyph Heights,Finish/lap banner,finish,"33,91","33,91",
+29,Watopia,Glyph Heights,Lap banner,lap_banner,"33,91","33,91",
 30,Scotland,BRAEk-fast Crits and Grits,Lead in,lead,"0,00","1,32",Includes the Sggur South KOM!
 31,Scotland,BRAEk-fast Crits and Grits,Sggur South KOM,climb,"0,35","1,35","Steep 300m at start and 100m towards end, flat finish"
 32,Scotland,BRAEk-fast Crits and Grits,Sggur descent,,"1,35","2,90",
@@ -46,6 +46,22 @@
 44,Scotland,BRAEk-fast Crits and Grits,Climbs to pens,,"19,45","20,04",3-5%
 45,Scotland,BRAEk-fast Crits and Grits,Climbs to pens,,"20,30","20,65",3-5%
 46,Scotland,BRAEk-fast Crits and Grits,Sggur South KOM,climb,"21,18","22,17","Steep 300m at start and 100m towards end, flat finish"
-47,Scotland,BRAEk-fast Crits and Grits,Finish/lap banner,finish,"22,17","22,17",
+47,Scotland,BRAEk-fast Crits and Grits,Lap banner,lap_banner,"22,17","22,17",
 48,Innsbruck,Innsbruckring,Lead in,lead,"0,00","0,23",
-49,Innsbruck,Innsbruckring,Finish/lap banner,finish,"9,00","9,00",
+49,Innsbruck,Innsbruckring,Lap banner,lap_banner,"9,00","9,00",
+50,Watopia,Road to Sky,Lead in,lead,"0,00","0,25",
+51,Watopia,Road to Sky,AdZ KOM,climb,"5,16","17,38",
+52,Watopia,Road to Sky,Finish,finish,"17,38","17,38",
+53,Makuri Islands,Country to Coastal,Lead in,lead,"0,00","0,13",
+54,Makuri Islands,Country to Coastal,Village Sprint,sprint,"1,62","1,77",
+55,Makuri Islands,Country to Coastal,Country Sprint,sprint,"7,23","7,48",
+56,Makuri Islands,Country to Coastal,Shisa Sprint,sprint,"20,37","20,67",
+57,Makuri Islands,Country to Coastal,Tidepool Sprint,sprint,"25,47","25,80",
+58,Makuri Islands,Country to Coastal,Lap banner,lap_banner,"33,52","33,52",
+59,London,Greater London 8,Lead in,lead,"0,00","0,62",
+60,London,Greater London 8,Box Hill KOM,climb,"15,83","18,86",
+61,London,Greater London 8,Lap banner,lap_banner,"24,42","24,42",
+62,Watopia,Loop de Loop,Lead in,lead,"0,00","0,19",
+63,Watopia,Loop de Loop,JWB Sprint,sprint,"2,62","2,82",
+64,Watopia,Loop de Loop,Zwift KOM,climb,"8,26","9,26",
+65,Watopia,Loop de Loop,Lap banner,lap_banner,"12,54","12,54",

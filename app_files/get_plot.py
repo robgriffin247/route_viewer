@@ -51,7 +51,7 @@ def get_plot():
         else:
             fig.add_vrect(x0=highlight["start_point"], x1=highlight["end_point"], fillcolor="blue", line_width=0, opacity=0.3)
 
-        if highlight["type"] in ["lead", "finish"]:
+        if highlight["type"] in ["lead", "finish", "lap_banner"]:
             fig.add_vline(x=highlight["end_point"], line_color="blue")
     
     st.session_state["profile_plot"] = fig

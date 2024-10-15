@@ -3,8 +3,6 @@ from app_files.route_menu import route_menu
 from app_files.lap_menu import lap_menu
 from app_files.get_notes import get_notes
 from app_files.get_plot import get_plot
-import plotly.express as px 
-
 
 st.set_page_config(
     page_title="RouteViewer",
@@ -17,16 +15,17 @@ st.html("<hr/>")
 
 
 route_menu()
-plot = st.container()
+profile_plot_cont = st.container()
 lap_menu()
 get_notes()
 get_plot()
-plot.plotly_chart(st.session_state["profile_plot"])
+profile_plot_cont.plotly_chart(st.session_state["profile_plot"])
+
+
+# ADD MORE DATA 
 
 
 
-# FIX PLOTTING OF LAPS WHEN MILES - NEED TO CONVERT LAP LENGTH? SHOMS BETWEEN LAPS
-# 
 
 
 

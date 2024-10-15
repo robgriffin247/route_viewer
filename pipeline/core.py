@@ -20,7 +20,7 @@ def dim_fits():
                 ),
 
                 LAP_END AS (
-                    SELECT world, route, end_km FROM NOTES WHERE type='finish'
+                    SELECT world, route, end_km FROM NOTES WHERE type IN ('finish', 'lap_banner')
                 ),
 
                 -- 0=lead, 1=main    

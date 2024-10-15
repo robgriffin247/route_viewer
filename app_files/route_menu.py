@@ -5,8 +5,7 @@ import pandas as pd
 def route_menu():
     with duckdb.connect("data/data.duckdb") as con:
         routes = con.sql(f"SELECT * FROM CORE.dim_routes").to_df()
-
-
+   
     world, route, metric = st.columns([4,6,3], vertical_alignment="bottom")
 
     world.selectbox("World", 
@@ -32,3 +31,5 @@ def route_menu():
         st.session_state["d_unit"] = "mi"
         st.session_state["a_unit"] = "ft"
         st.session_state["convert_scale"] = 1.609344
+
+    st.session_state["can_lap"] = routes[(routes["world"]==st.session_state["world"]) & (routes["route"]==st.session_state["route"])]["can_lap"].values[0]

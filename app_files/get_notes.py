@@ -6,13 +6,14 @@ def get_notes():
     with duckdb.connect("data/data.duckdb") as con:
         notes = con.sql(f"""
         SELECT segment, type, start_km, end_km, note,
-                        CASE WHEN type IN ('sprint', 'climb', 'finish') THEN true ELSE false END AS highlight
+                        CASE WHEN type IN ('sprint', 'climb', 'finish', 'lap_banner') THEN true ELSE false END AS highlight
         FROM CORE.dim_notes
         WHERE world='{st.session_state['world']}' AND route='{st.session_state['route']}'
         """).to_df()
 
+   
     lead_length = float(notes[notes["type"]=="lead"]["end_km"])
-    st.session_state["lap_length"] = float(notes[notes["type"]=="finish"]["end_km"]) - (lead_length)#/st.session_state["convert_scale"])
+    st.session_state["lap_length"] = float(notes[(notes["type"]=="finish") | (notes["type"]=="lap_banner")]["end_km"]) - (lead_length)#/st.session_state["convert_scale"])
 
     lap_data = notes[notes["start_km"]>lead_length]
     for lap in range(st.session_state["laps"]-1):
