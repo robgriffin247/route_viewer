@@ -13,19 +13,9 @@ st.title("RouteViewer")
 st.write("Racing Notes for Zwift")
 st.html("<hr/>")
 
-
 route_menu()
 profile_plot_cont = st.container()
 lap_menu()
 get_notes()
 get_plot()
 profile_plot_cont.plotly_chart(st.session_state["profile_plot"])
-
-
-# ADD MORE DATA 
-
-
-
-
-
-
