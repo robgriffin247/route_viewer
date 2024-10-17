@@ -1,27 +1,46 @@
 import duckdb
 import os
 from dotenv import load_dotenv
-from pipeline.fit_to_df import fit_to_df
+from pipeline.read_raw import read_fit, read_gpx
 import pandas as pd
 
 def stg_fits():
 
-    data = []
+    df = []
 
-    files = os.listdir(os.getenv('FIT_DIR'))
+    files = os.listdir("data/fit_files")
     for f in files:
-        data.append(fit_to_df(f.replace(".fit", "")))
+        df.append(read_fit(f"data/fit_files/{f}"))
 
-    data = pd.concat(data, ignore_index=True)
+    df = pd.concat(df, ignore_index=True)
 
     with duckdb.connect(os.getenv('DB')) as con:
         con.sql(f"CREATE SCHEMA IF NOT EXISTS {os.getenv('STG_SCHEMA')}")
 
         con.sql(f"""CREATE OR REPLACE TABLE {os.getenv('STG_SCHEMA')}.stg_fits AS 
             SELECT world, route, altitude, distance
-            FROM data 
+            FROM df 
             WHERE position_lat IS NOT NULL""")
 
+def stg_rides():
+
+    df = []
+
+    files = os.listdir("data/gpx_files")
+    for f in files:
+        df.append(read_gpx(f"data/gpx_files/{f}"))
+
+    df = pd.concat(df, ignore_index=True)
+
+    with duckdb.connect(os.getenv('DB')) as con:
+        con.sql(f"CREATE SCHEMA IF NOT EXISTS {os.getenv('STG_SCHEMA')}")
+
+        con.sql(f"""CREATE OR REPLACE TABLE {os.getenv('STG_SCHEMA')}.stg_rides AS 
+            SELECT world, route, altitude, distance
+            FROM df
+            """)
+
+        print(con.sql("SELECT * FROM STAGING.stg_rides"))
 
 def stg_sheets(refresh=False):
     if not refresh:
