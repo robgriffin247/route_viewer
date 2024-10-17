@@ -18,10 +18,10 @@ def get_plot():
     
     
     # Duplicate data for lapping
-    lap_data = route_data[route_data["lap"]==1]
+    lap_data = route_data.loc[route_data["lap"]==1]
     for lap in range(st.session_state["laps"]-1):
-        lap_data["distance"] += (st.session_state["lap_length"]/st.session_state["convert_scale"])
-        lap_data["lap"] += 1
+        lap_data.loc[:, "distance"] += (st.session_state["lap_length"]/st.session_state["convert_scale"])
+        lap_data.loc[:, "lap"] += 1
         route_data = pd.concat([route_data, lap_data])
 
     # Generate figure

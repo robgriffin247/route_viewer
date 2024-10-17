@@ -11,33 +11,38 @@ def get_notes():
         WHERE world='{st.session_state['world']}' AND route='{st.session_state['route']}'
         """).to_df()
 
-   
-    lead_length = float(notes[notes["type"]=="lead"]["end_km"])
-    st.session_state["lap_length"] = float(notes[(notes["type"]=="finish") | (notes["type"]=="lap_banner")]["end_km"]) - (lead_length)#/st.session_state["convert_scale"])
+    if st.session_state["can_lap"]:
+        lead_length = notes.loc[notes["type"]=="lead", "end_km"][0]
+        st.session_state["lap_length"] = [i for i in notes.loc[notes["type"]=="lap_banner", "end_km"]][0] - (lead_length)
 
-    lap_data = notes[notes["start_km"]>lead_length]
-    for lap in range(st.session_state["laps"]-1):
-        lap_data["start_km"] += st.session_state["lap_length"]
-        lap_data["end_km"] += st.session_state["lap_length"]
-        notes = pd.concat([notes, lap_data])
+        lap_data = notes.loc[notes["start_km"]>lead_length]
+        for lap in range(st.session_state["laps"]-1):
+            lap_data.loc[:, "start_km"] += st.session_state["lap_length"]
+            lap_data.loc[:, "end_km"] += st.session_state["lap_length"]
+            notes = pd.concat([notes, lap_data])
 
 
-    notes["start_point"] = (notes["start_km"]/st.session_state['convert_scale'])
-    notes["end_point"] = (notes["end_km"]/st.session_state['convert_scale'])
+    notes.loc[:, "start_point"] = (notes["start_km"]/st.session_state['convert_scale'])
+    notes.loc[:, "end_point"] = (notes["end_km"]/st.session_state['convert_scale'])
 
-    st.session_state["notes"] = notes
+    if st.session_state["basic"]:
+        st.session_state["notes"] = notes
+    else:
+        st.session_state["notes"] = notes.loc[notes["type"].isin(["sprint", "lead", "climb", "finish", "lap_banner"])]
+        
 
     st.session_state["notes_data_editor"] = st.data_editor(st.session_state["notes"][["segment", "type", "highlight", "start_point", "end_point", "note"]],
                    hide_index=True, 
-                   height=int(35.2*(notes.shape[0]+1)),
+                   height=int(35.2*(st.session_state["notes"].shape[0]+1)),
                    use_container_width=False,
                    column_config={
                        "type":None,
                        "highlight":st.column_config.CheckboxColumn("🚨"),
                        "segment":st.column_config.TextColumn("Segment", width="medium"),
-                       "start_point":st.column_config.NumberColumn("From", format=f"%.2f {st.session_state['d_unit']}", width="small"),
-                       "end_point":st.column_config.NumberColumn("To", format=f"%.2f {st.session_state['d_unit']}", width="small"),
+                       "start_point":st.column_config.NumberColumn("From", format=f"%.1f {st.session_state['d_unit']}", width="small"),
+                       "end_point":st.column_config.NumberColumn("To", format=f"%.1f {st.session_state['d_unit']}", width="small"),
                        "note":st.column_config.TextColumn("Note", width="large")
-                   },
-                   disabled=["segment", "start_point", "end_point", "notes"])
+                   }
+                )
+    
 
