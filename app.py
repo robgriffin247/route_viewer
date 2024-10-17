@@ -10,7 +10,6 @@ st.set_page_config(
     layout="wide"
 )
 
-
 st.title("RouteViewer")
 st.write("Racing Notes for Zwift")
 st.html("<hr/>")
