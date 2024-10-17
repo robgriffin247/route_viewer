@@ -32,9 +32,10 @@ st.html("""
         </style>
         """)
 
-index_page = st.Page("main.py", title="Home")
-about_page = st.Page("about.py", title="About")
-pg = st.navigation([index_page, about_page])
+index_page = st.Page("main_page.py", title="Home")
+data_page = st.Page("data_page.py", title="Data")
+about_page = st.Page("about_page.py", title="About")
+pg = st.navigation([index_page, data_page, about_page])
 
 st.title("RouteViewer")
 st.html("""
@@ -42,3 +43,10 @@ st.html("""
         """)
 
 pg.run()
+
+
+
+# Add a further page showing which routes have what data...
+# - mark which routes to list
+# - add target to pipeline
+# - filter to targetted on data_page

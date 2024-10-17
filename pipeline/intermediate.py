@@ -73,6 +73,6 @@ def int_routes():
         con.sql(f"CREATE SCHEMA IF NOT EXISTS {os.getenv('INT_SCHEMA')}")
 
         con.sql(f"""CREATE OR REPLACE TABLE {os.getenv('INT_SCHEMA')}.int_routes AS 
-                    SELECT world, route, fit, basic, complete, can_lap 
+                    SELECT world, route, fit, basic, complete, can_lap, priority
                     FROM {os.getenv('STG_SCHEMA')}.stg_routes""")
         

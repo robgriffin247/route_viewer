@@ -36,8 +36,12 @@ def stg_sheets(refresh=False):
         notes.to_csv("data/notes.csv")
 
         url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet=routes"
-        routes = pd.read_csv(url)[["world", "route", "fit", "basic", "complete", "can_lap"]]
+        routes = pd.read_csv(url)[["world", "route", "fit", "basic", "complete", "can_lap", "priority"]]
         routes.to_csv("data/routes.csv")
+        
+        #url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet=zp_races"
+        #races = pd.read_csv(url)[["route"]]
+        #print(races["route"].value_counts()[21:40])
         
 
     with duckdb.connect(os.getenv('DB')) as con:
@@ -48,6 +52,6 @@ def stg_sheets(refresh=False):
                 FROM notes""")
 
         con.sql(f"""CREATE OR REPLACE TABLE {os.getenv('STG_SCHEMA')}.stg_routes AS 
-                SELECT world, route, fit, basic, complete, can_lap
+                SELECT world, route, fit, basic, complete, can_lap, priority
                 FROM routes""")
 

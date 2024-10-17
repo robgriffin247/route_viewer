@@ -34,7 +34,7 @@ def get_notes():
     st.session_state["notes_data_editor"] = st.data_editor(st.session_state["notes"][["segment", "type", "highlight", "start_point", "end_point", "note"]],
                    hide_index=True, 
                    height=int(35.2*(st.session_state["notes"].shape[0]+1)),
-                   use_container_width=False,
+                   use_container_width=True,
                    column_config={
                        "type":None,
                        "highlight":st.column_config.CheckboxColumn("🚨"),
