@@ -16,7 +16,7 @@ def route_menu():
                     key="world")
 
     if st.session_state["world"]=="Watopia":
-        default_index=[i for i in routes.route[routes.world==st.session_state["world"]]].index("Loop de Loop")
+        default_index=[i for i in routes.route[routes.world==st.session_state["world"]]].index("Glyph Heights")
     else:
         default_index=0
 
