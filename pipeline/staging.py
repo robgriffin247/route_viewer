@@ -29,7 +29,7 @@ def stg_notes(refresh=False):
 
     else:
         sheet_id = "1qHMTUfpi9Gy_l3g9P4umsfdGaJ3O6Bdh9R1yNguoBEc"
-        sheet_name = "race_notes"
+        sheet_name = "routeviewer_notes"
         url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}"
 
         notes = pd.read_csv(url)[["world", "route", "segment", "type", "start_km", "end_km", "note"]]
