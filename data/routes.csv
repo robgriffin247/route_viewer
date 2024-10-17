@@ -1,0 +1,235 @@
+,world,route,fit,basic,complete,can_lap
+0,Bologna,Time Trial Lap,False,False,False,False
+1,Crit City,Bell Lap,False,False,False,False
+2,Crit City,Downtown Dolphin,False,False,False,False
+3,France,Casse-Pattes,False,False,False,False
+4,France,Douce France,True,True,True,False
+5,France,France Classic Fondo,False,False,False,False
+6,France,La Reine,False,False,False,False
+7,France,Petit Boucle,False,False,False,False
+8,France,R.G.V.,False,False,False,False
+9,France,Roule Ma Poule,False,False,False,False
+10,France,Tire-Bouchon,False,False,False,False
+11,France,Ven-Top,False,False,False,False
+12,Gravel Mountain,Gravel Mountain,False,False,False,False
+13,Gravel Mountain,Gravel Mountain Reverse,False,False,False,False
+14,Innsbruck,2018 UCI Worlds Course Short Lap,False,False,False,False
+15,Innsbruck,Achterbahn,False,False,False,False
+16,Innsbruck,Innsbruck KOM After Party,False,False,False,False
+17,Innsbruck,InnsbruckConti,False,False,False,False
+18,Innsbruck,Innsbruckring,True,True,False,True
+19,Innsbruck,Lutscher,False,False,False,False
+20,Innsbruck,Lutscher CCW,False,False,False,False
+21,London,Classique,False,False,False,False
+22,London,Classique Reverse,False,False,False,False
+23,London,Greater London 8,True,True,False,True
+24,London,Greater London Flat,False,False,False,False
+25,London,Greater London Loop,False,False,False,False
+26,London,Greater London Loop Reverse,False,False,False,False
+27,London,Greatest London Flat,False,False,False,False
+28,London,Greatest London Loop,False,False,False,False
+29,London,Greatest London Loop Reverse,False,False,False,False
+30,London,Keith Hill After Party,False,False,False,False
+31,London,Leith Hill After Party,False,False,False,False
+32,London,London 8,False,False,False,False
+33,London,London 8 Reverse,False,False,False,False
+34,London,London Loop,False,False,False,False
+35,London,London Loop Reverse,False,False,False,False
+36,London,Surrey Hills,False,False,False,False
+37,London,The London Pretzel,False,False,False,False
+38,London,The PRL Full,False,False,False,False
+39,London,The PRL Half,False,False,False,False
+40,London,Triple Loops,False,False,False,False
+41,Makuri Islands,Bridges and Boardwalks,False,False,False,False
+42,Makuri Islands,Castle Crit,False,False,False,False
+43,Makuri Islands,Castle Crit Run,False,False,False,False
+44,Makuri Islands,Castle to Castle,False,False,False,False
+45,Makuri Islands,Chain Chomper,False,False,False,False
+46,Makuri Islands,Chasing the Sun,False,False,False,False
+47,Makuri Islands,Country to Coastal,True,True,False,True
+48,Makuri Islands,Countryside Tour,False,False,False,False
+49,Makuri Islands,Electric Loop,False,False,False,False
+50,Makuri Islands,Farmland Loop,False,False,False,False
+51,Makuri Islands,Fine and Sandy,False,False,False,False
+52,Makuri Islands,Flatland Loop,False,False,False,False
+53,Makuri Islands,Island Hopper,False,False,False,False
+54,Makuri Islands,Island Outskirts,False,False,False,False
+55,Makuri Islands,Kappa Quest,False,False,False,False
+56,Makuri Islands,Kappa Quest Reverse,False,False,False,False
+57,Makuri Islands,Makuri 40,False,False,False,False
+58,Makuri Islands,Makuri Pretzel,False,False,False,False
+59,Makuri Islands,Mech Isle Loop,False,False,False,False
+60,Makuri Islands,Neokyo All-Nighter,False,False,False,False
+61,Makuri Islands,Neokyo Crit Course,False,False,False,False
+62,Makuri Islands,Neon Flats,False,False,False,False
+63,Makuri Islands,Railways and Rooftops,False,False,False,False
+64,Makuri Islands,Rooftop Rendezvous,False,False,False,False
+65,Makuri Islands,Sea to Tree,False,False,False,False
+66,Makuri Islands,Shisa Shakedown,False,False,False,False
+67,Makuri Islands,Sleepless City,False,False,False,False
+68,Makuri Islands,Spirit Forest,False,False,False,False
+69,Makuri Islands,Sprinter's Playground,False,False,False,False
+70,Makuri Islands,Suki's Playground,False,False,False,False
+71,Makuri Islands,Temples and Towers,False,False,False,False
+72,Makuri Islands,Three Village Loop,False,False,False,False
+73,Makuri Islands,Turf N Surf,False,False,False,False
+74,Makuri Islands,Twilight Harbor,False,False,False,False
+75,Makuri Islands,Two Village Loop,False,False,False,False
+76,Makuri Islands,Valley to Mountaintop,False,False,False,False
+77,Makuri Islands,Wandering Flats,False,False,False,False
+78,New York,2022 Cycling Esports World Championships Route,False,False,False,False
+79,New York,Astoria Line 8,False,False,False,False
+80,New York,Couch to Sky K,False,False,False,False
+81,New York,Everything Bagel,False,False,False,False
+82,New York,Flat Irons,False,False,False,False
+83,New York,Gotham Grind,False,False,False,False
+84,New York,Gotham Grind Reverse,False,False,False,False
+85,New York,Grand Central Circuit,False,False,False,False
+86,New York,Grand Central Circuit Reverse,False,False,False,False
+87,New York,Hudson Roll,False,False,False,False
+88,New York,Knickerbocker,False,False,False,False
+89,New York,Knickerbocker Reverse,False,False,False,False
+90,New York,Lady Liberty,False,False,False,False
+91,New York,LaGuardia Loop,False,False,False,False
+92,New York,LaGuardia Loop Reverse,False,False,False,False
+93,New York,Mighty Metropolitan,False,False,False,False
+94,New York,NYC KOM After Party,False,False,False,False
+95,New York,Park Perimeter Loop,False,False,False,False
+96,New York,Park Perimeter Reverse,False,False,False,False
+97,New York,Park to Peak,False,False,False,False
+98,New York,Rising Empire,False,False,False,False
+99,New York,Shuman Trail Loop,False,False,False,False
+100,New York,Shuman Trail Loop Reverse,False,False,False,False
+101,New York,The 6 Train,False,False,False,False
+102,New York,The 6 Train Reverse,False,False,False,False
+103,New York,The Highline,False,False,False,False
+104,New York,The Highline Reverse,False,False,False,False
+105,Paris,Champs-Élysées,False,False,False,False
+106,Paris,Lutece Express,False,False,False,False
+107,Richmond,Cobbled Climbs,False,False,False,False
+108,Richmond,Cobbled Climbs Reverse,False,False,False,False
+109,Richmond,Libby Hill After Party,False,False,False,False
+110,Richmond,Richmond Loop Around,False,False,False,False
+111,Richmond,Richmond Rollercoaster,False,False,False,False
+112,Richmond,Richmond UCI Reverse,False,False,False,False
+113,Richmond,Richmond UCI Worlds,False,False,False,False
+114,Richmond,The Fan Flats,False,False,False,False
+115,Scotland,BRAEk-fast Crits and Grits,True,True,True,True
+116,Scotland,City and the Sgurr,False,False,False,False
+117,Scotland,Glasgow Crit Circuit,False,False,False,False
+118,Scotland,Glasgow Reverse,False,False,False,False
+119,Scotland,Loch Loop,False,False,False,False
+120,Scotland,Rolling Highlands,False,False,False,False
+121,Scotland,The Muckle Yin,False,False,False,False
+122,Watopia,11.1 Ocean Blvd,False,False,False,False
+123,Watopia,5K Loop,False,False,False,False
+124,Watopia,Accelerate to Elevate,False,False,False,False
+125,Watopia,Bambino Fondo,False,False,False,False
+126,Watopia,Beach Island Loop,False,False,False,False
+127,Watopia,Big Flat 8,False,False,False,False
+128,Watopia,Big Foot Hills,False,False,False,False
+129,Watopia,Big Loop,False,False,False,False
+130,Watopia,Big Loop Reverse,False,False,False,False
+131,Watopia,Bigger Loop,False,False,False,False
+132,Watopia,Canopies and Coastlines,False,False,False,False
+133,Watopia,Chili Pepper,False,False,False,False
+134,Watopia,Chili Pepper Reverse,False,False,False,False
+135,Watopia,Climber's Gambit,False,False,False,False
+136,Watopia,Coast Crusher,False,False,False,False
+137,Watopia,Coastal Crown Loop,False,False,False,False
+138,Watopia,Downtown Titans,False,False,False,False
+139,Watopia,Dust In the Wind,False,False,False,False
+140,Watopia,Eastern Eight,False,False,False,False
+141,Watopia,Elevation Evaluation,False,False,False,False
+142,Watopia,Epic Run,False,False,False,False
+143,Watopia,Figure 8,False,False,False,False
+144,Watopia,Figure 8 Reverse,False,False,False,False
+145,Watopia,Flat Route,False,False,False,False
+146,Watopia,Flat Route Reverse,False,False,False,False
+147,Watopia,Four Horsemen,False,False,False,False
+148,Watopia,Glyph Heights,True,True,True,True
+149,Watopia,Going Coastal,False,False,False,False
+150,Watopia,Gran Fondo,False,False,False,False
+151,Watopia,Handful of Gravel,False,False,False,False
+152,Watopia,Hilly Route,False,False,False,False
+153,Watopia,Hilly Route Reverse,False,False,False,False
+154,Watopia,Italian Villas Circuit,False,False,False,False
+155,Watopia,Itza Climb Finish,False,False,False,False
+156,Watopia,Itza Party,False,False,False,False
+157,Watopia,Jon's Route,False,False,False,False
+158,Watopia,Jungle Circuit,False,False,False,False
+159,Watopia,Jungle Circuit Reverse,False,False,False,False
+160,Watopia,Jurassic Coast,False,False,False,False
+161,Watopia,Legends and Lava,False,False,False,False
+162,Watopia,Loop de Loop,True,True,False,True
+163,Watopia,May Field,False,False,False,False
+164,Watopia,Mayan 8,False,False,False,False
+165,Watopia,Mayan Bridge Loop,False,False,False,False
+166,Watopia,Mayan Mash,False,False,False,False
+167,Watopia,Mayan San Remo,False,False,False,False
+168,Watopia,Medio Fondo,False,False,False,False
+169,Watopia,Mountain 8,False,False,False,False
+170,Watopia,Mountain Mash,False,False,False,False
+171,Watopia,Mountain Route,False,False,False,False
+172,Watopia,Muir and the Mountain,False,False,False,False
+173,Watopia,Navig8,False,False,False,False
+174,Watopia,Ocean Lava Cliffside Loop,False,False,False,False
+175,Watopia,Oh Hill No,False,False,False,False
+176,Watopia,Out and Back Again,False,False,False,False
+177,Watopia,Peak Performance,False,False,False,False
+178,Watopia,Power to the Tower,False,False,False,False
+179,Watopia,Quatch Quest,False,False,False,False
+180,Watopia,Radio Rendezvous,False,False,False,False
+181,Watopia,Repack Rush,False,False,False,False
+182,Watopia,Road to Ruins,False,False,False,False
+183,Watopia,Road to Ruins Reverse,False,False,False,False
+184,Watopia,Road to Sky,True,True,False,False
+185,Watopia,Run Path Reverse,False,False,False,False
+186,Watopia,Sand and Sequoias,False,False,False,False
+187,Watopia,Seaside Sprint,False,False,False,False
+188,Watopia,Serpentine 8,False,False,False,False
+189,Watopia,Shorelines and Summits,False,False,False,False
+190,Watopia,Snowman,False,False,False,False
+191,Watopia,Spiral Into the Volcano,False,False,False,False
+192,Watopia,Splash and Dash,False,False,False,False
+193,Watopia,Sugar Cookie,False,False,False,False
+194,Watopia,Surfin' Safari,False,False,False,False
+195,Watopia,Temple Trek,False,False,False,False
+196,Watopia,Tempus Fugit,False,False,False,False
+197,Watopia,That's Amore,False,False,False,False
+198,Watopia,That's Amore Reverse,False,False,False,False
+199,Watopia,The Big Ring,False,False,False,False
+200,Watopia,The Magnificent 8,False,False,False,False
+201,Watopia,The Mega Pretzel,False,False,False,False
+202,Watopia,The Pretzel,False,False,False,False
+203,Watopia,The Über Pretzel,False,False,False,False
+204,Watopia,Three Little Sisters,False,False,False,False
+205,Watopia,Three Sisters,False,False,False,False
+206,Watopia,Three Sisters Reverse,False,False,False,False
+207,Watopia,Tick Tock,False,False,False,False
+208,Watopia,Tides and Temples,False,False,False,False
+209,Watopia,Titans Run,False,False,False,False
+210,Watopia,Tour of Fire and Ice,False,False,False,False
+211,Watopia,Triple Flat Loops,False,False,False,False
+212,Watopia,Two Bridges Loop,False,False,False,False
+213,Watopia,Volcano Circuit,False,False,False,False
+214,Watopia,Volcano Circuit CCW,False,False,False,False
+215,Watopia,Volcano Climb,False,False,False,False
+216,Watopia,Volcano Climb After Party,False,False,False,False
+217,Watopia,Volcano Flat,False,False,False,False
+218,Watopia,Volcano Flat Reverse,False,False,False,False
+219,Watopia,Watopia's Waistband,False,False,False,False
+220,Watopia,WBR Climbing Series,False,False,False,False
+221,Watopia,Whole Lotta Lava,False,False,False,False
+222,Watopia,Zwift Bambino Fondo 2022,False,False,False,False
+223,Watopia,Zwift Games 2024 Epic,False,False,False,False
+224,Watopia,Zwift Gran Fondo 2022,False,False,False,False
+225,Watopia,Zwift Medio Fondo 2022,False,False,False,False
+226,Yorkshire,2019 UCI Worlds Harrogate Circuit,False,False,False,False
+227,Yorkshire,Duchy Estate,False,False,False,False
+228,Yorkshire,Harrogate Circuit Reverse,False,False,False,False
+229,Yorkshire,Queen's Highway,False,False,False,False
+230,Yorkshire,Queen's Highway After Party,False,False,False,False
+231,Yorkshire,Royal Pump Room 8,False,False,False,False
+232,Yorkshire,Tour of Tewit Well,False,False,False,False
+233,Yorkshire,Yorkshire Double Loops,False,False,False,False
