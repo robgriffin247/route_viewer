@@ -64,3 +64,4 @@ def dim_routes():
         con.sql(f"""CREATE OR REPLACE TABLE {os.getenv('PRD_SCHEMA')}.dim_routes AS
                     SELECT * 
                     FROM {os.getenv('INT_SCHEMA')}.int_routes""")
+        print(con.sql(f"""SELECT * FROM CORE.dim_routes"""))

@@ -72,16 +72,7 @@ def int_routes():
     with duckdb.connect(os.getenv('DB')) as con:
         con.sql(f"CREATE SCHEMA IF NOT EXISTS {os.getenv('INT_SCHEMA')}")
 
-        df = con.sql(f"""WITH SOURCE AS(
-                        SELECT DISTINCT(world), route,
-                            CASE WHEN 'finish' IN type THEN false ELSE true END AS can_lap 
-                        FROM {os.getenv('STG_SCHEMA')}.stg_notes
-                        GROUP BY world, route, type)
-                        
-                        SELECT world, route, CASE WHEN COUNT(can_lap) >1 THEN false ELSE true END AS can_lap FROM SOURCE GROUP BY world, route""")
-        print(df)
-
         con.sql(f"""CREATE OR REPLACE TABLE {os.getenv('INT_SCHEMA')}.int_routes AS 
-                    SELECT *
-                    FROM df""")
+                    SELECT world, route, fit, basic, complete, can_lap 
+                    FROM {os.getenv('STG_SCHEMA')}.stg_routes""")
         

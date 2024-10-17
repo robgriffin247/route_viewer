@@ -1,22 +1,28 @@
 import streamlit as st 
 import duckdb
 import pandas as pd
+import numpy as np
 
 def route_menu():
     with duckdb.connect("data/data.duckdb") as con:
-        routes = con.sql(f"SELECT * FROM CORE.dim_routes ORDER BY world, route").to_df()
-   
-    #world, route, metric = st.columns([4,6,3], vertical_alignment="bottom")
+        routes = con.sql(f"SELECT world, route, can_lap FROM CORE.dim_routes WHERE fit AND basic ORDER BY world, route").to_df()
+
     world, route, laps = st.columns([4,6,3], vertical_alignment="bottom")
 
     world.selectbox("World", 
                     #label_visibility="hidden",
-                    index=routes.index[routes.world=="Watopia"].tolist()[0], # gets Watopia
+                    index=int(np.where(routes=="Watopia")[0][0]),
                     options=routes.world.unique(),
                     key="world")
 
+    if st.session_state["world"]=="Watopia":
+        default_index=[i for i in routes.route[routes.world==st.session_state["world"]]].index("Loop de Loop")
+    else:
+        default_index=0
+
     route.selectbox("Route", 
                     #label_visibility="hidden", 
+                    index=default_index,
                     options=routes.route[routes.world==st.session_state["world"]],
                     key="route")
 
