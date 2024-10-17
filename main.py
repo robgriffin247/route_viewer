@@ -10,5 +10,3 @@ profile_plot_cont = st.container()
 get_notes()
 get_plot()
 profile_plot_cont.plotly_chart(st.session_state["profile_plot"])
-
-
