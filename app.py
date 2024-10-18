@@ -47,7 +47,6 @@ st.html("""
 # Run the app
 pg.run()
 
-
 # TODO ===========================================
 # Add to stg_rides to check if route already parsed (message duplicates; manual delete?)
 # Build notes to cover lap banners (then reinstate can_lap flow control)
