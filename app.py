@@ -37,7 +37,7 @@ st.html("""
 main_page = st.Page("main_page.py", title="Home")
 data_page = st.Page("data_page.py", title="Data")
 about_page = st.Page("about_page.py", title="About")
-pg = st.navigation([main_page, data_page, about_page])
+pg = st.navigation([main_page, about_page])
 
 st.title("RouteViewer")
 st.html("""
