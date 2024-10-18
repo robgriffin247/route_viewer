@@ -23,9 +23,13 @@ with duckdb.connect("data/data.duckdb") as con:
                     "total_length":st.column_config.NumberColumn("Length (km)", format='%.1f'),
                  })
     
-    if False:
+    if True:
         st.html("<hr/><br/>")
         st.write("Ridden a race on one of these routes starting from the pens and covering the entire route? Download the .gpx file from Strava and upload it here!")
-        st.file_uploader("Upload .gpx file", label_visibility="hidden")
+        upload_area, send_button = st.columns([8,3])
         # Control type
+        upload_area.file_uploader("Upload .gpx file", label_visibility="hidden")
+        # inactive if no file uploaded
+        send_button.button("Send")
         # Send file to me
+        # Generate pop up thank you message

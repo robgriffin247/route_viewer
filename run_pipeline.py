@@ -10,6 +10,7 @@ with duckdb.connect("data/data.duckdb") as con:
     con.sql(f"CREATE SCHEMA IF NOT EXISTS CORE")
 
 """
+"""
 stg_rides()
 stg_sheet("notes", ["world", "route", "segment", "type", "start_km", "end_km", "note"])
 stg_sheet("zi_routes", ["Map", "Route", "Length", "Elevation", "Lead-In", "Restriction"])
@@ -20,7 +21,6 @@ int_notes()
 
 dim_rides()
 dim_notes()
-"""
 
 with duckdb.connect("data/data.duckdb") as con:
     
