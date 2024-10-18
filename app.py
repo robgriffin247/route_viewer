@@ -7,8 +7,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-
-
+# Styling
 st.html("""
         <style>
             .st-emotion-cache-13ln4jf { // Main page width
@@ -34,20 +33,21 @@ st.html("""
         </style>
         """)
 
-main_page = st.Page("main_page.py", title="Home")
-data_page = st.Page("data_page.py", title="Data")
-about_page = st.Page("about_page.py", title="About")
+# Define navigation and pages
+main_page = st.Page("pages/index.py", title="Home")
+about_page = st.Page("pages/about.py", title="About")
 pg = st.navigation([main_page, about_page])
 
+# Set standard top of page
 st.title("RouteViewer")
 st.html("""
         <div class='subheader''>Racing Notes for Zwift</div>
         """)
 
-
-
+# Run the app
 pg.run()
 
-# Replace fits with gpx/rides
-# Break staging sheets into seperate functions/a generic function e.g. stg_sheet("routes")
-# Replace targets; have gpx T/F populate automatically - routes should be a table of each world, route, 
+
+# TODO ===========================================
+# Add to stg_rides to check if route already parsed (message duplicates; manual delete?)
+# Build notes to cover lap banners (then reinstate can_lap flow control)
