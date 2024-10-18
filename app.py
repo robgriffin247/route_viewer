@@ -7,6 +7,8 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+
+
 st.html("""
         <style>
             .st-emotion-cache-13ln4jf { // Main page width
@@ -32,20 +34,20 @@ st.html("""
         </style>
         """)
 
-index_page = st.Page("main_page.py", title="Home")
+main_page = st.Page("main_page.py", title="Home")
 data_page = st.Page("data_page.py", title="Data")
 about_page = st.Page("about_page.py", title="About")
-pg = st.navigation([index_page, data_page, about_page])
+pg = st.navigation([main_page, data_page, about_page])
 
 st.title("RouteViewer")
 st.html("""
         <div class='subheader''>Racing Notes for Zwift</div>
         """)
 
+
+
 pg.run()
 
-
-# Add a further page showing which routes have what data...
-# - mark which routes to list
-# - add target to pipeline
-# - filter to targetted on data_page
+# Replace fits with gpx/rides
+# Break staging sheets into seperate functions/a generic function e.g. stg_sheet("routes")
+# Replace targets; have gpx T/F populate automatically - routes should be a table of each world, route, 

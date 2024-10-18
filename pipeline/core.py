@@ -1,67 +1,51 @@
 import duckdb
 import os
 
-def dim_fits():
-    with duckdb.connect(os.getenv('DB')) as con:
+def dim_rides():
+    with duckdb.connect("data/data.duckdb") as con:
+        df = con.sql(f"""WITH
+                        RIDES AS (
+                            SELECT *
+                            FROM INTERMEDIATE.int_rides
+                        ),
+                     
+                        LEADS AS (
+                            SELECT route_id, end_point
+                            FROM INTERMEDIATE.int_notes
+                            WHERE type='lead'
+                        ),
 
-        fits = con.sql(f"""
-                WITH SOURCE AS (
-                    SELECT world, route, altitude, distance, gradient 
-                    FROM {os.getenv('INT_SCHEMA')}.int_fits
-                ),
+                        FINISHES AS (
+                            SELECT route_id, end_point
+                            FROM INTERMEDIATE.int_notes
+                            WHERE type IN ('finish', 'lap_banner')
+                        ),
+                     
+                        ADD_LAPS AS (
+                            SELECT 
+                                RIDES.*,
+                                CASE WHEN RIDES.distance < (LEADS.end_point*1000) THEN  0 ELSE 1 END AS lap
+                            FROM RIDES LEFT JOIN LEADS ON RIDES.route_id=LEADS.route_id
+                        ),
 
-                NOTES AS (
-                    SELECT world, route, end_km*1000 AS end_km, type
-                    FROM {os.getenv('INT_SCHEMA')}.int_notes
-                ),
+                        CUT_FINISH AS (
+                            SELECT *
+                            FROM ADD_LAPS LEFT JOIN FINISHES ON ADD_LAPS.route_id=FINISHES.route_id
+                            WHERE ADD_LAPS.distance <= (FINISHES.end_point*1000)
+                        )
 
-                LEAD_END AS (
-                    SELECT world, route, end_km FROM NOTES WHERE type='lead'
-                ),
+                        SELECT * FROM CUT_FINISH
+                        """)
+                
+        con.sql("CREATE OR REPLACE TABLE CORE.dim_rides AS SELECT * FROM df")
 
-                LAP_END AS (
-                    SELECT world, route, end_km FROM NOTES WHERE type IN ('finish', 'lap_banner')
-                ),
-
-                -- 0=lead, 1=main    
-                ADD_LAP AS ( 
-                    SELECT S.world, S.route, S.altitude, S.distance, S.gradient, 
-                        CASE WHEN L.end_km>=S.distance THEN 0 ELSE 1 END AS lap
-                    FROM SOURCE AS S LEFT JOIN LEAD_END AS L ON S.world=L.world AND S.route=L.route 
-                ),
-
-                CUT_TO_FINISH AS (
-                    SELECT A.world, A.route, A.lap, A.altitude, A.distance, A.gradient
-                    FROM ADD_LAP AS A LEFT JOIN LAP_END AS L ON A.world=L.world AND A.route=L.route
-                    WHERE L.end_km>=A.distance
-                )
-
-                SELECT world, route, lap, altitude, distance, gradient 
-                FROM CUT_TO_FINISH
-
-                """).to_df()
-
-        con.sql(f"CREATE SCHEMA IF NOT EXISTS {os.getenv('PRD_SCHEMA')}")
-
-        con.sql(f"""CREATE OR REPLACE TABLE {os.getenv('PRD_SCHEMA')}.dim_fits AS
-                    SELECT * 
-                    FROM fits""")
-
+    print("Loaded dim_rides")
 
 def dim_notes():
-    with duckdb.connect(os.getenv('DB')) as con:
-        con.sql(f"CREATE SCHEMA IF NOT EXISTS {os.getenv('PRD_SCHEMA')}")
-
-        con.sql(f"""CREATE OR REPLACE TABLE {os.getenv('PRD_SCHEMA')}.dim_notes AS
-                    SELECT * 
-                    FROM {os.getenv('INT_SCHEMA')}.int_notes""")
-
-
-def dim_routes():
-    with duckdb.connect(os.getenv('DB')) as con:
-        con.sql(f"CREATE SCHEMA IF NOT EXISTS {os.getenv('PRD_SCHEMA')}")
-
-        con.sql(f"""CREATE OR REPLACE TABLE {os.getenv('PRD_SCHEMA')}.dim_routes AS
-                    SELECT * 
-                    FROM {os.getenv('INT_SCHEMA')}.int_routes""")
-        print(con.sql(f"""SELECT * FROM CORE.dim_routes"""))
+    with duckdb.connect("data/data.duckdb") as con:
+        df = con.sql(f"""WITH SOURCE AS (
+                        SELECT * FROM INTERMEDIATE.int_notes
+                     )
+                     SELECT * FROM SOURCE
+                     """)
+        con.sql("CREATE OR REPLACE TABLE CORE.dim_notes AS SELECT * FROM df")

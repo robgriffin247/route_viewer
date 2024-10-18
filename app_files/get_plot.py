@@ -3,32 +3,29 @@ import duckdb
 import plotly.express as px 
 import pandas as pd
 
-
 def get_plot():
     with duckdb.connect("data/data.duckdb") as con:
         route_data = con.sql(f"""
-            SELECT 
-                lap, 
+            SELECT lap,
                 CASE WHEN {st.session_state['metric']} THEN altitude ELSE altitude*{3.2808399} END AS altitude, 
                 distance/1000/{st.session_state['convert_scale']} AS distance, 
                 gradient
-            FROM CORE.dim_fits
+            FROM CORE.dim_rides
             WHERE world='{st.session_state['world']}' AND route='{st.session_state['route']}'
         """).to_df()
-    
-    
-    # Duplicate data for lapping
-    lap_data = route_data.loc[route_data["lap"]==1]
-    for lap in range(st.session_state["laps"]-1):
-        lap_data.loc[:, "distance"] += (st.session_state["lap_length"]/st.session_state["convert_scale"])
-        lap_data.loc[:, "lap"] += 1
-        route_data = pd.concat([route_data, lap_data])
 
-    # Generate figure
+    # Duplicate data for lapping
+    #lap_data = route_data.loc[route_data["lap"]==1]
+    #for lap in range(st.session_state["laps"]-1):
+    #    lap_data.loc[:, "distance"] += (st.session_state["lap_length"]/st.session_state["convert_scale"])
+    #    lap_data.loc[:, "lap"] += 1
+    #    route_data = pd.concat([route_data, lap_data])
+
+
     fig = px.line(route_data, x="distance", y="altitude",
-                  labels={"distance":f"Distance ({st.session_state['d_unit']})",
-                          "altitude":f"Altitude ({st.session_state['a_unit']})"})
-    
+                    labels={"distance":f"Distance ({st.session_state['d_unit']})",
+                            "altitude":f"Altitude ({st.session_state['a_unit']})"})
+        
     route_data["dfmt"] = [f"{'{:.2f}'.format(round(d,2))} {st.session_state['d_unit']}" for d in route_data['distance']] 
     route_data["afmt"] = [f"{'{:.1f}'.format(round(a,2))} {st.session_state['a_unit']}" for a in route_data['altitude']] 
     route_data["gfmt"] = [f"{'{:.1f}'.format(round(g,2))}%" for g in route_data['gradient']] 

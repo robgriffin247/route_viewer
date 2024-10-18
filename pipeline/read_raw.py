@@ -1,5 +1,5 @@
 import pandas as pd
-import os
+
 import fitdecode
 import gpxpy
 import geopy.distance
@@ -29,12 +29,11 @@ def read_fit(file):
     
     return df
 
-
 def read_gpx(file):
 
     # Get world and route from filename
-    world = file.split("__")[1]
-    route = file.split("__")[2].replace(".gpx",""   )
+    world = file.split("_in_")[1].split(".gpx")[0].replace("_", " ")
+    route = file.split("_on_")[1].split("_in_")[0].replace("_", " ")
 
     with open(file) as f:
         gpx = gpxpy.parse(f)
@@ -56,7 +55,23 @@ def read_gpx(file):
     df['distance'] = df.distance_delta.cumsum()
 
 
-    df["world"] = world.replace("_", " ")
-    df["route"] = route.replace("_", " ")
+    df["file"] = file
+    df["world"] = world
+    df["route"] = route
     
     return df[["world", "route", "distance", "altitude", "longitude", "latitude"]]
+
+def read_sheet(sheet_name, columns_list, refresh=True):
+
+    if not refresh:
+        df = pd.read_csv(f"data/{sheet_name}.csv")
+
+    else:
+        sheet_id = "1qHMTUfpi9Gy_l3g9P4umsfdGaJ3O6Bdh9R1yNguoBEc"
+        
+        url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}"
+        df = pd.read_csv(url)[columns_list]
+        df.to_csv(f"data/{sheet_name}.csv")
+    
+    return df
+

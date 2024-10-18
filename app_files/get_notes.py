@@ -1,3 +1,4 @@
+
 import streamlit as st 
 import duckdb
 import pandas as pd
@@ -5,12 +6,14 @@ import pandas as pd
 def get_notes():
     with duckdb.connect("data/data.duckdb") as con:
         notes = con.sql(f"""
-        SELECT segment, type, start_km, end_km, note,
+        SELECT segment, type, start_point, end_point, note,
                         CASE WHEN type IN ('sprint', 'climb', 'finish', 'lap_banner') THEN true ELSE false END AS highlight
         FROM CORE.dim_notes
         WHERE world='{st.session_state['world']}' AND route='{st.session_state['route']}'
+        ORDER BY start_point
         """).to_df()
 
+    x = """
     if st.session_state["can_lap"]:
         lead_length = notes.loc[notes["type"]=="lead", "end_km"][0]
         st.session_state["lap_length"] = [i for i in notes.loc[notes["type"]=="lap_banner", "end_km"]][0] - (lead_length)
@@ -20,15 +23,16 @@ def get_notes():
             lap_data.loc[:, "start_km"] += st.session_state["lap_length"]
             lap_data.loc[:, "end_km"] += st.session_state["lap_length"]
             notes = pd.concat([notes, lap_data])
+    """
 
+    notes.loc[:, "start_point"] = pd.to_numeric(notes["start_point"])/st.session_state['convert_scale']
+    notes.loc[:, "end_point"] = notes["end_point"]/st.session_state['convert_scale']
+    notes.loc[:, "note"] = [str(i) for i in notes["note"]]
 
-    notes.loc[:, "start_point"] = (notes["start_km"]/st.session_state['convert_scale'])
-    notes.loc[:, "end_point"] = (notes["end_km"]/st.session_state['convert_scale'])
-
-    if st.session_state["basic"]:
-        st.session_state["notes"] = notes
-    else:
-        st.session_state["notes"] = notes.loc[notes["type"].isin(["sprint", "lead", "climb", "finish", "lap_banner"])]
+    #if st.session_state["basic"]:
+    st.session_state["notes"] = notes
+    #else:
+    #    st.session_state["notes"] = notes.loc[notes["type"].isin(["sprint", "lead", "climb", "finish", "lap_banner"])]
         
 
     st.session_state["notes_data_editor"] = st.data_editor(st.session_state["notes"][["segment", "type", "highlight", "start_point", "end_point", "note"]],
@@ -45,4 +49,3 @@ def get_notes():
                    }
                 )
     
-
