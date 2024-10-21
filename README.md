@@ -1,15 +1,14 @@
 # RouteViewer
 
-An app to build and view race/route notes for Zwift (and other e-ecycling platforms).
+This app is designed to combine .gpx files from activities on Zwift (and other e-cycling platforms in the future) with route descriptions/racing notes. For routes that can be lapped (lead-in ends/route starts where the route finishes - it is a circuit; e.g. Glasgow Crit, e.g. not Road to Sky which starts in the jungle and finishes atop the alpe) it also allows users to set the number of laps, adjusting the route profile graph and table of notes accordingly. Users can also set metric (km/metres) or imperial (miles/feet).
 
-1. Initial design:
-    - Load data in from race .fit files into one big table with world and route variables added
-    - Create streamlit app to give
-        1. Dropdown menus for world and route; route to be reactive to world (routes are a child of world; e.g. Road to Sky only exists in Watopia and should not show if the user selects the Makuri Islands world)
-        1. Interactive plot of profile showing distance and altitude including formatted tooltip
-        1. Option for miles or km as the units
-        1. Generate a summary of the selected area (distance, climbing, average grade)
+The route profile graph is interactive, allowing users to zoom in and out of sections, scroll axes and hover over the line to get details about distance, altitude and gradient. Users can also highlight specific notes on the profile graph, with KOM/sprint segments automatically shown by default (and coloured appropriately).
 
-1. Second phase:
-    - Create a csv of route meta-data (start/end points, type and name for leadin, sprint and kom sectors, lap/finish banner) based on distances
-    - Generate table with lap capabilities
+### TODO 
+
+- Check if route covered by >1 gpx file before running pipeline
+- Create check in stg_rides to cause omit dataset & message about if length < total length in ZI note
+- Put logic of table of routes with no gpx data into pipeline (dim_todo) then read into data_page.py
+- Create table (dim_basic) of routes with no detailed notes - add to data_page.py
+- Create upload feature in data_page.py; check if route needed
+- Focus work on notes to id routes that can be lapped (then reinstate can_lap flow control)

@@ -7,6 +7,9 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+
+
+
 # Styling
 st.html("""
         <style>
@@ -49,14 +52,6 @@ st.html("""
 
 # Run the app
 
-
-
 pg.run()
 
-# TODO ===========================================
-# [x] Add to stg_rides to check if route already parsed (message duplicates; manual delete?)
-# [x] Add to check length >= ZI notes else do not load (message to alert)
-# [x] Create and publish table of routes with no gpx data,
-# [ ] Create upload feature 
-# [ ] Create table of routes with no detailed notes; create subpage detailing this?
-# [ ] Build notes to cover lap banners (then reinstate can_lap flow control)
+

@@ -1,17 +1,25 @@
 import streamlit as st 
  
-st.html("""
-<p>RouteViewer is developed by Rob Griffin &mdash; data engineer by day and keen zwifter by night! 
-        Follow me on instagram <a class="subtle_link" href=="https://www.instagram.com/griffin_cycling/">@griffin_cycling</a> for updates. 
-        Special thanks to the <a class="subtle_link" href="https://www.facebook.com/TeaSconeBikes">Tea & Scone club</a> on Zwift who have helped 
-        develop and test this project.</p>
-            
-<p>It is early days for this project and I am currently working to build the data, 
-        but it takes time &mdash; each route requires riding and annotating. This involves riding the route 
-        myself or sending a bot around the route to get <em>.fit</em> data, and trawling through race videos on YouTube to develop notes. 
-        It takes time and money!</p>
+st.markdown("""
+The objective of this app is to create **race-ready route notes describing key the sections of popular Zwift racing routes**. Most importantly, RouteViewer provides
 
-<p>To support the project, to help cover costs (like the hardware and Zwift membership needed to run bots) or 
-        just to give me a bit of motivation, then head over to <a class="subtle_link" href="https://buymeacoffee.com/griffin_cycling">buymeacoffee</a> 
-        &mdash; if you're feeling really generous you can even buy me a bike 😉</p> 
+- an **interactive route profile**, allowing users to zoom, scroll and explore the route profile
+- detailed and concise **notes for critical parts of the route** &mdash; not just where to find sprint and kom segments          
+- funcionality to **set the number of laps**, updating the route profile and race notes to make it easy to describe the whole route, not just the first lap!
+- outputs in **metric or imperial**
+
+----------
+            
+RouteViewer is developed by Rob Griffin &mdash; data engineer by day and keen zwifter by night! 
+Follow me on [instagram](https://www.instagram.com/griffin_cycling/) for updates. 
+Special thanks to the [Tea & Scone club](https://www.facebook.com/TeaSconeBikes) on Zwift who have helped develop and test this project.
+            
+It is early days for this project and I am currently working to build the data, 
+but it takes time &mdash; each route requires ride data and annotating. 
+That involves watching races on YouTube and repeatedly watching the key sections to create a thorough descriotand accurate description.
+
+Finding this app useful? I've made it to be fully open and free to use, but if you'd like to make a donation then head over to [buymeacoffee](https://buymeacoffee.com/griffin_cycling).
+With enough donations, I might even get to upgrade my 15 year old Specialized Allez! Every donation is hugely appreciated and helps keep me motivated to invest my time and expertise :) 
+            
+Ride on!
 """)
