@@ -42,13 +42,11 @@ data_page = st.Page("app_pages/data.py", title="Wanted gpx files")
 about_page = st.Page("app_pages/about.py", title="About")
 pg = st.navigation([main_page, data_page, about_page])
 
-
 # Set standard top of page
 st.title("RouteViewer")
 st.html("""
         <div class='subheader'>Racing Notes for Zwift</div>
         """)
-
 
 # Run the app
 
