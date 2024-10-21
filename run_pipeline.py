@@ -4,13 +4,12 @@ from pipeline.core import dim_rides, dim_notes
 import duckdb
 
 
+"""
 with duckdb.connect("data/data.duckdb") as con:
     con.sql(f"CREATE SCHEMA IF NOT EXISTS STAGING")
     con.sql(f"CREATE SCHEMA IF NOT EXISTS INTERMEDIATE")
     con.sql(f"CREATE SCHEMA IF NOT EXISTS CORE")
 
-"""
-"""
 stg_rides()
 stg_sheet("notes", ["world", "route", "segment", "type", "start_km", "end_km", "note"])
 stg_sheet("zi_routes", ["Map", "Route", "Length", "Elevation", "Lead-In", "Restriction"])
@@ -24,7 +23,7 @@ dim_notes()
 
 with duckdb.connect("data/data.duckdb") as con:
     
-    too_short = con.sql("""
+    too_short = con.sql(""
                   WITH NOTES AS (
                     SELECT * FROM INTERMEDIATE.int_notes WHERE type in ('finish', 'lap_banner') 
                   ),
@@ -40,14 +39,14 @@ with duckdb.connect("data/data.duckdb") as con:
                   )
                   SELECT * 
                   FROM TOO_SHORT
-                  """)
+                  "")
 
     print("The following gpx files did not cover the entire route - remove them and find a new source:")
     print(too_short)
     print("="*80)
     print(" "*80)
 
-    to_do = con.sql("""
+    to_do = con.sql(""
             WITH ROUTES AS (
                 SELECT route_id, world, route, total_length FROM INTERMEDIATE.int_routes WHERE ride
             ),
@@ -56,8 +55,44 @@ with duckdb.connect("data/data.duckdb") as con:
                 FROM INTERMEDIATE.int_rides
             )
             SELECT world, route FROM ROUTES WHERE route_id NOT IN (SELECT route_id FROM ROUTES_RIDDEN) ORDER BY total_length
-            """)
+            "")
     print("The following routes need gpx files:")
     print(to_do)
     print("="*80)
     print(" "*80)
+"""
+
+
+stg_sheet("road_descriptions", ["world", "road", "sector_name", "sector_start", "sector_end", "sector_notes", "sector_type"])
+stg_sheet("route_roads", ["world", "route", "road", "start"])
+
+with duckdb.connect("data/data.duckdb") as con:
+    print(con.sql("""
+            WITH ROAD_DESCRIPTIONS AS (
+              SELECT 
+                  * EXCLUDE (sector_start, sector_end),
+                  CAST(REPLACE(sector_start, ',', '.') AS DECIMAL(10,2)) AS sector_start,
+                  CAST(REPLACE(sector_end, ',', '.') AS DECIMAL(10,2)) AS sector_end
+              FROM STAGING.stg_road_descriptions
+            ),
+
+            ROUTE_ROADS AS (
+              SELECT 
+                  * EXCLUDE (start),
+                  CAST(REPLACE(start, ',', '.') AS DECIMAL(10,2)) AS start,
+              FROM STAGING.stg_route_roads
+            ),
+
+            JOINED AS (
+              SELECT 
+                  RR.world, RR.route,
+                  RD.sector_name AS sector,
+                  RD.sector_type AS type,
+                  RD.sector_start + RR.start AS start_point,
+                  RD.sector_end + RR.start AS end_point,
+                  RD.sector_notes AS notes
+              FROM ROUTE_ROADS AS RR LEFT JOIN ROAD_DESCRIPTIONS RD ON RR.world=RD.world AND RR.road=RD.road
+            )
+
+            SELECT * FROM JOINED ORDER BY world, route, start_point, end_point
+            """))
