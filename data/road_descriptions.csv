@@ -1,5 +1,5 @@
 ,world,road,sector_name,sector_start,sector_end,sector_notes,sector_type
-0,Scotland,A,Champions Sprint,"0,05","0,25","Fast entry, then flat",sprint
-1,Scotland,B,Clyde Kicker KOM,"0,42","0,72","Short ramp into flat, 200m at 8-9%, then flat to banner ",climb
-2,Scotland,B,Rollers,"0,75","1,5","Long down into 3 rolling uphills, freewheel last downhill",
-3,Scotland,B,Sprint approach,"1,8","1,85",Little ramp into flat to sprint/lap banner,
+0,Scotland,A1,Champions Sprint,"0,05","0,25","Fast entry, then flat",sprint
+1,Scotland,B1,Clyde Kicker KOM,"0,42","0,72","Short ramp into flat, 200m at 8-9%, then flat to banner ",climb
+2,Scotland,B1,Rollers,"0,75","1,5","Long down into 3 rolling uphills, freewheel last downhill",
+3,Scotland,B1,Sprint approach,"1,8","1,85",Little ramp into flat to sprint/lap banner,

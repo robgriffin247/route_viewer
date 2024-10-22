@@ -49,3 +49,12 @@ def dim_notes():
                      SELECT * FROM SOURCE
                      """)
         con.sql("CREATE OR REPLACE TABLE CORE.dim_notes AS SELECT * FROM df")
+
+def dim_notesx():
+    with duckdb.connect("data/data.duckdb") as con:
+        df = con.sql(f"""WITH SOURCE AS (
+                        SELECT * FROM INTERMEDIATE.int_notesx
+                     )
+                     SELECT * FROM SOURCE
+                     """)
+        con.sql("CREATE OR REPLACE TABLE CORE.dim_notesx AS SELECT * FROM df")

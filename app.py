@@ -7,9 +7,6 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-
-
-
 # Styling
 st.html("""
         <style>
@@ -36,6 +33,7 @@ st.html("""
         </style>
         """)
 
+
 # Define navigation and pages
 main_page = st.Page("app_pages/index.py", title="Home")
 data_page = st.Page("app_pages/data.py", title="Wanted gpx files")
@@ -48,7 +46,6 @@ st.html("""
         <div class='subheader'>Racing Notes for Zwift</div>
         """)
 
-# Run the app
 
 pg.run()
 

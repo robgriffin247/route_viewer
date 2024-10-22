@@ -152,3 +152,40 @@ def int_notes():
 
     print(f"Loaded int_notes")
 
+
+
+def int_notesx():  
+    with duckdb.connect("data/data.duckdb") as con:
+        df = con.sql("""
+                WITH ROAD_DESCRIPTIONS AS (
+                SELECT 
+                    * EXCLUDE (sector_start, sector_end),
+                    CAST(REPLACE(sector_start, ',', '.') AS DECIMAL(10,2)) AS sector_start,
+                    CAST(REPLACE(sector_end, ',', '.') AS DECIMAL(10,2)) AS sector_end
+                FROM STAGING.stg_road_descriptions
+                ),
+
+                ROUTE_ROADS AS (
+                SELECT 
+                    * EXCLUDE (start),
+                    CAST(REPLACE(start, ',', '.') AS DECIMAL(10,2)) AS start,
+                FROM STAGING.stg_route_roads
+                ),
+
+                JOINED AS (
+                SELECT 
+                    RR.world, RR.route,
+                    RD.sector_name AS segment,
+                    RD.sector_type AS type,
+                    RD.sector_start + RR.start AS start_point,
+                    RD.sector_end + RR.start AS end_point,
+                    RD.sector_notes AS note
+                FROM ROUTE_ROADS AS RR LEFT JOIN ROAD_DESCRIPTIONS RD ON RR.world=RD.world AND RR.road=RD.road
+                )
+
+                SELECT * FROM JOINED ORDER BY world, route, start_point, end_point
+                """).to_df()
+        
+        con.sql(f"CREATE OR REPLACE TABLE INTERMEDIATE.int_notesx AS SELECT * FROM df")
+
+    print(f"Loaded int_notesx")
