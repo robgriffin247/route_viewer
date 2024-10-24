@@ -1,5 +1,30 @@
 ,world,road,sector_name,sector_start,sector_end,sector_notes,sector_type
-0,Scotland,A1,Champions Sprint,"0,05","0,25","Fast entry, then flat",sprint
+0,Scotland,B1,Champions Sprint,"2,12","2,32","Fast entry, then flat",sprint
 1,Scotland,B1,Clyde Kicker KOM,"0,42","0,72","Short ramp into flat, 200m at 8-9%, then flat to banner ",climb
-2,Scotland,B1,Rollers,"0,75","1,5","Long down into 3 rolling uphills, freewheel last downhill",
+2,Scotland,B1,City Rollers,"0,75","1,5","Long down into 3 rolling uphills, freewheel last downhill",
 3,Scotland,B1,Sprint approach,"1,8","1,85",Little ramp into flat to sprint/lap banner,
+4,Scotland,C2,City approach,"0,17","0,4",2-4% ramp,
+5,Scotland,D2,Rollers,"0,32","1,47",Some gentle rollers and fast downhill on last to roundabout,
+6,Scotland,E1,Brae Rev. KOM,"0,29","0,73","Builds up to 5% until arch, then flat to banner",climb
+7,Scotland,E1,Brae descent,"0,79","1,32",Two steep downhill ramps,
+8,Scotland,E2,Brae KOM ,"0,1","0,7","Steep at big left bend, kicks again on final straight, flattening to banner",
+9,Scotland,E2,Brae Rev. descent,"0,88","1,08",3-5% descent,
+10,Scotland,F1,Climb to corkscrew,"0,06","0,34","7-8% early, flattening to castle",
+11,Scotland,F1,Corkscrew descent,"0,48","0,76","2-4% down, then steep under the bridge",
+12,Scotland,F1,Climb to Sgurr South,"0,79","2,06","Two early ramps of 4-5%, and long 2% finish to pens",
+13,Scotland,F2,Corkscrew approach,"0,12","1,39","Downhill, steep towards corkscrew",
+14,Scotland,F2,Corkscrew,"1,42","1,77","8-9% through tunnel, into 2-4%",
+15,Scotland,F2,Brae approach,"1,97","2,12",Steep drop - freewheel,
+16,Scotland,H1,Coast road,"1,3","1,8","mostly 2%, kicks to 4% late on",
+17,Scotland,I1,Sgurr South KOM,"0,12","1,11","Two main ramps, flatter finish",climb
+18,Scotland,I1,Sgurr South KOM,"0,22","0,44",7-9% ramp,
+19,Scotland,I1,Sgurr South KOM,"0,83",1,Shorter 7-9% ramp,
+20,Scotland,I1,Sgurr South descent,"1,15","2,6","Lots of steep sections in the first half, ",
+21,Scotland,I2,Sgurr North,"0,1","1,67","4% average, some ramps:",climb
+22,Scotland,I2,Sgurr North,"0,5","0,64",First ramp of 6%,
+23,Scotland,I2,Sgurr North,"0,82","0,88",Short 14% ramp,
+24,Scotland,I2,Sgurr North,"1,03","1,4",Longer ramp of mostly 5-8%,
+25,Scotland,I2,Sgurr North,"1,5","1,67",5-7% then flattening to banner,
+26,Scotland,I2,Sgurr South descent,"1,78","1,95",Steep drop,
+27,Scotland,I2,Sgurr South descent,"2,32","2,58",Steep drop,
+28,Scotland,J2,Brae bypass,"0,22","0,25",Drop off bridge,

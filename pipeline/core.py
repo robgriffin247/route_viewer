@@ -52,9 +52,13 @@ def dim_notes():
 
 def dim_notesx():
     with duckdb.connect("data/data.duckdb") as con:
-        df = con.sql(f"""WITH SOURCE AS (
-                        SELECT * FROM INTERMEDIATE.int_notesx
+        df = con.sql(f"""WITH NOTESX AS (
+                        SELECT REPLACE(CONCAT(world, '__', route), ' ', '_') AS route_id, * FROM INTERMEDIATE.int_notesx
+                     ),
+                     NOTES AS (
+                        SELECT * FROM INTERMEDIATE.int_notes
                      )
-                     SELECT * FROM SOURCE
+                     (SELECT * FROM NOTESX) UNION (SELECT * FROM NOTES)
                      """)
-        con.sql("CREATE OR REPLACE TABLE CORE.dim_notesx AS SELECT * FROM df")
+        
+        con.sql("CREATE OR REPLACE TABLE CORE.dim_notes AS SELECT * FROM df")

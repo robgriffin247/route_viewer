@@ -47,7 +47,7 @@ def int_routes():
                                 LOWER(REPLACE(CONCAT(Map, '__', Route), ' ', '_')) AS route_id, 
                                 Map AS world,
                                 Route AS route,
-                                CAST(STR_SPLIT("Lead-in", 'km')[1] AS DECIMAL(10,1)) AS lead,
+                                CASE WHEN ovr_lead IS NULL CAST(STR_SPLIT("Lead-in", 'km')[1] AS DECIMAL(10,1)) ELSE ovr_lead END AS lead,
                                 CAST(STR_SPLIT(Length, 'km')[1] AS DECIMAL(10,1)) AS length,
                                 CAST(STR_SPLIT(Elevation, 'm')[1] AS DECIMAL(10,1)) AS elevation,
                                 NOT CONTAINS(Restriction, 'Run Only') OR Restriction IS NULL AS ride,

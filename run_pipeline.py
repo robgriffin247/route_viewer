@@ -53,7 +53,7 @@ with duckdb.connect("data/data.duckdb") as con:
 if args.s:
     stg_rides()
     stg_sheet("notes", ["world", "route", "segment", "type", "start_km", "end_km", "note"])
-    stg_sheet("zi_routes", ["Map", "Route", "Length", "Elevation", "Lead-In", "Restriction"])
+    stg_sheet("zi_routes", ["Map", "Route", "Length", "Elevation", "Lead-In", "Restriction", "ovr_lead", "ovr_total"])
 
 if args.i:
     int_rides()
@@ -67,17 +67,25 @@ if args.p:
 
 # DEV - this will replace notes later (stg_notes = stg_road_descriptions and stg_route_roads; *_notes=*_notesx)
 if args.d:
+    #stg_rides()
     stg_sheet("road_descriptions", ["world", "road", "sector_name", "sector_start", "sector_end", "sector_notes", "sector_type"])
     stg_sheet("route_roads", ["world", "route", "road", "start"])
+    #stg_sheet("zi_routes", ["Map", "Route", "Length", "Elevation", "Lead-In", "Restriction"])
 
     int_notesx()
+    #int_rides()
+    #int_routes()
 
     dim_notesx()
+    #dim_rides()
 
     with duckdb.connect("data/data.duckdb") as con:
-        print(con.sql("SELECT * FROM INTERMEDIATE.int_notesx"))
+        print(con.sql("SELECT * FROM CORE.dim_notesx"))
 
 # CHECKS 
 if args.c:
     too_short()
     to_get()
+
+
+    # currently fixing new notes system - added ovr_lead and ovr_total; tweaking route notes; union on notesx and notes
