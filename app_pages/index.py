@@ -1,16 +1,12 @@
 import streamlit as st 
-from app_files.route_menu import route_menu
-from app_files.controls import controls
+from app_functions.user_inputs import route_input, controls_input
+from app_functions.outputs import notes_output, profile_output
 
-from app_files.get_notes_table import get_notes_table
-from app_files.get_profile_plot import get_profile_plot
+from dotenv import load_dotenv
+load_dotenv()
 
-route_menu()
-controls()
-profile_plot_cont = st.container()
-get_notes_table()
-get_profile_plot()
-profile_plot_cont.plotly_chart(st.session_state["profile_plot"])
-
-
-
+route_input()
+controls_input()
+plot_container = st.container()
+notes_output()
+plot_container.plotly_chart(profile_output())

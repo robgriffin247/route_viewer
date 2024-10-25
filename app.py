@@ -1,5 +1,4 @@
 import streamlit as st 
-import numpy as np
 
 st.set_page_config(
     page_title="RouteViewer",
@@ -38,7 +37,10 @@ st.html("""
 main_page = st.Page("app_pages/index.py", title="Home")
 data_page = st.Page("app_pages/data.py", title="Wanted gpx files")
 about_page = st.Page("app_pages/about.py", title="About")
-pg = st.navigation([main_page, data_page, about_page])
+pg = st.navigation([
+    main_page, 
+    #data_page, 
+    about_page])
 
 # Set standard top of page
 st.title("RouteViewer")
@@ -46,5 +48,8 @@ st.html("""
         <div class='subheader'>Racing Notes for Zwift</div>
         """)
 
-
 pg.run()
+
+
+# Replace existing with x*
+# Add more notes
