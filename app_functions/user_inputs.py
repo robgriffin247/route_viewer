@@ -2,11 +2,12 @@ import duckdb
 import streamlit as st 
 import numpy as np 
 import pandas as pd
-import os
+#import os
 
 def route_input():
     world, route = st.columns([4,6])
-    with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+#    with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+    with duckdb.connect("data/routeviewer.duckdb") as con:
         #available_routes = con.sql("SELECT DISTINCT(world) AS world, route FROM CORE.dim_rides ORDER BY world, route").to_df()
         available_routes = con.sql("SELECT DISTINCT(world) AS world, route FROM CORE.dim_notes ORDER BY world, route").to_df()
 
@@ -21,7 +22,7 @@ def route_input():
                     options=available_routes.route[available_routes.world==st.session_state["world"]],
                     key="route")
     
-    with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+    with duckdb.connect("data/routeviewer.duckdb") as con:
         st.session_state["ride_data"] = con.sql(f"""
                         SELECT * FROM CORE.dim_rides WHERE world='{st.session_state["world"]}' AND route='{st.session_state["route"]}'
                         """).to_df()  
