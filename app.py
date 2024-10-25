@@ -6,6 +6,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+    
 # Styling
 st.html("""
         <style>
