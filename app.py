@@ -55,6 +55,4 @@ st.html("""
 
 pg.run()
 
-
-# Replace existing with x*
 # Add more notes

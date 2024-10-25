@@ -1,6 +1,6 @@
 ,world,sector_id,sector_start_landmark,sector_description
 0,Scotland,SC001,Champions sprint clockwise start banner,Champions Sprint (clockwise) only
 1,Scotland,SC002,"Zebra crossinf before rail bridge, clockwise towards Clyde Kicker","Ride from the rail bridge near the entry point to Glasgow, under the Central Station building, up the Clyde Kicker, through the rollers, past the church and finish at the zebra crossing just before left bend to Champ./pens"
-2,Watopia,WA001,Grade start banner,"Lower slopes of the Grade, until gradient hits 0%"
-3,Watopia,WA002,Grade sector 5 line,Upper slopes of the Grade until banner
-4,Watopia,WA003,The Grade KOM,Entire kom form banner to banner
+2,Watopia,WA001,Grade start banner,Entire kom form banner to banner
+3,Watopia,WA002,Grade start banner,"Lower slopes of the Grade, until gradient hits 0%"
+4,Watopia,WA003,Grade sector 5 line,Upper slopes of the Grade until banner

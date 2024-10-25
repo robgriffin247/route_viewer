@@ -28,7 +28,7 @@ if args.s:
         con.sql(f"CREATE SCHEMA IF NOT EXISTS STAGING")
 
     stg_sheet("routes", ["Map", "Route", "Length", "Lead-In", "Restriction"])
-    stg_sheet("route_lengths", ["world", "route", "lead", "total", "gpx_correction"])
+    stg_sheet("route_lengths", ["world", "route", "lead", "total", "circuit", "gpx_correction", "complete_notes"])
     stg_sheet("sectors", ["world", "sector_id", "sector_start_landmark", "sector_description"])
     stg_sheet("sector_descriptions", ["world", "sector_id", "note_name", "note_start_km", "note_end_km", "note_type", "note_description"])
     stg_sheet("route_sectors", ["world", "route", "sector_id", "sector_start"])

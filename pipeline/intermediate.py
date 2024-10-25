@@ -42,7 +42,9 @@ def int_routes():
                         Route AS route,
                         CAST(STR_SPLIT("Lead-in", 'km')[1] AS FLOAT) AS lead,
                         CAST(STR_SPLIT("Lead-in", 'km')[1] AS FLOAT) + CAST(STR_SPLIT(Length, 'km')[1] AS FLOAT) as total,
-                        NULL AS gpx_correction
+                        NULL AS circuit,
+                        NULL AS gpx_correction,
+                        NULL AS complete_notes
                     FROM STAGING.stg_routes
                     WHERE NOT CONTAINS(Restriction, 'Run Only') OR Restriction IS NULL
                 ),
@@ -50,10 +52,11 @@ def int_routes():
                 -- More precise, and contains gpx correction; notes are made by watching videos of races but gpx starts after departing pens
                 MY_ROUTES AS (
                     SELECT 
-                        world, route, lead, total,
+                        world, route, lead, total, circuit, 
                         CASE WHEN CONTAINS(gpx_correction, '−') THEN 
                             -CAST(REPLACE(REPLACE(gpx_correction, '−', ''), ',', '.') AS FLOAT) ELSE
-                            CAST(REPLACE(gpx_correction, ',', '.') AS FLOAT) END AS gpx_correction
+                            CAST(REPLACE(gpx_correction, ',', '.') AS FLOAT) END AS gpx_correction,
+                        complete_notes
                     FROM STAGING.stg_route_lengths       
                 ),
 
@@ -63,7 +66,9 @@ def int_routes():
                         world, route,
                         CAST(REPLACE(lead, ',', '.') AS FLOAT) + gpx_correction AS lead,
                         CAST(REPLACE(total, ',', '.') AS FLOAT) + gpx_correction AS total,
-                        gpx_correction
+                        circuit,
+                        gpx_correction,
+                        complete_notes
                     FROM MY_ROUTES     
                 ),
 

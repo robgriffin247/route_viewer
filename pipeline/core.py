@@ -74,11 +74,12 @@ def dim_notes():
                             B.note_type AS type, 
                             B.note_description AS note
                         FROM CORRECT_STARTS AS A LEFT JOIN SECTOR_DESCRIPTIONS AS B ON A.sector_id=B.sector_id
+                        ORDER BY A.world, A.route, sector_start, note_start 
                      ),
 
                      CLEAR_NAME AS (
                         SELECT * EXCLUDE(segment),
-                            CASE WHEN LAG(segment) OVER()=segment THEN '' ELSE segment END AS segment
+                            CASE WHEN LAG(segment) OVER(PARTITION BY world, route)=segment THEN '' ELSE segment END AS segment
                         FROM ROUTE_DESCRIPTIONS
                      )
 
@@ -90,5 +91,5 @@ def dim_notes():
 
 def dim_routes():
     with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
-        df = con.sql("SELECT world, route, lead, total-lead AS lap FROM INTERMEDIATE.int_routes")
+        df = con.sql("SELECT world, route, lead, total-lead AS lap, circuit, complete_notes FROM INTERMEDIATE.int_routes")
         con.sql("CREATE OR REPLACE TABLE CORE.dim_routes AS SELECT * FROM df")

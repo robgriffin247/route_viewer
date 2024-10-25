@@ -1,5 +1,8 @@
 ,world,route,sector_id,sector_start
 0,Watopia,Oh Hill No,WA001,"0,59"
-1,Watopia,Oh Hill No,WA002,"2,01"
-2,Watopia,Oh Hill No,WA003,"0,59"
-3,,,,
+1,Watopia,Oh Hill No,WA002,"0,59"
+2,Watopia,Oh Hill No,WA003,"2,01"
+3,Watopia,Elevation Evaluation,WA001,"5,925"
+4,Watopia,Elevation Evaluation,WA002,"5,925"
+5,Watopia,Elevation Evaluation,WA003,"7,35"
+6,,,,

@@ -19,6 +19,9 @@ def notes_output():
                             "note":st.column_config.TextColumn("Note", width="large")
                         }
                 )
+    
+    if not st.session_state["route_data"].loc[0, "circuit"]:
+        st.write("Please note that the description for this route is currently incomplete - check back soon to see changes as I build my library of route data!")
 
 
 def profile_output():

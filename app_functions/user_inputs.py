@@ -39,7 +39,10 @@ def route_input():
 def controls_input():
     laps, metric, _= st.columns([4,3,6], vertical_alignment="bottom")
 
-    laps.number_input("Laps", value=1, min_value=1, max_value=20, key="laps")
+    if st.session_state["route_data"].loc[0, "circuit"]:
+        laps.number_input("Laps", value=1, min_value=1, max_value=20, key="laps")
+    else:
+        laps.number_input("Laps", value=1, min_value=1, max_value=1, key="laps", help="It is not possible to lap this route - the start and finish banners are in different locations!")
 
     lead_length=[float(i) for i in st.session_state["route_data"]["lead"]][0]
     lap_length=[float(i) for i in st.session_state["route_data"]["lap"]]
