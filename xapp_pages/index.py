@@ -1,6 +1,6 @@
 import streamlit as st 
-from xapp_files.user_inputs import route_input, controls_input
-from xapp_files.outputs import notes_output, profile_output
+from xapp_functions.user_inputs import route_input, controls_input
+from xapp_functions.outputs import notes_output, profile_output
 
 from dotenv import load_dotenv
 load_dotenv()

@@ -41,9 +41,9 @@ def stg_rides():
             
             route_ids.add(route_id)
 
-            file = f'{os.getenv("data_dir")}/gpx_files/{file}'
+            file_path = f'{os.getenv("data_dir")}/gpx_files/{file}'
 
-            with open(file) as f:
+            with open(file_path) as f:
                 gpx = gpxpy.parse(f)
             
             points = []
@@ -62,14 +62,15 @@ def stg_rides():
             df['distance_delta'] = [0] + [geopy.distance.distance(from_, to).m for from_, to in zip(coords[:-1], coords[1:])]
             df['distance'] = df.distance_delta.cumsum()
 
-            df['world'] = file.split("_in_")[1].split(".gpx")[0].replace("_", " ")
-            df['route'] = file.split("_on_")[1].split("_in_")[0].replace("_", " ")
+            df['file'] = file
+            df['world'] = file_path.split("_in_")[1].split(".gpx")[0].replace("_", " ")
+            df['route'] = file_path.split("_on_")[1].split("_in_")[0].replace("_", " ")
 
             data.append(df)
         else:
-            print(f"Already parsed {route_id} - remove {file}")
+            print(f"Already parsed {route_id} - remove {file_path}")
             
     data = pd.concat(data, ignore_index=True)
 
     with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
-        con.sql(f'CREATE OR REPLACE TABLE STAGING.stg_rides AS SELECT world, route, altitude, distance FROM data')
+        con.sql(f'CREATE OR REPLACE TABLE STAGING.stg_rides AS SELECT file, world, route, altitude, distance FROM data')

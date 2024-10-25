@@ -3,6 +3,22 @@ import os
 
 def dim_rides():
     with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+        x = con.sql("""
+                      WITH RIDE_LENGTHS AS(
+                        SELECT file, world, route, MAX(distance) AS length 
+                        FROM INTERMEDIATE.int_rides
+                        GROUP BY file, world, route
+                      )
+
+                      SELECT A.world, A.route, A.length, B.total AS expected_min, A.file
+                      FROM RIDE_LENGTHS AS A LEFT JOIN 
+                          (SELECT world, route, total FROM INTERMEDIATE.int_routes) AS B ON
+                          A.world=B.world AND A.route=B.route
+                      WHERE length<total
+                      """).to_df()
+        if x.shape[0] > 0:
+            raise Exception("\n" + "="*80 + f"\n\nRide data too short, check file(s)/ride_lengths: \n{x}")
+
         df = con.sql("""
                     WITH RIDES AS (
                         SELECT * FROM INTERMEDIATE.int_rides

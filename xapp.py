@@ -50,6 +50,6 @@ st.html("""
 
 pg.run()
 
+
 # Replace existing with x*
 # Add more notes
-# Add check for rides that are too short

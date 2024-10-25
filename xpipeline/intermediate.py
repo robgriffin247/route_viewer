@@ -16,7 +16,7 @@ def int_rides():
                 
                 -- Smooth the changes out by taking average over 3 rows
                 SMOOTH_CHANGES AS (
-                    SELECT world, route, distance, altitude,
+                    SELECT file, world, route, distance, altitude,
                         CASE WHEN ROW_NUMBER() OVER() = 1 THEN 0 ELSE 
                             SUM(altitude_change) OVER(ROWS 2 PRECEDING) / SUM(distance_change) OVER(ROWS 2 PRECEDING) / 0.01 END AS gradient
                     FROM CHANGES        
@@ -99,6 +99,7 @@ def int_route_sectors():
                         SELECT world, route, sector_id,
                             CAST(REPLACE(sector_start, ',', '.') AS FLOAT) AS sector_start
                         FROM STAGING.stg_route_sectors
+                        WHERE world IS NOT NULL
                     )
                      
                     SELECT * FROM SECTORS""")
