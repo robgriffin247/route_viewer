@@ -4,7 +4,6 @@ import numpy as np
 import pandas as pd
 import os
 
-
 def route_input():
     world, route = st.columns([4,6])
     with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
