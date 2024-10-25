@@ -56,6 +56,7 @@ def controls_input():
         st.session_state["note_data"] = pd.concat([st.session_state["note_data"], lap_note_data], ignore_index=True)
         st.session_state["ride_data"] = pd.concat([st.session_state["ride_data"], lap_ride_data], ignore_index=True)
 
+    st.session_state["ride_data"] = st.session_state["ride_data"].sort_values(by=["world", "route", "distance"])
 
     metric.toggle("Metric",
                 value=True,
