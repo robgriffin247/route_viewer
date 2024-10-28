@@ -24,6 +24,7 @@ def notes_output():
         st.write("Please note that the description for this route is currently incomplete - check back soon to see changes as I build my library of route data!")
 
 
+
 def profile_output():
     fig = px.line(st.session_state["ride_data"], 
                 x="distance", 
