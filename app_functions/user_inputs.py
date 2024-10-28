@@ -44,6 +44,10 @@ def controls_input():
     else:
         laps.number_input("Laps", value=1, min_value=1, max_value=1, key="laps", help="It is not possible to lap this route - the start and finish banners are in different locations!")
 
+
+    ride_length = st.session_state["ride_data"]["distance"].max()
+    st.session_state["note_data"] = st.session_state["note_data"].loc[st.session_state["note_data"]["start_point"]<=ride_length]
+
     lead_length=[float(i) for i in st.session_state["route_data"]["lead"]][0]
     lap_length=[float(i) for i in st.session_state["route_data"]["lap"]]
     lap_note_data = st.session_state["note_data"].loc[st.session_state["note_data"]["start_point"] >= lead_length]
@@ -57,9 +61,6 @@ def controls_input():
         st.session_state["ride_data"] = pd.concat([st.session_state["ride_data"], lap_ride_data], ignore_index=True)
 
     st.session_state["ride_data"] = st.session_state["ride_data"].sort_values(by=["world", "route", "distance"])
-
-    ride_length = st.session_state["ride_data"]["distance"].max()
-    st.session_state["note_data"] = st.session_state["note_data"].loc[st.session_state["note_data"]["start_point"]<=ride_length]
     
     st.session_state["note_data"] = st.session_state["note_data"].sort_values(by=["world", "route", "start_point", "type", "segment", "end_point"],
                                                                               ascending=[True, True, True, True, True, False])

@@ -78,13 +78,15 @@ def dim_notes():
 
                      SORTED AS (
                         SELECT * FROM ROUTE_DESCRIPTIONS
-                        ORDER BY world, route, start_point, type NULLS LAST, end_point DESC
+                        ORDER BY world, route, start_point, end_point DESC
                      ),
 
                      CLEAR_NAME AS (
                         SELECT * EXCLUDE(segment),
-                            CASE WHEN LAG(segment) OVER(PARTITION BY world, route)=segment THEN '' ELSE segment END AS segment
+                            CASE WHEN LAG(segment) OVER()=segment THEN '' ELSE segment END AS segment
                         FROM SORTED
+                        ORDER BY world, route, start_point, end_point DESC
+
                      )
 
                      SELECT world, route, segment, start_point, end_point, type, note FROM CLEAR_NAME
@@ -92,6 +94,7 @@ def dim_notes():
         
         con.sql("CREATE OR REPLACE TABLE CORE.dim_notes AS SELECT * FROM df")
         # Merge sector_descriptions and route_sectors
+
 
 def dim_routes():
     with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
