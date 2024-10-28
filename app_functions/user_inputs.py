@@ -65,6 +65,7 @@ def controls_input():
                 value=True,
                 key="metric")
 
+
     if st.session_state["metric"]:
         st.session_state["units"] = {"distance":"km", "altitude":"m"}
         st.session_state["scales"] = {"distance":1.0, "altitude":1.0}
