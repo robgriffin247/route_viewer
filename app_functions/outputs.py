@@ -14,8 +14,8 @@ def notes_output():
                             "type":None,
                             "segment":st.column_config.TextColumn("Segment", width="medium"),
                             "highlight":st.column_config.CheckboxColumn("🚨"),
-                            "start_point":st.column_config.NumberColumn("From", format=f"%.1f {st.session_state['units']['distance']}", width="small"),
-                            "end_point":st.column_config.NumberColumn("To", format=f"%.1f {st.session_state['units']['distance']}", width="small"),
+                            "start_point":st.column_config.NumberColumn("From", format=f"%.2f {st.session_state['units']['distance']}", width="small"),
+                            "end_point":st.column_config.NumberColumn("To", format=f"%.2f {st.session_state['units']['distance']}", width="small"),
                             "note":st.column_config.TextColumn("Note", width="large")
                         }
                 )

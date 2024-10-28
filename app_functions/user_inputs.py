@@ -60,6 +60,10 @@ def controls_input():
 
     ride_length = st.session_state["ride_data"]["distance"].max()
     st.session_state["note_data"] = st.session_state["note_data"].loc[st.session_state["note_data"]["start_point"]<=ride_length]
+    
+    st.session_state["note_data"] = st.session_state["note_data"].sort_values(by=["world", "route", "start_point", "type", "segment", "end_point"],
+                                                                              ascending=[True, True, True, True, True, False])
+
 
     metric.toggle("Metric",
                 value=True,

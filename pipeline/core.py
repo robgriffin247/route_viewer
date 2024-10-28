@@ -74,16 +74,20 @@ def dim_notes():
                             B.note_type AS type, 
                             B.note_description AS note
                         FROM CORRECT_STARTS AS A LEFT JOIN SECTOR_DESCRIPTIONS AS B ON A.sector_id=B.sector_id
-                        ORDER BY A.world, A.route, sector_start, note_start, note_type NULLS LAST, note_end DESC
+                     ),
+
+                     SORTED AS (
+                        SELECT * FROM ROUTE_DESCRIPTIONS
+                        ORDER BY world, route, start_point, type NULLS LAST, end_point DESC
                      ),
 
                      CLEAR_NAME AS (
                         SELECT * EXCLUDE(segment),
                             CASE WHEN LAG(segment) OVER(PARTITION BY world, route)=segment THEN '' ELSE segment END AS segment
-                        FROM ROUTE_DESCRIPTIONS
+                        FROM SORTED
                      )
 
-                     SELECT * FROM ROUTE_DESCRIPTIONS ORDER BY world, route, start_point, end_point
+                     SELECT world, route, segment, start_point, end_point, type, note FROM CLEAR_NAME
                      """)
         
         con.sql("CREATE OR REPLACE TABLE CORE.dim_notes AS SELECT * FROM df")
