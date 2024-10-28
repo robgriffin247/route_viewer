@@ -74,7 +74,7 @@ def dim_notes():
                             B.note_type AS type, 
                             B.note_description AS note
                         FROM CORRECT_STARTS AS A LEFT JOIN SECTOR_DESCRIPTIONS AS B ON A.sector_id=B.sector_id
-                        ORDER BY A.world, A.route, sector_start, note_start 
+                        ORDER BY A.world, A.route, sector_start, note_start, note_type NULLS LAST, note_end DESC
                      ),
 
                      CLEAR_NAME AS (
@@ -83,7 +83,7 @@ def dim_notes():
                         FROM ROUTE_DESCRIPTIONS
                      )
 
-                     SELECT * FROM CLEAR_NAME ORDER BY world, route, start_point, end_point
+                     SELECT * FROM ROUTE_DESCRIPTIONS ORDER BY world, route, start_point, end_point
                      """)
         
         con.sql("CREATE OR REPLACE TABLE CORE.dim_notes AS SELECT * FROM df")
