@@ -20,4 +20,33 @@
 18,Watopia,WA005,Itza Climb,"5,02","5,34",,5-8%
 19,Watopia,WA005,Itza Climb,"5,65","6,1",,6-9%
 20,Watopia,WA005,Itza Climb,"6,15","6,31",,Fast finish; down into flat
-21,Watopia,WA006,Grade descent,"0,05","1,4",,Grade descent; 10% down
+21,Watopia,WA006,Grade lower descent,"0,05","1,4",,Grade descent; 10% down
+22,Watopia,WA007,Sasquatch Sprint,"2,06","2,41",sprint,Fast entry into flat sprint
+23,Watopia,WA008,Sasquatch risers,"0,61","0,71",,3% rise
+24,Watopia,WA008,Sasquatch risers,"1,91","2,01",,3% rise
+25,Watopia,WA009,Evergreen Coast,"1,42","1,67",,2-4% rise
+26,Watopia,WA009,Woodland Sprint,"4,3","4,78",sprint,4% drop into flatter sandy section
+27,Watopia,WA009,Evergreen Coast,"6,1","6,49",,3% rise
+28,Watopia,WA009,Evergreen Coast,"6,67","6,84",,4% downhill
+29,Watopia,WA009,Exit to desert,"8,17","8,54",,2-3% rise
+30,Watopia,WA017,Desert to Titans,"0,145","0,625",,2-3% rise
+31,Watopia,WA018,Downhill from Titans,"0,055","1,065",,"2-4% drop, steepest early"
+32,Watopia,WA019,Epic lower slopes,0,"0,46",,6-8%
+33,Watopia,WA019,Epic lower slopes,"0,46","0,65",,8-10%
+34,Watopia,WA019,Epic lower slopes,"0,69","1,7",,Bridge at 3%
+35,Watopia,WA019,Epic lower slopes,"1,7","1,88",,Exit bridge rising up to 8%
+36,,WA020,Epic mid-section,"0,12",2,,5-8%
+37,,WA020,Epic mid-section,"2,04","2,32",,Flat
+38,,WA020,Epic mid-section,"2,37","2,57",,6% rise
+39,,WA020,Epic mid-section,"2,88","3,71",,4-5% rise
+40,,WA020,Epic mid-section,"3,74","4,4",,6-7% rise
+41,,WA028,Grade upper descent,"0,08","1,8",,"Steep descent, especially at start"
+42,,WA029,Itza descent,"0,15","0,65",,2-4% rise before descent starts
+43,,WA029,Itza descent,"0,69","3,24",,"Mostly 4% drop, but rolling"
+44,,WA029,Itza descent,"3,26","3,68",,4% climb
+45,,WA029,Itza descent,"3,71","4,06",,Descent
+46,,WA029,Mayan city,"4,06","5,01",,Mostly flat
+47,,WA029,Mayan descent,"5,01","6,71",,Consistent 3-4% descent
+48,,WA030,Stoneway approach,"0,135","0,335",,3% rise
+49,,WA030,Stoneway Sprint,"0,355","0,755",sprint,1% climb into flat finish
+50,,WA030,Acropolis Sprint,"2,89","3,33",sprint,2% climb into flat finish

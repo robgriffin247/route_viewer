@@ -8,7 +8,7 @@ def notes_output():
     else:
         st.session_state["live_notes"] = st.data_editor(st.session_state["note_data"][["type", "segment", "highlight", "start_point", "end_point", "note"]],
                         hide_index=True, 
-                        height=int(35.2*(st.session_state["note_data"].shape[0]+1)),
+                        #height=int(35.2*(st.session_state["note_data"].shape[0]+1)),
                         use_container_width=True,
                         column_config={
                             "type":None,

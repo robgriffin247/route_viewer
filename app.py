@@ -53,9 +53,5 @@ st.html("""
         <div class='subheader'>Racing Notes for Zwift</div>
         """)
 
-
-
-
 pg.run()
-
 # Add more notes

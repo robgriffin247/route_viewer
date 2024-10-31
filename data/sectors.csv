@@ -1,9 +1,34 @@
 ,world,sector_id,sector_start_landmark,sector_description
 0,Scotland,SC001,Champions sprint clockwise start banner,Champions Sprint (clockwise) only
 1,Scotland,SC002,"Zebra crossinf before rail bridge, clockwise towards Clyde Kicker","Ride from the rail bridge near the entry point to Glasgow, under the Central Station building, up the Clyde Kicker, through the rollers, past the church and finish at the zebra crossing just before left bend to Champ./pens"
-2,Watopia,WA001,Grade start banner,Entire kom form banner to banner
-3,Watopia,WA002,Grade start banner,"Lower slopes of the Grade, until gradient hits 0%"
+2,Watopia,WA001,Grade start line,Entire kom form banner to banner
+3,Watopia,WA002,Grade start line,"Lower slopes of the Grade, until gradient hits 0%"
 4,Watopia,WA003,Grade sector 5 line,Upper slopes of the Grade until banner
 5,Watopia,WA004,"Asphalt after leaving pens, turning left (ca. 140m)",Sandy Coast; Grade pens toward Mayan mountain/Jungle
 6,Watopia,WA005,Mayan Mountain start line,Mayan/Itza climbs to Grade
 7,Watopia,WA006,"Last pair of street lights before drop, as road lines merge from Itza","Lower section of the grade, descent"
+8,Watopia,WA007,"Asphalt after leaving pens, turning right (ca. 125m)",Grade pens to turn-around by Sasquatch sprint/Evergreen coast
+9,Watopia,WA008,Sasquatch Banner,Sasquatch banner to Grade
+10,Watopia,WA009,Sasquatch Banner,Sasquatch banner to Desert
+11,Watopia,WA010,,
+12,Watopia,WA011,,
+13,Watopia,WA012,,
+14,Watopia,WA013,,
+15,Watopia,WA014,,
+16,Watopia,WA015,,
+17,Watopia,WA016,,
+18,Watopia,WA017,Roadwall ending on left side after triple exit roundabout at end of desert,Desert to titans climb
+19,Watopia,WA018,"Final turn sign for riders from opp. direction on left, opposite a redwood",Titans to island t-junction (epic/downtown)
+20,Watopia,WA019,Epic kom start line,Epic lower slopes
+21,Watopia,WA020,Where bypass and epic roadlines merge from right into one,Epic kom mid-section
+22,Watopia,WA021,,
+23,Watopia,WA022,,
+24,Watopia,WA023,,
+25,Watopia,WA024,,
+26,Watopia,WA025,,
+27,Watopia,WA026,,
+28,Watopia,WA027,,
+29,Watopia,WA028,Grade finish banner,Grade upper descent
+30,Watopia,WA029,First pair of lamposts after turning off grade,Itza/Mayan reverse
+31,Watopia,WA030,"Two ruins towers after leaving mayan mountain/jungle, 400m before stoneway sprint start",Sandy coast; Mayan to Grade
+32,Watopia,WA031,,

@@ -1,4 +1,5 @@
 ,world,route,lead,total,circuit,gpx_correction,complete_notes
 0,Watopia,Oh Hill No,"0,59","8,385",True,"−0,38",True
 1,Watopia,Elevation Evaluation,"3,09","27,6",False,"−0,16",False
-2,Watopia,Coastal Crown Loop,"8,63","23,65",True,"−0,06",False
+2,Watopia,Coastal Crown Loop,"8,63","23,65",True,"−0,06",True
+3,Watopia,Tides and Temples,"2,66","38,97",True,0,True
