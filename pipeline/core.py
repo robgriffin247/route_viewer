@@ -41,7 +41,7 @@ def dim_rides():
                         FROM TRIM_RIDES AS A LEFT JOIN ROUTES AS B ON A.world=B.world AND A.route=B.route
                     )
                      
-                    SELECT world, route, lap, distance, altitude, gradient FROM ADD_LAP 
+                    SELECT world, route, lap, longitude, latitude, distance, altitude, gradient FROM ADD_LAP 
                     """)
         con.sql('CREATE OR REPLACE TABLE CORE.dim_rides AS SELECT * FROM df')
 

@@ -16,7 +16,7 @@ def int_rides():
                 
                 -- Smooth the changes out by taking average over 3 rows
                 SMOOTH_CHANGES AS (
-                    SELECT file, world, route, distance, altitude,
+                    SELECT file, world, route, longitude, latitude, distance, altitude,
                         CASE WHEN ROW_NUMBER() OVER() = 1 THEN 0 ELSE 
                             SUM(altitude_change) OVER(ROWS 2 PRECEDING) / SUM(distance_change) OVER(ROWS 2 PRECEDING) / 0.01 END AS gradient
                     FROM CHANGES        

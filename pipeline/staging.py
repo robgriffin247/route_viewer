@@ -73,4 +73,4 @@ def stg_rides():
     data = pd.concat(data, ignore_index=True)
 
     with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
-        con.sql(f'CREATE OR REPLACE TABLE STAGING.stg_rides AS SELECT file, world, route, altitude, distance FROM data')
+        con.sql(f'CREATE OR REPLACE TABLE STAGING.stg_rides AS SELECT file, world, route, longitude, latitude, altitude, distance FROM data')

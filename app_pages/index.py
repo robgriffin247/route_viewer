@@ -7,4 +7,3 @@ controls_input()
 plot_container = st.container()
 notes_output()
 plot_container.plotly_chart(profile_output())
-

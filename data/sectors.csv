@@ -1,17 +1,23 @@
 ,world,sector_id,sector_start_landmark,sector_description
 0,Watopia,WA001F,Grade start line,Entire kom from banner to banner
-1,Watopia,WA002F,Grade start line,"Lower slopes of the Grade, until gradient hits 0%"
-2,Watopia,WA003F,Grade sector 5 line,Upper slopes of the Grade until banner
-3,Watopia,WA004F,"Asphalt after leaving pens, turning left (ca. 140m)",Sandy Coast; Grade pens toward Mayan mountain/Jungle
-4,Watopia,WA005F,Mayan Mountain start line,Mayan/Itza climbs to Grade
-5,Watopia,WA002R,"Last pair of street lights before drop, as road lines merge from Itza","Lower section of the grade, descent"
-6,Watopia,WA006F,"Asphalt after leaving pens, turning right (ca. 125m)",Grade pens to turn-around by Sasquatch sprint/Evergreen coast
-7,Watopia,WA006R,Sasquatch Banner,Sasquatch banner to Grade
-8,Watopia,WA007F,Sasquatch Banner,Sasquatch banner to Desert
-9,Watopia,WA008F,Roadwall ending on left side after triple exit roundabout at end of desert,Desert to titans climb
-10,Watopia,WA009F,"Final turn sign for riders from opp. direction on left, opposite a redwood",Titans to island t-junction (epic/downtown)
-11,Watopia,WA010F,Epic kom start line,Epic lower slopes
-12,Watopia,WA011F,Where bypass and epic roadlines merge from right into one,Epic kom mid-section
-13,Watopia,WA003R,Grade finish banner,Grade upper descent
-14,Watopia,WA005R,First pair of lamposts after turning off grade,Itza/Mayan reverse
-15,Watopia,WA004R,"Two ruins towers after leaving mayan mountain/jungle, 400m before stoneway sprint start",Sandy coast; Mayan to Grade
+1,Watopia,WA001R,,
+2,Watopia,WA002F,Grade start line,"Lower slopes of the Grade, until gradient hits 0%"
+3,Watopia,WA002R,"Last pair of street lights before drop, as road lines merge from Itza","Lower section of the grade, descent"
+4,Watopia,WA003F,Grade sector 5 line,Upper slopes of the Grade until banner
+5,Watopia,WA003R,Grade finish banner,Grade upper descent
+6,Watopia,WA004F,"Asphalt after leaving pens, turning left (ca. 140m)",Sandy Coast; Grade pens toward Mayan mountain/Jungle
+7,Watopia,WA004R,"Two ruins towers after leaving mayan mountain/jungle, 400m before stoneway sprint start",Sandy coast; Mayan to Grade
+8,Watopia,WA005F,Mayan Mountain start line,Mayan/Itza climbs to Grade
+9,Watopia,WA005R,First pair of lamposts after turning off grade,Itza/Mayan reverse
+10,Watopia,WA006F,"Asphalt after leaving pens, turning right (ca. 125m)",Grade pens to turn-around by Sasquatch sprint/Evergreen coast
+11,Watopia,WA006R,Sasquatch Banner,Sasquatch banner to Grade
+12,Watopia,WA007F,Sasquatch Banner,Sasquatch banner to Desert
+13,Watopia,WA007R,,
+14,Watopia,WA008F,Roadwall ending on left side after triple exit roundabout at end of desert,Desert to titans climb
+15,Watopia,WA008R,,
+16,Watopia,WA009F,"Final turn sign for riders from opp. direction on left, opposite a redwood",Titans to island t-junction (epic/downtown)
+17,Watopia,WA009R,,
+18,Watopia,WA010F,Epic kom start line,Epic lower slopes
+19,Watopia,WA010R,,
+20,Watopia,WA011F,Where bypass and epic roadlines merge from right into one,Epic kom mid-section
+21,Watopia,WA011R,,

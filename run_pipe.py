@@ -54,3 +54,7 @@ if args.c:
     dim_rides()
     dim_notes()
     dim_routes()
+
+
+#with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+#    print(con.sql("SELECT * FROM staging.stg_rides"))
