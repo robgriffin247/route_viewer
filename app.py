@@ -1,4 +1,5 @@
 import streamlit as st 
+from app_functions.coffee import buy_coffee
 
 #from dotenv import load_dotenv
 #load_dotenv()
@@ -16,8 +17,10 @@ st.html("""
             .st-emotion-cache-13ln4jf { // Main page width
                 max-width: 1000px; 
                 width: 92%;
+                text-align: center;
             }
         
+            .stMarkdown, h1, .subheader {text-align:left;}
             .subheader {
                 color: #478f84;
                 padding-bottom: 1em;
@@ -33,6 +36,11 @@ st.html("""
             a:hover, a:active {
                 color: orange;
             }
+
+            bmc-btn-container {
+                margin: 0 20em;
+                left: 0.5;
+            }
         </style>
         """)
 
@@ -44,7 +52,8 @@ about_page = st.Page("app_pages/about.py", title="About")
 pg = st.navigation([
     main_page, 
     #data_page, 
-    about_page])
+    about_page,
+    ])
 
 # Set standard top of page
 st.title("RouteViewer")
@@ -53,4 +62,6 @@ st.html("""
         """)
 
 pg.run()
-# Add more notes
+
+
+buy_coffee()
