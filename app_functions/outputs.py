@@ -48,8 +48,11 @@ def profile_output():
     route_length = data["distance"].max()
     route_bottom = data["altitude"].min()
     route_top = data["altitude"].max()
-    if route_top-route_bottom<50:  
-        fig.update_yaxes(range=[route_bottom-10, route_top+60], minallowed=route_bottom-10, maxallowed=route_top+60)
+    if route_top-route_bottom<(50*st.session_state["scales"]["altitude"]):  
+        fig.update_yaxes(range=[route_bottom-(10*st.session_state["scales"]["altitude"]), 
+                                route_top+(60*st.session_state["scales"]["altitude"])], 
+                                minallowed=route_bottom-(10*st.session_state["scales"]["altitude"]), 
+                                maxallowed=route_top+(60*st.session_state["scales"]["altitude"]))
         
     fig.update_xaxes(range=[0, route_length], minallowed=0, maxallowed=route_length)
 

@@ -61,6 +61,4 @@ st.html("""
 
 pg.run()
 
-
-
 buy_coffee()
