@@ -37,10 +37,6 @@ st.html("""
                 color: orange;
             }
 
-            bmc-btn-container {
-                margin: 0 20em;
-                left: 0.5;
-            }
         </style>
         """)
 

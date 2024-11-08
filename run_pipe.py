@@ -12,17 +12,19 @@ import argparse
 parser = argparse.ArgumentParser(description='control which sections of the pipeline to run')
 
 parser.add_argument('-s', action='store_true', help='Run staging')
+parser.add_argument('-sg', action='store_true', help='Run staging; Google only')
 parser.add_argument('-i', action='store_true', help='Run intermediate')
 parser.add_argument('-c', action='store_true', help='Run core')
 
 args = parser.parse_args()
 
-if not (args.s or args.i or args.c):
+if not (args.s or args.sg or args.i or args.c):
     args.s = True
+    args.sg = True
     args.i = True
     args.c = True
 
-if args.s:
+if args.s or args.sg:
     print("Running staging...")
     with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
         con.sql(f"CREATE SCHEMA IF NOT EXISTS STAGING")
@@ -32,6 +34,8 @@ if args.s:
     stg_sheet("sectors", ["world", "sector_id", "sector_start_landmark", "sector_description"])
     stg_sheet("sector_descriptions", ["world", "sector_id", "note_name", "note_start_km", "note_end_km", "note_type", "note_description"])
     stg_sheet("route_sectors", ["world", "route", "sector_id", "sector_start"])
+
+if args.s:
     stg_rides()
 
 

@@ -1,6 +1,7 @@
 ,world,route,lead,total,circuit,gpx_correction,complete_notes
-0,Watopia,Oh Hill No,"0,59","8,385",True,"−0,38",True
-1,Watopia,Elevation Evaluation,"3,09","27,6",True,"−0,16",True
-2,Watopia,Coastal Crown Loop,"8,63","23,65",True,"−0,06",True
-3,Watopia,Tides and Temples,"2,66","38,97",True,0,True
-4,Watopia,Beach Island Loop,"0,19","12,95",True,"−0,015",True
+0,Watopia,Oh Hill No,"0,590","8,385",True,"−0,38",True
+1,Watopia,Elevation Evaluation,"3,090","27,600",True,"−0,16",True
+2,Watopia,Coastal Crown Loop,"8,630","23,650",True,"−0,06",True
+3,Watopia,Tides and Temples,"2,660","38,900",True,0,True
+4,Watopia,Beach Island Loop,"0,190","12,950",True,"−0,015",True
+5,Watopia,Volcano Circuit CCW,"4,835","8,955",True,0,False

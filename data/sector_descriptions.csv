@@ -1,75 +1,77 @@
 ,world,sector_id,note_name,note_start_km,note_end_km,note_type,note_description
-0,Watopia,WA001F,The Grade,0,"3,53",climb,Two big slopes with a flat middle section
-1,Watopia,WA002F,The Grade,"0,04","1,36",,Slightly shallower first but 10% most of the way
-2,Watopia,WA002R,Grade lower descent,"0,05","1,4",,Grade descent; 10% down
-3,Watopia,WA003F,The Grade,"0,2","0,7",,7-9% to start...
-4,Watopia,WA003F,The Grade,"0,7","2,01",,10-12%
-5,Watopia,WA003R,Grade upper descent,"0,08","1,8",,"Steep descent, especially at start"
-6,Watopia,WA004F,Acropolis Sprint,"2,54","2,99",sprint,Long but fast; flat into 2% downhill
-7,Watopia,WA004F,Sandy Coast,"3,45","3,65",,3% rise to bridge
-8,Watopia,WA004F,Stoneway Sprint,"5,16","5,56",sprint,"2-3% first half, flat/down second"
+0,Watopia,WA001F,The Grade,"0,000","3,530",climb,Two big slopes with a flat middle section
+1,Watopia,WA002F,The Grade,"0,040","1,360",,Slightly shallower first but 10% most of the way
+2,Watopia,WA002R,Grade lower descent,"0,050","1,360",,Grade descent; 10% down
+3,Watopia,WA003F,The Grade,"0,200","0,700",,7-9% to start...
+4,Watopia,WA003F,The Grade,"0,700","2,010",,10-12%
+5,Watopia,WA003R,Grade upper descent,"0,080","1,800",,"Steep descent, especially at start"
+6,Watopia,WA004F,Acropolis Sprint,"2,540","2,990",sprint,Long but fast; flat into 2% downhill
+7,Watopia,WA004F,Sandy Coast,"3,450","3,650",,3% rise to bridge
+8,Watopia,WA004F,Stoneway Sprint,"5,160","5,560",sprint,"2-3% first half, flat/down second"
 9,Watopia,WA004R,Stoneway approach,"0,135","0,335",,3% rise
 10,Watopia,WA004R,Stoneway Sprint,"0,355","0,755",sprint,1% climb into flat finish
-11,Watopia,WA004R,Acropolis Sprint,"2,89","3,33",sprint,2% climb into flat finish
-12,Watopia,WA005F,Mayan Mountainside,0,"0,57",,3-5%
-13,Watopia,WA005F,Mayan Mountainside,0,"1,98",climb,Fairly consistent 4% with some small bumps
-14,Watopia,WA005F,Mayan Mountainside,"0,7","0,87",,4-7%
-15,Watopia,WA005F,Mayan Mountainside,"0,97","1,73",,4-6%
-16,Watopia,WA005F,Mayan Mountainside,"1,77","1,98",,Flat finish
-17,Watopia,WA005F,Itza Climb,"2,583","6,31",climb,"Some rolling in the start, then some steeper ramps, and a flat finish"
-18,Watopia,WA005F,Itza Climb,"2,65","3,02",,4-6%
-19,Watopia,WA005F,Itza Climb,"3,07","3,45",,Downhill - drafting chance
-20,Watopia,WA005F,Itza Climb,"3,5","3,75",,Up and down bump
-21,Watopia,WA005F,Itza Climb,"4,47","4,65",,4-7%
-22,Watopia,WA005F,Itza Climb,"4,73","4,78",,5-6%
-23,Watopia,WA005F,Itza Climb,"5,02","5,34",,5-8%
-24,Watopia,WA005F,Itza Climb,"5,65","6,1",,6-9%
-25,Watopia,WA005F,Itza Climb,"6,15","6,31",,Fast finish; down into flat
-26,Watopia,WA005R,Itza descent,"0,15","0,65",,2-4% rise before descent starts
-27,Watopia,WA005R,Itza descent,"0,69","3,24",,"Mostly 4% drop, but rolling"
-28,Watopia,WA005R,Itza descent,"3,26","3,68",,4% climb
-29,Watopia,WA005R,Itza descent,"3,71","4,06",,Descent
-30,Watopia,WA005R,Mayan city,"4,06","5,01",,Mostly flat
-31,Watopia,WA005R,Mayan descent,"5,01","6,71",,Consistent 3-4% descent
-32,Watopia,WA006F,Sasquatch Sprint,"2,06","2,41",sprint,Fast entry into flat sprint
-33,Watopia,WA006R,Sasquatch risers,"0,61","0,71",,3% rise
-34,Watopia,WA006R,Sasquatch risers,"1,91","2,01",,3% rise
-35,Watopia,WA007F,Evergreen Coast,"1,42","1,67",,2-4% rise
-36,Watopia,WA007F,Woodland Sprint,"4,3","4,78",sprint,4% drop into flatter sandy section
-37,Watopia,WA007F,Evergreen Coast,"6,1","6,49",,3% rise
-38,Watopia,WA007F,Evergreen Coast,"6,67","6,84",,4% downhill
-39,Watopia,WA007F,Exit to desert,"8,17","8,54",,2-3% rise
-40,Watopia,WA007R,Evergreen Coast,"0,17","0,485",,Slight descent to coast
-41,Watopia,WA007R,Evergreen Coast,"0,87","6,27",,Gently rolling road
-42,Watopia,WA007R,Evergreen Coast,"3,25","3,37",,Downhill approaching sprint
-43,Watopia,WA007R,Woodland Sprint,"3,37","3,87",sprint,"Downhill first 300m, flat sand finish"
-44,Watopia,WA007R,Woodland climb,"3,97","4,37",,3-4%
-45,Watopia,WA007R,Sasquatch Sprint,"8,31","8,65",sprint,Flat into 2% 200m climb finish
+11,Watopia,WA004R,Acropolis Sprint,"2,890","3,330",sprint,2% climb into flat finish
+12,Watopia,WA005F,Mayan Mountainside,"0,000","1,980",climb,Fairly consistent 4% with some small bumps
+13,Watopia,WA005F,Mayan Mountainside,"0,000","0,570",,3-5%
+14,Watopia,WA005F,Mayan Mountainside,"0,700","0,870",,4-7%
+15,Watopia,WA005F,Mayan Mountainside,"0,970","1,730",,4-6%
+16,Watopia,WA005F,Mayan Mountainside,"1,770","1,980",,Flat finish
+17,Watopia,WA005F,Itza Climb,"2,583","6,310",climb,"Some rolling in the start, then some steeper ramps, and a flat finish"
+18,Watopia,WA005F,Itza Climb,"2,650","3,020",,4-6%
+19,Watopia,WA005F,Itza Climb,"3,070","3,450",,Downhill - drafting chance
+20,Watopia,WA005F,Itza Climb,"3,500","3,750",,Up and down bump
+21,Watopia,WA005F,Itza Climb,"4,470","4,650",,4-7%
+22,Watopia,WA005F,Itza Climb,"4,730","4,780",,5-6%
+23,Watopia,WA005F,Itza Climb,"5,020","5,340",,5-8%
+24,Watopia,WA005F,Itza Climb,"5,650","6,100",,6-9%
+25,Watopia,WA005F,Itza Climb,"6,150","6,310",,Fast finish; down into flat
+26,Watopia,WA005R,Itza descent,"0,150","0,650",,2-4% rise before descent starts
+27,Watopia,WA005R,Itza descent,"0,690","3,240",,"Mostly 4% drop, but rolling"
+28,Watopia,WA005R,Itza descent,"3,260","3,680",,4% climb
+29,Watopia,WA005R,Itza descent,"3,710","4,060",,Descent
+30,Watopia,WA005R,Mayan city,"4,060","5,010",,Mostly flat
+31,Watopia,WA005R,Mayan descent,"5,010","6,710",,Consistent 3-4% descent
+32,Watopia,WA006F,Sasquatch Sprint,"2,060","2,410",sprint,Fast entry into flat sprint
+33,Watopia,WA006R,Sasquatch risers,"0,610","0,710",,3% rise
+34,Watopia,WA006R,Sasquatch risers,"1,910","2,010",,3% rise
+35,Watopia,WA007F,Evergreen Coast,"1,420","1,670",,2-4% rise
+36,Watopia,WA007F,Woodland Sprint,"4,300","4,780",sprint,4% drop into flatter sandy section
+37,Watopia,WA007F,Evergreen Coast,"6,100","6,490",,3% rise
+38,Watopia,WA007F,Evergreen Coast,"6,670","6,840",,4% downhill
+39,Watopia,WA007F,Exit to desert,"8,170","8,540",,2-3% rise
+40,Watopia,WA007R,Evergreen Coast,"0,170","0,485",,Slight descent to coast
+41,Watopia,WA007R,Evergreen Coast,"0,870","6,270",,Gently rolling road
+42,Watopia,WA007R,Evergreen Coast,"3,250","3,370",,Downhill approaching sprint
+43,Watopia,WA007R,Woodland Sprint,"3,370","3,870",sprint,"Downhill first 300m, flat sand finish"
+44,Watopia,WA007R,Woodland climb,"3,970","4,370",,3-4%
+45,Watopia,WA007R,Sasquatch Sprint,"8,310","8,650",sprint,Flat into 2% 200m climb finish
 46,Watopia,WA008F,Desert to Titans,"0,145","0,625",,2-3% rise
 47,Watopia,WA009F,Downhill from Titans,"0,055","1,065",,"2-4% drop, steepest early"
-48,Watopia,WA009R,Climb toward Titans,"0,23","1,03",,1-3% climb
-49,Watopia,WA009R,Climb toward Titans,"1,03","1,23",,3-5% climb
-50,Watopia,WA010F,Epic lower slopes,0,"0,46",,6-8%
-51,Watopia,WA010F,Epic lower slopes,"0,46","0,65",,8-10%
-52,Watopia,WA010F,Epic lower slopes,"0,69","1,7",,Bridge at 3%
-53,Watopia,WA010F,Epic lower slopes,"1,7","1,88",,Exit bridge rising up to 8%
-54,Watopia,WA010R,Epic lower slopes,0,"1,15",,3% descent
-55,Watopia,WA010R,Epic lower slopes,"1,2","1,83",,Steep descent
-56,Watopia,WA011F,Epic mid-section,"0,12",2,,5-8%
-57,Watopia,WA011F,Epic mid-section,"2,04","2,32",,Flat
-58,Watopia,WA011F,Epic mid-section,"2,37","2,57",,6% rise
-59,Watopia,WA011F,Epic mid-section,"2,88","3,71",,4-5% rise
-60,Watopia,WA011F,Epic mid-section,"3,74","4,4",,6-7% rise
-61,Watopia,WA011R,Epic mid-section,0,"2,05",,Constant descent
-62,Watopia,WA011R,Epic mid-section,"2,05","2,37",,Flat section
-63,Watopia,WA011R,Epic mid-section,"2,45","4,4",,Constant descent
+48,Watopia,WA009R,Climb toward Titans,"0,230","1,030",,1-3% climb
+49,Watopia,WA009R,Climb toward Titans,"1,030","1,230",,3-5% climb
+50,Watopia,WA010F,Epic lower slopes,"0,000","0,460",,6-8%
+51,Watopia,WA010F,Epic lower slopes,"0,460","0,650",,8-10%
+52,Watopia,WA010F,Epic lower slopes,"0,690","1,700",,Bridge at 3%
+53,Watopia,WA010F,Epic lower slopes,"1,700","1,880",,Exit bridge rising up to 8%
+54,Watopia,WA010R,Epic lower slopes,"0,000","1,150",,3% descent
+55,Watopia,WA010R,Epic lower slopes,"1,200","1,830",,Steep descent
+56,Watopia,WA011F,Epic mid-section,"0,120","2,000",,5-8%
+57,Watopia,WA011F,Epic mid-section,"2,040","2,320",,Flat
+58,Watopia,WA011F,Epic mid-section,"2,370","2,570",,6% rise
+59,Watopia,WA011F,Epic mid-section,"2,880","3,710",,4-5% rise
+60,Watopia,WA011F,Epic mid-section,"3,740","4,400",,6-7% rise
+61,Watopia,WA011R,Epic mid-section,"0,000","2,050",,Constant descent
+62,Watopia,WA011R,Epic mid-section,"2,050","2,370",,Flat section
+63,Watopia,WA011R,Epic mid-section,"2,450","4,400",,Constant descent
 64,Watopia,WA026F,Volcano exit,"0,435","0,505",,Bump here often causes gaps
-65,Watopia,WA029R,Hairpin descent,0,"0,15",,Sharp hairpin descent
-66,Watopia,WA030F,Sorpresa climb,"0,19","0,55",,"Steepest around second bend, flatter top"
-67,Watopia,WA031F,Watopia Sprint,0,"0,37",sprint,Flat
-68,Watopia,WA043F,360 climb,"0,06","0,24",,3% climb
-69,Watopia,WA033R,Boulevard descent,0,"1,47",,Slight descent to boardwalk
-70,Watopia,WA045R,Tunnel entrance,0,"0,23",,Short steep descent
-71,Watopia,WA046F,Tunnel exit,"1,277","1,497",,Short 3-4% climb
-72,Watopia,WA044F,Downtown rise,"0,35","0,85",,2-4% rise
-73,Watopia,WA042F,Mayfield rise,"0,07","0,27",,2-3% rise
+65,Watopia,WA027R,Volcano entry,"0,000","0,205",,Climb increases to 6%
+66,Watopia,WA027R,Volcano rise,"0,540","0,740",,3-4% to banner
+67,Watopia,WA029R,Hairpin descent,"0,000","0,150",,Sharp hairpin descent
+68,Watopia,WA030F,Sorpresa climb,"0,190","0,550",,"Steepest around second bend, flatter top"
+69,Watopia,WA031F,Watopia Sprint,"0,000","0,370",sprint,Flat
+70,Watopia,WA033R,Boulevard descent,"0,000","1,470",,Slight descent to boardwalk
+71,Watopia,WA042F,Mayfield rise,"0,070","0,270",,2-3% rise
+72,Watopia,WA043F,360 climb,"0,060","0,240",,3% climb
+73,Watopia,WA044F,Downtown rise,"0,350","0,850",,2-4% rise
+74,Watopia,WA045R,Tunnel entrance,"0,000","0,230",,Short steep descent
+75,Watopia,WA046F,Tunnel exit,"1,277","1,497",,Short 3-4% climb
