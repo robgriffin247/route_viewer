@@ -1,6 +1,8 @@
 import streamlit as st 
 from app_functions.coffee import buy_coffee
 
+
+    
 #from dotenv import load_dotenv
 #load_dotenv()
 
@@ -58,6 +60,5 @@ st.html("""
         """)
 
 pg.run()
-
 
 buy_coffee()

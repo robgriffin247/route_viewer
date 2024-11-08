@@ -24,11 +24,12 @@ def notes_output():
         st.write("Please note that the description for this route is currently incomplete - check back soon to see changes as I build my library of route data!")
 
 
-
 def profile_output():
-    fig = px.line(st.session_state["ride_data"], 
+    data = st.session_state["ride_data"]
+    fig = px.line(data, 
                 x="distance", 
                 y="altitude",
+                #line_shape="spline",
                 labels={"distance":f"Distance ({st.session_state['units']['distance']})",
                         "altitude":f"Altitude ({st.session_state['units']['altitude']})"})
 
@@ -38,12 +39,19 @@ def profile_output():
             if note["highlight"]:
                 fig.add_vrect(x0=note["start_point"], x1=note["end_point"], fillcolor=colours[note["type"]], line_width=0, opacity=0.2)
 
-    fig.update_traces(mode="lines", customdata=st.session_state["ride_data"][["distance_tip", "altitude_tip", "gradient_tip"]],
+    fig.update_traces(mode="lines", customdata=data[["distance_tip", "altitude_tip", "gradient_tip"]],
                         hovertemplate="<b>Distance: %{customdata[0]}</b><br>" + 
                         "<b>Altitude: %{customdata[1]}</b><br>" +
                         "<b>Grade: %{customdata[2]}</b><br>" + 
                         "<extra></extra>"
                         )
+    
+    route_length = data["distance"].max()
+    route_bottom = data["altitude"].min()
+    route_top = data["altitude"].max()
+    if route_top-route_bottom<50:  
+        fig.update_yaxes(range=[route_bottom-10, route_top+60], minallowed=route_bottom-10, maxallowed=route_top+60)
+        
+    fig.update_xaxes(range=[0, route_length], minallowed=0, maxallowed=route_length)
 
     return fig
-    
