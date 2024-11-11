@@ -44,7 +44,6 @@ def int_routes():
                         CAST(STR_SPLIT("Lead-in", 'km')[1] AS FLOAT) AS lead,
                         CAST(STR_SPLIT("Lead-in", 'km')[1] AS FLOAT) + CAST(STR_SPLIT(Length, 'km')[1] AS FLOAT) as total,
                         NULL AS circuit,
-                        NULL AS gpx_correction,
                         NULL AS complete_notes
                     FROM STAGING.stg_routes
                     WHERE NOT CONTAINS(Restriction, 'Run Only') OR Restriction IS NULL
@@ -53,28 +52,15 @@ def int_routes():
                 -- More precise, and contains gpx correction; notes are made by watching videos of races but gpx starts after departing pens
                 MY_ROUTES AS (
                     SELECT 
-                        world, route, lead, total, circuit, 
-                        CASE WHEN CONTAINS(gpx_correction, '−') THEN 
-                            -CAST(REPLACE(REPLACE(gpx_correction, '−', ''), ',', '.') AS FLOAT) ELSE
-                            CAST(REPLACE(gpx_correction, ',', '.') AS FLOAT) END AS gpx_correction,
+                        world, route, 
+                        CAST(REPLACE(lead, ',', '.') AS FLOAT) AS lead, 
+                        CAST(REPLACE(total, ',', '.') AS FLOAT) AS total, circuit,
                         complete_notes
                     FROM STAGING.stg_route_lengths       
                 ),
 
-                -- Correct lead in and total lengths taken from video notes     
-                CORRECTION AS (
-                    SELECT 
-                        world, route,
-                        CAST(REPLACE(lead, ',', '.') AS FLOAT) + gpx_correction AS lead,
-                        CAST(REPLACE(total, ',', '.') AS FLOAT) + gpx_correction AS total,
-                        circuit,
-                        gpx_correction,
-                        complete_notes
-                    FROM MY_ROUTES     
-                ),
-
                 APPENDED AS (
-                    (SELECT * FROM CORRECTION) UNION
+                    (SELECT * FROM MY_ROUTES) UNION
                     (SELECT * FROM ZI_ROUTES WHERE CONCAT(world, '_', route) NOT IN (SELECT CONCAT(world, '_', route) FROM MY_ROUTES))
                 )
                      
@@ -103,7 +89,7 @@ def int_route_sectors():
         df = con.sql("""
                     WITH SECTORS AS (
                         SELECT world, route, sector_id,
-                            CAST(REPLACE(sector_start, ',', '.') AS FLOAT) AS sector_start
+                            CAST(REPLACE(REPLACE(sector_start, '−', '-'), ',', '.') AS FLOAT) AS sector_start
                         FROM STAGING.stg_route_sectors
                         WHERE world IS NOT NULL
                     )

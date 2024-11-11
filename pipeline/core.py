@@ -62,12 +62,6 @@ def dim_notes():
                         SELECT * FROM INTERMEDIATE.int_routes
                      ),
 
-                     CORRECT_STARTS AS (
-                        SELECT A.* EXCLUDE(sector_start),
-                            A.sector_start + B.gpx_correction AS sector_start
-                        FROM ROUTE_SECTORS AS A LEFT JOIN ROUTES AS B ON A.world=B.world AND A.route=B.route
-                     ),
-
                      ROUTE_DESCRIPTIONS AS (
                         SELECT A.world, A.route,
                             B.note_name AS segment,
@@ -75,7 +69,7 @@ def dim_notes():
                             A.sector_start + B.note_end AS end_point,
                             B.note_type AS type, 
                             B.note_description AS note
-                        FROM CORRECT_STARTS AS A LEFT JOIN SECTOR_DESCRIPTIONS AS B ON A.sector_id=B.sector_id
+                        FROM ROUTE_SECTORS AS A LEFT JOIN SECTOR_DESCRIPTIONS AS B ON A.sector_id=B.sector_id
                      ),
 
                      SORTED AS (
