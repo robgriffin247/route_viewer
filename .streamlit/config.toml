@@ -1,0 +1,7 @@
+[theme]
+base = "light"
+primaryColor = "#478f84"
+secondaryBackgroundColor = "#d8e6e4"
+
+[secrets]
+files = [ ".streamlit/secrets.toml", ]

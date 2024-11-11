@@ -1,10 +1,10 @@
 import duckdb
-import os
+import streamlit as st
 from pipeline.staging import stg_sheet, stg_rides
 from pipeline.intermediate import int_routes, int_rides, int_sector_descriptions, int_route_sectors
 from pipeline.core import dim_rides, dim_notes, dim_routes
-from dotenv import load_dotenv
-load_dotenv()
+
+data_config = st.secrets["data_config"]
 
 import argparse
 
@@ -26,7 +26,8 @@ if not (args.s or args.sg or args.i or args.c):
 
 if args.s or args.sg:
     print("Running staging...")
-    with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+    #with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+    with duckdb.connect(f'{data_config["data_dir"]}/{data_config["database"]}') as con:
         con.sql(f"CREATE SCHEMA IF NOT EXISTS STAGING")
 
     stg_sheet("routes", ["Map", "Route", "Length", "Lead-In", "Restriction"])
@@ -41,7 +42,7 @@ if args.s:
 
 if args.i:
     print("Running intermediate...")
-    with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+    with duckdb.connect(f'{data_config["data_dir"]}/{data_config["database"]}') as con:
         con.sql(f"CREATE SCHEMA IF NOT EXISTS INTERMEDIATE")
     
     int_routes()
@@ -52,13 +53,9 @@ if args.i:
 
 if args.c:
     print("Running core...")
-    with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+    with duckdb.connect(f'{data_config["data_dir"]}/{data_config["database"]}') as con:
         con.sql(f"CREATE SCHEMA IF NOT EXISTS CORE")
     
     dim_rides()
     dim_notes()
     dim_routes()
-
-
-#with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
-#    print(con.sql("SELECT * FROM staging.stg_rides"))

@@ -1,8 +1,10 @@
 import duckdb
-import os
+import streamlit as st
+
+data_config = st.secrets["data_config"]
 
 def dim_rides():
-    with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+    with duckdb.connect(f'{data_config["data_dir"]}/{data_config["database"]}') as con:
         x = con.sql("""
                       WITH RIDE_LENGTHS AS(
                         SELECT file, world, route, MAX(distance) AS length 
@@ -46,7 +48,7 @@ def dim_rides():
         con.sql('CREATE OR REPLACE TABLE CORE.dim_rides AS SELECT * FROM df')
 
 def dim_notes():
-    with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+    with duckdb.connect(f'{data_config["data_dir"]}/{data_config["database"]}') as con:
         df = con.sql("""
                      WITH SECTOR_DESCRIPTIONS AS (
                         SELECT * FROM INTERMEDIATE.int_sector_descriptions
@@ -97,6 +99,6 @@ def dim_notes():
 
 
 def dim_routes():
-    with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+    with duckdb.connect(f'{data_config["data_dir"]}/{data_config["database"]}') as con:
         df = con.sql("SELECT world, route, lead, total-lead AS lap, circuit, complete_notes FROM INTERMEDIATE.int_routes")
         con.sql("CREATE OR REPLACE TABLE CORE.dim_routes AS SELECT * FROM df")

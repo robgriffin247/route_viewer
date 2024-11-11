@@ -1,0 +1,21 @@
+.stMarkdown, h1, h4 {
+    text-align:left;
+}
+
+h4 {
+    color: #478f84;
+    font-size: 1.1em;
+    padding-bottom: 1em;
+    margin-bottom: 1.6em;
+    border-bottom: 1px dashed #525756;
+}
+
+a, a:visited {
+    color: #478f84;
+    transition: 0.3s;
+}
+
+a:hover, a:active {
+    color: orange;
+    transition: 0.3s;
+}

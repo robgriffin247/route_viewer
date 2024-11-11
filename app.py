@@ -1,63 +1,32 @@
 import streamlit as st 
-from app_functions.coffee import buy_coffee
+from webapp_functions.coffee import buy_coffee
 
-
-    
-#from dotenv import load_dotenv
-#load_dotenv()
+page_config = st.secrets["page_config"]
 
 st.set_page_config(
-    page_title="RouteViewer",
-    page_icon=":bike:",
-    initial_sidebar_state="collapsed"
+    page_title=page_config["page_name"],
+    page_icon=page_config["page_icon"],
+    initial_sidebar_state="collapsed",
 )
 
-    
 # Styling
-st.html("""
-        <style>
-            .st-emotion-cache-13ln4jf { // Main page width
-                max-width: 1000px; 
-                width: 92%;
-                text-align: center;
-            }
-        
-            .stMarkdown, h1, .subheader {text-align:left;}
-            .subheader {
-                color: #478f84;
-                padding-bottom: 1em;
-                margin-bottom: 1.6em;
-                border-bottom: 1px dashed #525756;
-            }
-            
-            a, a:visited {
-                color: #478f84;
-                transition: 0.2s;
-            }
-        
-            a:hover, a:active {
-                color: orange;
-            }
-
-        </style>
-        """)
-
+with open('./webapp_files/style.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # Define navigation and pages
-main_page = st.Page("app_pages/index.py", title="Home")
-data_page = st.Page("app_pages/data.py", title="Wanted gpx files")
-about_page = st.Page("app_pages/about.py", title="About")
+main_page = st.Page("webapp_files/index.py", 
+                    title=f"{page_config['page_name']}")
+about_page = st.Page("webapp_files/about.py", 
+                     title=f"About {page_config['page_name']}")
+
 pg = st.navigation([
     main_page, 
-    #data_page, 
     about_page,
     ])
 
 # Set standard top of page
-st.title("RouteViewer")
-st.html("""
-        <div class='subheader'>Racing Notes for Zwift</div>
-        """)
+st.title(page_config["page_name"])
+st.html("<h4>Racing Notes for Zwift</h4>")
 
 pg.run()
 

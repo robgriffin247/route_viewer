@@ -1,9 +1,10 @@
 import duckdb
-import os
+import streamlit as st 
 
+data_config = st.secrets["data_config"]
 
 def int_rides():
-    with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+    with duckdb.connect(f'{data_config["data_dir"]}/{data_config["database"]}') as con:
         df = con.sql("""
                 WITH 
                 -- Get the change in distance/altitude from row to row     
@@ -32,7 +33,7 @@ def int_rides():
         con.sql("CREATE OR REPLACE TABLE INTERMEDIATE.int_rides AS SELECT * FROM df")
 
 def int_routes():
-    with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+    with duckdb.connect(f'{data_config["data_dir"]}/{data_config["database"]}') as con:
         df = con.sql("""
                 WITH 
                 -- Routes from ZwiftInsider contain lead in and total lengths for all routes; remove run routes
@@ -83,7 +84,7 @@ def int_routes():
         con.sql('CREATE OR REPLACE TABLE INTERMEDIATE.int_routes AS SELECT * FROM df')
 
 def int_sector_descriptions():
-    with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+    with duckdb.connect(f'{data_config["data_dir"]}/{data_config["database"]}') as con:
         df = con.sql("""
                     WITH DESCRIPTIONS AS (
                         SELECT * EXCLUDE(note_start_km, note_end_km, note_type),
@@ -98,7 +99,7 @@ def int_sector_descriptions():
         con.sql("CREATE OR REPLACE TABLE INTERMEDIATE.int_sector_descriptions AS SELECT * FROM df")
 
 def int_route_sectors():
-    with duckdb.connect(f'{os.getenv("data_dir")}/{os.getenv("database")}') as con:
+    with duckdb.connect(f'{data_config["data_dir"]}/{data_config["database"]}') as con:
         df = con.sql("""
                     WITH SECTORS AS (
                         SELECT world, route, sector_id,

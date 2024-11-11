@@ -1,1 +1,3 @@
-old_app/
+_old_app/
+.env
+.streamlit/secrets.toml
