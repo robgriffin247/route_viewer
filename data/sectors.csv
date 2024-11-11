@@ -35,7 +35,7 @@
 33,Watopia,WA017R,,
 34,Watopia,WA018F,,
 35,Watopia,WA018R,,
-36,Watopia,WA019F,,
+36,Watopia,WA019F,Start banner for fuego flats forward,Fuego flats toward titans rev./evergreen coast
 37,Watopia,WA019R,,
 38,Watopia,WA020F,,
 39,Watopia,WA020R,,
@@ -90,3 +90,6 @@
 88,Watopia,WA045F,,
 89,Watopia,WA045R,Tunnel entrance after windfarm towards sequioa circle,Tunnels from windfarm to sequioa circle
 90,Watopia,WA046F,Tunnel entrance after sequioa circle towards downtown,Tunnels from sequoia circle to downtown
+91,Watopia,WA046R,,
+92,Watopia,WA047F,,Tunnels from sequioa to epic/titans
+93,Watopia,WA047R,First arch on tunnel entry,Epic/titans to sequioa circle
