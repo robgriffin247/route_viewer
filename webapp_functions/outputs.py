@@ -1,5 +1,6 @@
 import streamlit as st 
 import plotly.express as px
+import pandas as pd
 
 def notes_output():
     #if st.session_state["note_data"].shape[0]==0:
@@ -24,7 +25,8 @@ def notes_output():
     #    st.write("Please note that the description for this route is currently incomplete - check back soon to see changes as I build my library of route data!")
 
 def profile_output():
-    data = st.session_state["ride_data"]
+    data = st.session_state["ride_data"].copy()
+
     fig = px.line(data, 
                 x="distance", 
                 y="altitude",

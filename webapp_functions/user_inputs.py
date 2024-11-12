@@ -10,7 +10,7 @@ def route_input():
     world, route = st.columns([4,6])
 
     # Get the routes that have been desribed
-    with duckdb.connect(f'{data_config["data_dir"]}/{data_config["database"]}') as con:
+    with duckdb.connect(f'{data_config["data_directory"]}/{data_config["database_name"]}') as con:
         available_routes = con.sql("SELECT DISTINCT(world) AS world, route FROM CORE.dim_notes ORDER BY world, route").to_df()
 
     # User input for world
@@ -27,7 +27,7 @@ def route_input():
                     key="route")
     
     # Get the data for the route (ride = .gpx data used for plotting; note = notes for the route; route = route metadata such as length, lead in)
-    with duckdb.connect(f'{data_config["data_dir"]}/{data_config["database"]}') as con:
+    with duckdb.connect(f'{data_config["data_directory"]}/{data_config["database_name"]}') as con:
         st.session_state["ride_data"] = con.sql(f"""
                         SELECT * FROM CORE.dim_rides WHERE world='{st.session_state["world"]}' AND route='{st.session_state["route"]}'
                         """).to_df()  
