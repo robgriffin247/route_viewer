@@ -21,7 +21,7 @@ about_page = st.Page("webapp_files/about.py",
 
 pg = st.navigation([
     main_page, 
-    about_page
+    about_page,
     ])
 
 # Set standard top of page

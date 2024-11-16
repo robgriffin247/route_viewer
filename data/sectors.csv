@@ -1,6 +1,6 @@
 ,world,sector_id,sector_start_landmark,sector_description
 0,Watopia,WA001F,Grade start line,Entire kom from banner to banner
-1,Watopia,WA001R,,
+1,Watopia,WA001R,--,--
 2,Watopia,WA002F,Grade start line,"Lower slopes of the Grade, until gradient hits 0%"
 3,Watopia,WA002R,"Last pair of street lights before drop, as road lines merge from Itza","Lower section of the grade, descent"
 4,Watopia,WA003F,Grade sector 5 line,Upper slopes of the Grade until banner
@@ -21,30 +21,30 @@
 19,Watopia,WA010R,First bridge arch (nearest top of epic),Epic lower descent
 20,Watopia,WA011F,Where bypass and epic roadlines merge from right into one,Epic kom mid-section
 21,Watopia,WA011R,Where grade and epic yellow lines merge,Epic middle descent
-22,Watopia,WA012F,,
-23,Watopia,WA012R,,
-24,Watopia,WA013F,,
-25,Watopia,WA013R,,
-26,Watopia,WA014F,,
-27,Watopia,WA014R,,
-28,Watopia,WA015F,,
-29,Watopia,WA015R,,
-30,Watopia,WA016F,,
-31,Watopia,WA016R,,
-32,Watopia,WA017F,,
-33,Watopia,WA017R,,
-34,Watopia,WA018F,,
-35,Watopia,WA018R,,
+22,Watopia,WA012F,Start of wooden bridge after grade turnoff,Epic kom upper slopes
+23,Watopia,WA012R,,Epic upper descent
+24,Watopia,WA013F,,Epic Reverse KOM from jungle junction
+25,Watopia,WA013R,,Epic reverse descent to jungle junction
+26,Watopia,WA014F,,Radio tower climb
+27,Watopia,WA014R,,--
+28,Watopia,WA015F,Epic kom start line,Epic KOM Segment
+29,Watopia,WA015R,,--
+30,Watopia,WA016F,,Epic Reverse KOM Segment
+31,Watopia,WA016R,,--
+32,Watopia,WA017F,,"Epic Reverse KOM, lower slopes to jungle junction"
+33,Watopia,WA017R,,"Epic Reverse KOM, lower slopes descent towards windfarm"
+34,Watopia,WA018F,,Epic bypass forward to reverse (fuego to jungle)
+35,Watopia,WA018R,,Epic bypass reverse to forward (jungle to fuego)
 36,Watopia,WA019F,Start banner for fuego flats forward,Fuego flats toward titans rev./evergreen coast
-37,Watopia,WA019R,,
-38,Watopia,WA020F,,
-39,Watopia,WA020R,,
-40,Watopia,WA021F,,
-41,Watopia,WA021R,,
-42,Watopia,WA022F,,
-43,Watopia,WA022R,,
-44,Watopia,WA023F,,
-45,Watopia,WA023R,,
+37,Watopia,WA019R,,"Fuego flats reverse, towards downtown"
+38,Watopia,WA020F,,Titans grove reverse climb and forward descent (toward Epic)
+39,Watopia,WA020R,,Titans grove forward climb and reverse descent (toward Downtown)
+40,Watopia,WA021F,,Zwift KOM forward lower slopes climb
+41,Watopia,WA021R,,Zwift KOM forward lower slopes descent
+42,Watopia,WA022F,,Zwift KOM forward upper slopes and top climb
+43,Watopia,WA022R,,Zwift KOM forward upper slopes and top descent
+44,Watopia,WA023F,,Zwift KOM Segment
+45,Watopia,WA023R,,--
 46,Watopia,WA024F,,
 47,Watopia,WA024R,,
 48,Watopia,WA025F,,
