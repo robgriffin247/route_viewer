@@ -17,9 +17,9 @@ def route_input():
     # Set layout
     world, route = st.columns([4,6])
 
-    # Get the routes that have been desribed
+    # Get the routes that have been gpx (use dim_notes for just those described)
     with duckdb.connect(f'{data_config["data_directory"]}/{data_config["database_name"]}') as con:
-        available_routes = con.sql("SELECT DISTINCT(world) AS world, route FROM CORE.dim_notes ORDER BY world, route").to_df()
+        available_routes = con.sql("SELECT DISTINCT(world) AS world, route FROM CORE.dim_rides ORDER BY world, route").to_df()
 
     # User input for world
     world.selectbox("World", 
@@ -38,7 +38,6 @@ def route_input():
 
     route.selectbox("Route", 
                     label_visibility="hidden", 
-                    #index=int(np.where(available_routes.route==preset_route)[0][0]),
                     index=route_index,
                     options=route_options_df.route,
                     key="route")

@@ -43,7 +43,7 @@ def int_routes():
                         Route AS route,
                         CAST(STR_SPLIT("Lead-in", 'km')[1] AS FLOAT) AS lead,
                         CAST(STR_SPLIT("Lead-in", 'km')[1] AS FLOAT) + CAST(STR_SPLIT(Length, 'km')[1] AS FLOAT) as total,
-                        NULL AS circuit,
+                        circuit,
                         NULL AS complete_notes
                     FROM STAGING.stg_routes
                     WHERE NOT CONTAINS(Restriction, 'Run Only') OR Restriction IS NULL

@@ -19,3 +19,9 @@ a:hover, a:active {
     color: orange;
     transition: 0.3s;
 }
+
+.centered {
+    text-align: center;
+    color: red !important;
+    left: 0.5;
+}
