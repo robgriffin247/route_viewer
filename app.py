@@ -1,6 +1,5 @@
 # TODO
 # - FEAT: display profiles if gpx file exists; note that notes are incomplete
-# - FEAT: automate start_point for sector descriptions
 # - FEAT: flags/args for streamlit to run pipe
 # - FEAT: output pipline describing coverage
 
