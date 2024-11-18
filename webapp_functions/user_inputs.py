@@ -2,10 +2,18 @@ import duckdb
 import streamlit as st 
 import numpy as np 
 import pandas as pd
+import sys
 
 data_config = st.secrets["data_config"]
 
 def route_input():
+    if len(sys.argv)>1:
+        preset_world = sys.argv[1]
+        preset_route = sys.argv[2]
+    else:
+        preset_world = "Makuri Islands"
+        preset_route = "Turf N Surf"
+
     # Set layout
     world, route = st.columns([4,6])
 
@@ -16,14 +24,23 @@ def route_input():
     # User input for world
     world.selectbox("World", 
                     label_visibility="hidden",
-                    index=int(np.where(available_routes.world.unique()=="Watopia")[0][0]),
+                    index=int(np.where(available_routes.world.unique()==preset_world)[0][0]),
                     options=available_routes.world.unique(),
                     key="world")
     
     # User input for route filtered on world
+    route_options_df = available_routes.loc[available_routes.world==st.session_state["world"]]
+    route_options_df.reset_index()
+    if preset_world!=st.session_state["world"]:
+        route_index = 0
+    else:
+        route_index = int(np.where(route_options_df.route==preset_route)[0][0])
+
     route.selectbox("Route", 
                     label_visibility="hidden", 
-                    options=available_routes.route[available_routes.world==st.session_state["world"]],
+                    #index=int(np.where(available_routes.route==preset_route)[0][0]),
+                    index=route_index,
+                    options=route_options_df.route,
                     key="route")
     
     # Get the data for the route (ride = .gpx data used for plotting; note = notes for the route; route = route metadata such as length, lead in)

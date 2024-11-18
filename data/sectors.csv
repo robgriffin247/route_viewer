@@ -1,95 +1,99 @@
-,world,sector_id,sector_start_landmark,sector_description
-0,Watopia,WA001F,Grade start line,Entire kom from banner to banner
-1,Watopia,WA001R,--,--
-2,Watopia,WA002F,Grade start line,"Lower slopes of the Grade, until gradient hits 0%"
-3,Watopia,WA002R,"Last pair of street lights before drop, as road lines merge from Itza","Lower section of the grade, descent"
-4,Watopia,WA003F,Grade sector 5 line,Upper slopes of the Grade until banner
-5,Watopia,WA003R,Grade finish banner,Grade upper descent
-6,Watopia,WA004F,"Asphalt after leaving pens, turning left (ca. 140m)",Sandy Coast; Grade pens toward Mayan mountain/Jungle
-7,Watopia,WA004R,"Two ruins towers after leaving mayan mountain/jungle, 400m before stoneway sprint start",Sandy coast; Mayan to Grade
-8,Watopia,WA005F,Mayan Mountain start line,Mayan/Itza climbs to Grade
-9,Watopia,WA005R,First pair of lamposts after turning off grade,Itza/Mayan reverse
-10,Watopia,WA006F,"Asphalt after leaving pens, turning right (ca. 125m)",Grade pens to turn-around by Sasquatch sprint/Evergreen coast
-11,Watopia,WA006R,Sasquatch Banner,Sasquatch banner to Grade
-12,Watopia,WA007F,Sasquatch Banner,Sasquatch banner to Desert
-13,Watopia,WA007R,Coastal entry gate pillars,Desert toward Sasquatch sprint
-14,Watopia,WA008F,Roadwall ending on left side after triple exit roundabout at end of desert,Desert to titans climb
-15,Watopia,WA008R,"Start of wooden fence on righthand side, opposite turn sign and just after titans exit",Titans to desert
-16,Watopia,WA009F,"Final turn sign for riders from opp. direction on left, opposite a redwood",Titans to island t-junction (epic/downtown)
-17,Watopia,WA009R,Start of boardwalk after sand,Towards Titans from epic/downtown 
-18,Watopia,WA010F,Epic kom start line,Epic lower slopes
-19,Watopia,WA010R,First bridge arch (nearest top of epic),Epic lower descent
-20,Watopia,WA011F,Where bypass and epic roadlines merge from right into one,Epic kom mid-section
-21,Watopia,WA011R,Where grade and epic yellow lines merge,Epic middle descent
-22,Watopia,WA012F,Start of wooden bridge after grade turnoff,Epic kom upper slopes
-23,Watopia,WA012R,,Epic upper descent
-24,Watopia,WA013F,,Epic Reverse KOM from jungle junction
-25,Watopia,WA013R,,Epic reverse descent to jungle junction
-26,Watopia,WA014F,,Radio tower climb
-27,Watopia,WA014R,,--
-28,Watopia,WA015F,Epic kom start line,Epic KOM Segment
-29,Watopia,WA015R,,--
-30,Watopia,WA016F,,Epic Reverse KOM Segment
-31,Watopia,WA016R,,--
-32,Watopia,WA017F,,"Epic Reverse KOM, lower slopes to jungle junction"
-33,Watopia,WA017R,,"Epic Reverse KOM, lower slopes descent towards windfarm"
-34,Watopia,WA018F,,Epic bypass forward to reverse (fuego to jungle)
-35,Watopia,WA018R,,Epic bypass reverse to forward (jungle to fuego)
-36,Watopia,WA019F,Start banner for fuego flats forward,Fuego flats toward titans rev./evergreen coast
-37,Watopia,WA019R,,"Fuego flats reverse, towards downtown"
-38,Watopia,WA020F,,Titans grove reverse climb and forward descent (toward Epic)
-39,Watopia,WA020R,,Titans grove forward climb and reverse descent (toward Downtown)
-40,Watopia,WA021F,,Zwift KOM forward lower slopes climb
-41,Watopia,WA021R,,Zwift KOM forward lower slopes descent
-42,Watopia,WA022F,,Zwift KOM forward upper slopes and top climb
-43,Watopia,WA022R,,Zwift KOM forward upper slopes and top descent
-44,Watopia,WA023F,,Zwift KOM Segment
-45,Watopia,WA023R,,--
-46,Watopia,WA024F,,
-47,Watopia,WA024R,,
-48,Watopia,WA025F,,
-49,Watopia,WA05R,,
-50,Watopia,WA026F,,
-51,Watopia,WA026R,Cave entrance into volcano after climb portal,Volcano interior to Italian villas/sopressa turn off
-52,Watopia,WA027F,,
-53,Watopia,WA027R,Very large round boulder on right side immediately after turn,Villas side of volcano lower loop towards downtown
-54,Watopia,WA028F,,
-55,Watopia,WA028R,,
-56,Watopia,WA029F,,
-57,Watopia,WA029R,Immediately after completing first hairpin at top,Covers the hairpin exit form volcano
-58,Watopia,WA030F,Arch wall on sand entrance,Dirty sopresssa climb
-59,Watopia,WA030R,,
-60,Watopia,WA031F,"Watopia sprint start line, italian villas side",Watopia sprint
-61,Watopia,WA031R,,
-62,Watopia,WA032F,,
-63,Watopia,WA032R,,
-64,Watopia,WA033F,,
-65,Watopia,WA033R,,
-66,Watopia,WA034F,,
-67,Watopia,WA034R,,
-68,Watopia,WA035F,,
-69,Watopia,WA035R,,
-70,Watopia,WA036F,,
-71,Watopia,WA036R,,
-72,Watopia,WA037F,,
-73,Watopia,WA037R,,
-74,Watopia,WA038F,,
-75,Watopia,WA038R,,
-76,Watopia,WA039F,,
-77,Watopia,WA039R,,
-78,Watopia,WA040F,,
-79,Watopia,WA040R,,
-80,Watopia,WA041F,,
-81,Watopia,WA041R,,
-82,Watopia,WA042F,"Turn sign (from downtown) on left, just after passing dirt junction",Short sector passing mayfield
-83,Watopia,WA042R,,
-84,Watopia,WA043F,Turn sign immediately on right after turning on to road,360 to Ocean Boulevard Hairpins
-85,Watopia,WA043R,,
-86,Watopia,WA044F,"Downtown start/finish banner, toward volcano",Downtown toward volcano
-87,Watopia,WA044R,,
-88,Watopia,WA045F,,
-89,Watopia,WA045R,Tunnel entrance after windfarm towards sequioa circle,Tunnels from windfarm to sequioa circle
-90,Watopia,WA046F,Tunnel entrance after sequioa circle towards downtown,Tunnels from sequoia circle to downtown
-91,Watopia,WA046R,,
-92,Watopia,WA047F,,Tunnels from sequioa to epic/titans
-93,Watopia,WA047R,First arch on tunnel entry,Epic/titans to sequioa circle
+,world,sector_id,sector_start_landmark,sector_start_point,sector_description
+0,Watopia,WA001F,Grade start line,"0,000",Entire kom from banner to banner
+1,Watopia,WA001R,--,"0,000",--
+2,Watopia,WA002F,Grade start line,"0,000","Lower slopes of the Grade, until gradient hits 0%"
+3,Watopia,WA002R,"Last pair of street lights before drop, as road lines merge from Itza","0,000","Lower section of the grade, descent"
+4,Watopia,WA003F,Grade sector 5 line,"0,000",Upper slopes of the Grade until banner
+5,Watopia,WA003R,Grade finish banner,"0,000",Grade upper descent
+6,Watopia,WA004F,"Asphalt after leaving pens, turning left (ca. 140m)","0,000",Sandy Coast; Grade pens toward Mayan mountain/Jungle
+7,Watopia,WA004R,"Two ruins towers after leaving mayan mountain/jungle, 400m before stoneway sprint start","0,000",Sandy coast; Mayan to Grade
+8,Watopia,WA005F,Mayan Mountain start line,"0,000",Mayan/Itza climbs to Grade
+9,Watopia,WA005R,First pair of lamposts after turning off grade,"0,000",Itza/Mayan reverse
+10,Watopia,WA006F,"Asphalt after leaving pens, turning right (ca. 125m)","0,000",Grade pens to turn-around by Sasquatch sprint/Evergreen coast
+11,Watopia,WA006R,Sasquatch Banner,"0,000",Sasquatch banner to Grade
+12,Watopia,WA007F,Sasquatch Banner,"0,000",Sasquatch banner to Desert
+13,Watopia,WA007R,Coastal entry gate pillars,"0,000",Desert toward Sasquatch sprint
+14,Watopia,WA008F,Roadwall ending on left side after triple exit roundabout at end of desert,"0,000",Desert to titans climb
+15,Watopia,WA008R,"Start of wooden fence on righthand side, opposite turn sign and just after titans exit","0,000",Titans to desert
+16,Watopia,WA009F,"Final turn sign for riders from opp. direction on left, opposite a redwood","0,000",Titans to island t-junction (epic/downtown)
+17,Watopia,WA009R,Start of boardwalk after sand,"0,000",Towards Titans from epic/downtown 
+18,Watopia,WA010F,Epic kom start line,"0,000",Epic lower slopes
+19,Watopia,WA010R,First bridge arch (nearest top of epic),"0,000",Epic lower descent
+20,Watopia,WA011F,Where bypass and epic roadlines merge from right into one,"0,000",Epic kom mid-section
+21,Watopia,WA011R,Where grade and epic yellow lines merge,"0,000",Epic middle descent
+22,Watopia,WA012F,Start of wooden bridge after grade turnoff,"0,000",Epic kom upper slopes
+23,Watopia,WA012R,,,Epic upper descent
+24,Watopia,WA013F,,,Epic Reverse KOM from jungle junction
+25,Watopia,WA013R,,,Epic reverse descent to jungle junction
+26,Watopia,WA014F,,,Radio tower climb
+27,Watopia,WA014R,,,--
+28,Watopia,WA015F,Epic kom start line,"0,000",Epic KOM Segment
+29,Watopia,WA015R,,,--
+30,Watopia,WA016F,,,Epic Reverse KOM Segment
+31,Watopia,WA016R,,,--
+32,Watopia,WA017F,,,"Epic Reverse KOM, lower slopes to jungle junction"
+33,Watopia,WA017R,,,"Epic Reverse KOM, lower slopes descent towards windfarm"
+34,Watopia,WA018F,,,Epic bypass forward to reverse (fuego to jungle)
+35,Watopia,WA018R,,,Epic bypass reverse to forward (jungle to fuego)
+36,Watopia,WA019F,Start banner for fuego flats forward,"0,000",Fuego flats toward titans rev./evergreen coast
+37,Watopia,WA019R,,,"Fuego flats reverse, towards downtown"
+38,Watopia,WA020F,,,Titans grove reverse climb and forward descent (toward Epic)
+39,Watopia,WA020R,,,Titans grove forward climb and reverse descent (toward Downtown)
+40,Watopia,WA021F,,,Zwift KOM forward lower slopes climb
+41,Watopia,WA021R,,,Zwift KOM forward lower slopes descent
+42,Watopia,WA022F,,,Zwift KOM forward upper slopes and top climb
+43,Watopia,WA022R,,,Zwift KOM forward upper slopes and top descent
+44,Watopia,WA023F,,,Zwift KOM Segment
+45,Watopia,WA023R,,,--
+46,Watopia,WA024F,,,
+47,Watopia,WA024R,,,
+48,Watopia,WA025F,,,
+49,Watopia,WA05R,,,
+50,Watopia,WA026F,,,
+51,Watopia,WA026R,Cave entrance into volcano after climb portal,"0,000",Volcano interior to Italian villas/sopressa turn off
+52,Watopia,WA027F,,,
+53,Watopia,WA027R,Very large round boulder on right side immediately after turn,"0,000",Villas side of volcano lower loop towards downtown
+54,Watopia,WA028F,,,
+55,Watopia,WA028R,,,
+56,Watopia,WA029F,,,
+57,Watopia,WA029R,Immediately after completing first hairpin at top,"0,000",Covers the hairpin exit form volcano
+58,Watopia,WA030F,Arch wall on sand entrance,"0,000",Dirty sopresssa climb
+59,Watopia,WA030R,,,
+60,Watopia,WA031F,"Watopia sprint start line, italian villas side","0,000",Watopia sprint
+61,Watopia,WA031R,,,
+62,Watopia,WA032F,,,
+63,Watopia,WA032R,,,
+64,Watopia,WA033F,,,
+65,Watopia,WA033R,,,
+66,Watopia,WA034F,,,
+67,Watopia,WA034R,,,
+68,Watopia,WA035F,,,
+69,Watopia,WA035R,,,
+70,Watopia,WA036F,,,
+71,Watopia,WA036R,,,
+72,Watopia,WA037F,,,
+73,Watopia,WA037R,,,
+74,Watopia,WA038F,,,
+75,Watopia,WA038R,,,
+76,Watopia,WA039F,,,
+77,Watopia,WA039R,,,
+78,Watopia,WA040F,,,
+79,Watopia,WA040R,,,
+80,Watopia,WA041F,,,
+81,Watopia,WA041R,,,
+82,Watopia,WA042F,"Turn sign (from downtown) on left, just after passing dirt junction","0,000",Short sector passing mayfield
+83,Watopia,WA042R,,,
+84,Watopia,WA043F,Turn sign immediately on right after turning on to road,"0,000",360 to Ocean Boulevard Hairpins
+85,Watopia,WA043R,,,
+86,Watopia,WA044F,"Downtown start/finish banner, toward volcano","0,000",Downtown toward volcano
+87,Watopia,WA044R,,,
+88,Watopia,WA045F,,,
+89,Watopia,WA045R,Tunnel entrance after windfarm towards sequioa circle,"0,000",Tunnels from windfarm to sequioa circle
+90,Watopia,WA046F,Tunnel entrance after sequioa circle towards downtown,"0,000",Tunnels from sequoia circle to downtown
+91,Watopia,WA046R,,,
+92,Watopia,WA047F,,,Tunnels from sequioa to epic/titans
+93,Watopia,WA047R,First arch on tunnel entry,"0,000",Epic/titans to sequioa circle
+94,Makuri Islands,MI001F,Alley Sprint start banner,"0,000",Turf N Surf into city
+95,Makuri Islands,MI002F,Wooden bridge after junction,"6,885",Wooden bridge after leaving Neokyo
+96,Makuri Islands,MI003F,Boardwalk rise before pens,"11,890","Counterclockwise on mech isle, toward pens"
+97,Makuri Islands,MI004F,White line after pens,"12,602","Counterclockwise on mech isle, from pens"

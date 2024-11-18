@@ -54,12 +54,23 @@ def dim_notes():
                         SELECT * FROM INTERMEDIATE.int_sector_descriptions
                      ),
                      
+                     SECTORS AS (
+                        SELECT world, sector_id, sector_start_point FROM INTERMEDIATE.int_sectors
+                     ),
+
                      ROUTE_SECTORS AS (
                         SELECT * FROM INTERMEDIATE.int_route_sectors
                      ),
                      
                      ROUTES AS (
                         SELECT * FROM INTERMEDIATE.int_routes
+                     ),
+
+                     ADJUSTED_SECTOR_STARTS AS (
+                        SELECT A.* EXCLUDE(note_start, note_end),
+                            A.note_start-B.sector_start_point AS note_start,
+                            A.note_end-B.sector_start_point AS note_end
+                        FROM SECTOR_DESCRIPTIONS AS A LEFT JOIN SECTORS AS B on A.sector_id=B.sector_id
                      ),
 
                      ROUTE_DESCRIPTIONS AS (
@@ -69,7 +80,7 @@ def dim_notes():
                             A.sector_start + B.note_end AS end_point,
                             B.note_type AS type, 
                             B.note_description AS note
-                        FROM ROUTE_SECTORS AS A LEFT JOIN SECTOR_DESCRIPTIONS AS B ON A.sector_id=B.sector_id
+                        FROM ROUTE_SECTORS AS A LEFT JOIN ADJUSTED_SECTOR_STARTS AS B ON A.sector_id=B.sector_id
                      ),
 
                      SORTED AS (
@@ -89,6 +100,7 @@ def dim_notes():
                      """)
         
         con.sql("CREATE OR REPLACE TABLE CORE.dim_notes AS SELECT * FROM df")
+
         # Merge sector_descriptions and route_sectors
 
 

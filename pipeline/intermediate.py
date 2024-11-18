@@ -69,6 +69,19 @@ def int_routes():
         
         con.sql('CREATE OR REPLACE TABLE INTERMEDIATE.int_routes AS SELECT * FROM df')
 
+def int_sectors():
+    with duckdb.connect(f'{data_config["data_directory"]}/{data_config["database_name"]}') as con:
+        df = con.sql("""
+                    WITH SECTORS AS (
+                        SELECT world, sector_id,
+                            CAST(REPLACE(sector_start_point, ',', '.') AS DOUBLE) AS sector_start_point
+                        FROM STAGING.stg_sectors
+                    )
+                    
+                    SELECT * FROM SECTORS""")
+
+        con.sql("CREATE OR REPLACE TABLE INTERMEDIATE.int_sectors AS SELECT * FROM df")
+
 def int_sector_descriptions():
     with duckdb.connect(f'{data_config["data_directory"]}/{data_config["database_name"]}') as con:
         df = con.sql("""

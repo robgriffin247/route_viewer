@@ -1,7 +1,7 @@
 import duckdb
 import streamlit as st
 from pipeline.staging import stg_sheet, stg_rides
-from pipeline.intermediate import int_routes, int_rides, int_sector_descriptions, int_route_sectors
+from pipeline.intermediate import int_routes, int_rides, int_sectors, int_sector_descriptions, int_route_sectors
 from pipeline.core import dim_rides, dim_notes, dim_routes
 
 data_config = st.secrets["data_config"]
@@ -32,7 +32,7 @@ if args.s or args.sg:
 
     stg_sheet("routes", ["Map", "Route", "Length", "Lead-In", "Restriction"])
     stg_sheet("route_lengths", ["world", "route", "lead", "total", "circuit", "complete_notes"])
-    stg_sheet("sectors", ["world", "sector_id", "sector_start_landmark", "sector_description"])
+    stg_sheet("sectors", ["world", "sector_id", "sector_start_landmark", "sector_start_point", "sector_description"])
     stg_sheet("sector_descriptions", ["world", "sector_id", "note_name", "note_start_km", "note_end_km", "note_type", "note_description"])
     stg_sheet("route_sectors", ["world", "route", "sector_id", "sector_start"])
 
@@ -47,6 +47,7 @@ if args.i:
     
     int_routes()
     int_rides()
+    int_sectors()
     int_sector_descriptions()
     int_route_sectors()
 
