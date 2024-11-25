@@ -33,4 +33,6 @@ def profile_plot():
                         "<extra></extra>"
                         )
 
+    
+
     return fig

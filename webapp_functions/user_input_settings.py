@@ -44,6 +44,8 @@ def user_input_settings():
             st.session_state["rides_focal"] = pl.concat([st.session_state["rides_focal"], lap_ride])
             st.session_state["notes_focal"] = pl.concat([st.session_state["notes_focal"], lap_notes])
 
+    # Remove dup note_titles
+    st.session_state["notes_focal"] = st.session_state["notes_focal"].with_columns(pl.when(pl.col("note_title").shift(1)!=pl.col("note_title")).then(pl.col("note_title")).alias("note_title"))
 
     # Metric --------------------------------------------------------------------------------------
     metric_input.toggle("Metric", key="metric", value=True)
