@@ -31,7 +31,7 @@ if args.stg or args.google:
     with duckdb.connect(f'{data_config["data_directory"]}/{data_config["database_name"]}') as con:
         con.sql(f"CREATE SCHEMA IF NOT EXISTS STAGING")
 
-    stg_sheet("routes", ["Map", "Route", "Length", "Lead-In", "Restriction", "Circuit"])
+    stg_sheet("routes", ["Map", "Route", "Length", "Lead-In", "Restriction"])
     stg_sheet("route_lengths", ["world", "route", "lead", "total", "circuit", "complete_notes"])
     stg_sheet("sectors", ["world", "sector_id", "sector_start_landmark", "sector_start_point", "sector_description"])
     stg_sheet("sector_descriptions", ["world", "sector_id", "note_name", "note_start_km", "note_end_km", "note_type", "note_description"])

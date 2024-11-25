@@ -1,5 +1,9 @@
 # TODO
 # - FEAT: note that notes are incomplete/lapping may not actually be possible
+# - FEAT: Custom finish
+# - FEAT: Start from pens?
+# - FEAT: Duckdb-gsheets
+# - FIX: Move list of all routes, taking circuit with it to keep routes as in ZI (allow easier changes later, and have summary output routes that are not in the other list)
 
 import duckdb
 import streamlit as st 

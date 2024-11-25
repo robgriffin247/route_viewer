@@ -43,7 +43,7 @@ def int_routes():
                         Route AS route,
                         CAST(STR_SPLIT("Lead-in", 'km')[1] AS FLOAT) AS lead,
                         CAST(STR_SPLIT("Lead-in", 'km')[1] AS FLOAT) + CAST(STR_SPLIT(Length, 'km')[1] AS FLOAT) as total,
-                        circuit,
+                        NULL AS circuit,
                         NULL AS complete_notes
                     FROM STAGING.stg_routes
                     WHERE NOT CONTAINS(Restriction, 'Run Only') OR Restriction IS NULL
@@ -59,15 +59,24 @@ def int_routes():
                     FROM STAGING.stg_route_lengths       
                 ),
 
-                APPENDED AS (
+                /*APPENDED AS (
                     (SELECT * FROM MY_ROUTES) UNION
                     (SELECT * FROM ZI_ROUTES WHERE CONCAT(world, '_', route) NOT IN (SELECT CONCAT(world, '_', route) FROM MY_ROUTES))
+                )*/
+                JOINT AS (
+                    SELECT A.world, A.route, 
+                        COALESCE(A.lead, B.lead) AS lead, 
+                        COALESCE(A.total, B.total) AS total, 
+                        COALESCE(A.circuit, B.circuit) AS circuit, 
+                        CASE WHEN A.complete_notes is null THEN FALSE else A.complete_notes END AS complete_notes
+                     FROM MY_ROUTES AS A LEFT JOIN ZI_ROUTES AS B ON A.world=B.world AND A.route=B.route
                 )
                      
-                SELECT * FROM APPENDED
+                SELECT * FROM JOINT
                 """)
         
         con.sql('CREATE OR REPLACE TABLE INTERMEDIATE.int_routes AS SELECT * FROM df')
+        print(con.sql("SELECT * FROM INTERMEDIATE.int_routes WHERE ROUTE ilike '%Reine%'"))
 
 def int_sectors():
     with duckdb.connect(f'{data_config["data_directory"]}/{data_config["database_name"]}') as con:

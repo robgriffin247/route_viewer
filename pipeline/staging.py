@@ -20,7 +20,7 @@ def stg_sheet(sheet_name, columns_list, refresh=True):
 
     else:
         url = f'https://docs.google.com/spreadsheets/d/{data_config["google_sheet_id"]}/gviz/tq?tqx=out:csv&sheet={sheet_name}'
-        df = pd.read_csv(url)[columns_list]
+        df = pd.read_csv(url)
         df.to_csv(f'{data_config["data_directory"]}/{sheet_name}.csv')
     
     with duckdb.connect(f'{data_config["data_directory"]}/{data_config["database_name"]}') as con:
