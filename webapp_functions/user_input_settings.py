@@ -30,23 +30,24 @@ def user_input_settings():
     if (st.session_state["routes_focal"]["first_lap_whole"].item()) or (st.session_state["routes_focal"]["first_lap_whole"].item() is None):
         for lap in range(1, st.session_state["laps"]+1):
             if lap>1:
-                lap_ride = lap_ride.with_columns((pl.col("distance")+st.session_state["routes_focal"].select("route_length").item()).alias("distance"))
-                lap_notes = lap_notes.with_columns((pl.col("note_start")+int(st.session_state["routes_focal"].select("route_length").item())).alias("note_start"))
-                lap_notes = lap_notes.with_columns((pl.col("note_end")+int(st.session_state["routes_focal"].select("route_length").item())).alias("note_end"))
+                lap_ride = lap_ride.with_columns(distance=(pl.col("distance")+st.session_state["routes_focal"].select("route_length").item()))
+                lap_notes = lap_notes.with_columns(note_start=(pl.col("note_start")+int(st.session_state["routes_focal"].select("route_length").item())))
+                lap_notes = lap_notes.with_columns(note_end=(pl.col("note_end")+int(st.session_state["routes_focal"].select("route_length").item())))
             st.session_state["rides_focal"] = pl.concat([st.session_state["rides_focal"], lap_ride])
             st.session_state["notes_focal"] = pl.concat([st.session_state["notes_focal"], lap_notes])
     else:
         for lap in range(2, st.session_state["laps"]+1):
             if lap>2:
-                lap_ride = lap_ride.with_columns((pl.col("distance")+st.session_state["routes_focal"].select("route_length").item()).alias("distance"))
-                lap_notes = lap_notes.with_columns((pl.col("note_start")+int(st.session_state["routes_focal"].select("route_length").item())).alias("note_start"))
-                lap_notes = lap_notes.with_columns((pl.col("note_end")+int(st.session_state["routes_focal"].select("route_length").item())).alias("note_end"))
+                lap_ride = lap_ride.with_columns(distance=(pl.col("distance")+st.session_state["routes_focal"].select("route_length").item()))
+                lap_notes = lap_notes.with_columns(note_start=(pl.col("note_start")+int(st.session_state["routes_focal"].select("route_length").item())))
+                lap_notes = lap_notes.with_columns(note_end=(pl.col("note_end")+int(st.session_state["routes_focal"].select("route_length").item())))
             st.session_state["rides_focal"] = pl.concat([st.session_state["rides_focal"], lap_ride])
             st.session_state["notes_focal"] = pl.concat([st.session_state["notes_focal"], lap_notes])
 
     # Remove dup note_titles
-    st.session_state["notes_focal"] = st.session_state["notes_focal"].with_columns(pl.when(pl.col("note_title").shift(1)!=pl.col("note_title")).then(pl.col("note_title")).alias("note_title"))
+    #st.session_state["notes_focal"] = st.session_state["notes_focal"].with_columns(note_title=pl.when(pl.col("note_title").shift(1)!=pl.col("note_title")).then(pl.col("note_title")).otherwise(-1))
 
+    
     # Metric --------------------------------------------------------------------------------------
     metric_input.toggle("Metric", key="metric", value=True)
 
