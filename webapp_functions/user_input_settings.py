@@ -47,7 +47,6 @@ def user_input_settings():
     # Remove dup note_titles
     #st.session_state["notes_focal"] = st.session_state["notes_focal"].with_columns(note_title=pl.when(pl.col("note_title").shift(1)!=pl.col("note_title")).then(pl.col("note_title")).otherwise(-1))
 
-    
     # Metric --------------------------------------------------------------------------------------
     metric_input.toggle("Metric", key="metric", value=True)
 

@@ -18,7 +18,7 @@ Special thanks to the [Tea & Scone club](https://www.facebook.com/TeaSconeBikes)
             
 It is early days for this project and I am currently working to build the data, 
 but it takes time &mdash; each route requires ride data and annotating. 
-That involves watching races on YouTube and repeatedly watching the key sections to create a thorough descriotand accurate description.
+That involves watching races on YouTube and repeatedly watching the key sections to create a thorough and accurate description.
 
 Finding this app useful? I've made it to be fully open and free to use, but if you'd like to make a donation then head over to [buymeacoffee](https://buymeacoffee.com/griffin_cycling).
 With enough donations, I might even get to upgrade my 15 year old Specialized Allez! Every donation is hugely appreciated and helps keep me motivated to invest my time and expertise :) 
