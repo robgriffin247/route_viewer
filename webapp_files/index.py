@@ -13,7 +13,9 @@ user_input_route()
 user_input_settings()
 
 # Container used because plot needs to update in response to live notes table (below it) 
-profile_container = st.container()
+
+with st.expander("Profile", expanded=True):
+    profile_container = st.container()
 
 with st.expander("Map"):
     st.map(data=st.session_state["rides_focal"], latitude="latitude", longitude  ="longitude", size=1, height=650)
