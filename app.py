@@ -11,6 +11,7 @@ st.set_page_config(
     page_title=page_config['page_name'],
     page_icon=page_config['page_icon'],
     initial_sidebar_state='collapsed',
+    layout="wide",
 )
 
 # Styling
