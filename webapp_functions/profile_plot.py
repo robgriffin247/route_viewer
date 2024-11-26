@@ -8,7 +8,8 @@ def profile_plot():
                   y="altitude",
                   hover_data=["gradient"],
                   labels={"distance":f"Distance ({st.session_state['dst_units']})",
-                          "altitude":f"Altitude ({st.session_state['alt_units']})"})
+                          "altitude":f"Altitude ({st.session_state['alt_units']})"},
+                  height=530)
     
     colours = {"sprint":"green", "climb":"red", None:"blue"}
 

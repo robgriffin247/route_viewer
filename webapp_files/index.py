@@ -11,7 +11,14 @@ st.session_state["default_route"] = "Mighty Metropolitan"
 load_data()
 user_input_route()
 user_input_settings()
+
+# Container used because plot needs to update in response to live notes table (below it) 
 profile_container = st.container()
-notes_table()
+
+with st.expander("Map"):
+    st.map(data=st.session_state["rides_focal"], latitude="latitude", longitude  ="longitude", size=1, height=650)
+
+with st.expander("Notes", expanded=(st.session_state["notes_focal"].height>0)):
+    notes_table()
 
 profile_container.plotly_chart(profile_plot())

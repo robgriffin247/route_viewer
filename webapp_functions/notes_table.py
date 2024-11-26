@@ -18,4 +18,4 @@ def notes_table():
                 )
     
     else:
-        st.write("Apologies - notes have not yet been created for this route!")
+        st.write("Apologies. Notes have not yet been created for this route! I am working to generate new notes all the time but it involves a lot of work in my limited spare time. Please check back soon or reach out to me to request the notes; I will prioritise the most requested.")

@@ -13,7 +13,7 @@ def int_rides():
     with duckdb.connect(f'{data_config["data_directory"]}/{data_config["database_name"]}') as con:
         df = con.sql(f"""
                         with rides as (
-                            select world, route, distance, altitude
+                            select world, route, distance, altitude, longitude, latitude
                         from {data_config["schema_stg"]}.stg_rides
                         ),
 
