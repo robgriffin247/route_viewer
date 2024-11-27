@@ -15,7 +15,7 @@ def int_routes(route=False):
                         with zi_routes as (
                             select world, route,
                                 cast(str_split(lead, 'km')[1] as float) * 1000 as lead,
-                                cast(str_split(total, 'km')[1] as float) * 1000 as total
+                                (cast(str_split(total, 'km')[1] as float) * 1000) + (cast(str_split(lead, 'km')[1] as float) * 1000) as total
                             from {data_config["schema_stg"]}.stg_zi_routes
                             where lower(restriction) not like '%run only%' or restriction is null
                         ),

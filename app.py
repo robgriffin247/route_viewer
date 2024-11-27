@@ -33,3 +33,6 @@ st.html("<h4>Racing Notes for Zwift</h4>")
 pg.run()
 
 buy_coffee()
+
+
+st.write(st.session_state["routes_focal"])
