@@ -5,17 +5,22 @@ from webapp_functions.user_input_settings import user_input_settings
 from webapp_functions.notes_table import notes_table
 from webapp_functions.profile_plot import profile_plot
 
-st.session_state["default_world"] = "Watopia"
-st.session_state["default_route"] = "Glyph Heights"
 
+# Get data into session - runs once at start to reduce amount of reload on change
 load_data()
+
+
+# Layout: Menus on top, followed by 3 components, each in an expander (profile, map and notes)
 user_input_route()
 user_input_settings()
 
-# Container used because plot needs to update in response to live notes table (below it)
 
 with st.expander("Profile", expanded=True):
+    # Container used because plot needs to update in response to live notes table (below it)
     profile_container = st.container()
+
+with st.expander("Notes", expanded=(st.session_state["notes_focal"].height > 0)):
+    notes_table()
 
 with st.expander("Map"):
     st.map(
@@ -25,8 +30,5 @@ with st.expander("Map"):
         size=1,
         height=650,
     )
-
-with st.expander("Notes", expanded=(st.session_state["notes_focal"].height > 0)):
-    notes_table()
 
 profile_container.plotly_chart(profile_plot())

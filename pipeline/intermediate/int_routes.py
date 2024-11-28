@@ -3,15 +3,19 @@ import streamlit as st
 import pandas as pd
 import inspect
 
-data_config = st.secrets['data_config']
+data_config = st.secrets["data_config"]
+
 
 # - Create a table with all routes
 # - Use data from routes where possible
 def int_routes(route=False):
-    print(f'Running {inspect.stack()[0][3]}...')
+    print(f"Running {inspect.stack()[0][3]}...")
 
-    with duckdb.connect(f'{data_config["data_directory"]}/{data_config["database_name"]}') as con:
-        df = con.sql(f"""
+    with duckdb.connect(
+        f'{data_config["data_directory"]}/{data_config["database_name"]}'
+    ) as con:
+        df = con.sql(
+            f"""
                         with zi_routes as (
                             select world, route,
                                 cast(str_split(lead, 'km')[1] as float) * 1000 as lead,
@@ -38,10 +42,13 @@ def int_routes(route=False):
                         )
 
                         select * from add_length order by world, route, lap_finish
-                    """).to_df()
-    
-        con.sql(f'create or replace table {data_config["schema_int"]}.{inspect.stack()[0][3]} as select * from df')
+                    """
+        ).to_df()
+
+        con.sql(
+            f'create or replace table {data_config["schema_int"]}.{inspect.stack()[0][3]} as select * from df'
+        )
 
     if route:
-        df = df.loc[df.route==route]
+        df = df.loc[df.route == route]
     return df
