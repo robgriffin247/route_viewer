@@ -8,16 +8,17 @@ data_config = st.secrets["data_config"]
 page_config = st.secrets["page_config"]
 
 
+# Set default route
+st.session_state["default_world"] = "Richmond"
+st.session_state["default_route"] = "Cobbled Climbs"
+
+
 st.set_page_config(
     page_title=page_config["page_name"],
     page_icon=page_config["page_icon"],
     initial_sidebar_state="collapsed",
     layout="wide",
 )
-
-
-st.session_state["default_world"] = "Richmond"
-st.session_state["default_route"] = "Cobbled Climbs"
 
 
 # Styling
