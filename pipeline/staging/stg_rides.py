@@ -19,6 +19,7 @@ def stg_rides():
     df = []
     files = os.listdir(f'{data_config["data_directory"]}/gpx_files')
     route_ids = set()
+
     i = 0
     for file in files:
         world, route = [

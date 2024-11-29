@@ -89,7 +89,9 @@ with duckdb.connect(
         i = 0
         for index, value in loaded.iterrows():
             i += 1
-            print(f" - {value.item()}")
+            print(
+                f" - {value.item()}: https://zwiftinsider.com/route/{value.item().split(': ')[1].replace(' ', '-').lower()}"
+            )
             if not i % 5:
                 print("")
 
@@ -118,7 +120,16 @@ def check_gpx_files():
                 f"select * from routes where world='{world}' and route='{route}'"
             ).to_df()
 
-            if len(df) == 0:
+            if (len(df) == 0) & (
+                file
+                not in (
+                    "Watopia__Watopias_Waistband.gpx",
+                    "France__RGV.gpx",
+                    "Yorkshire__Queens_Highway.gpx",
+                    "Paris__Champs-Élysées.gpx",
+                    "Watopia__Climbers_Gambit.gpx",
+                )
+            ):
                 print(f"CHECK: {world}, {route}")
 
 
