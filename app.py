@@ -9,8 +9,8 @@ page_config = st.secrets["page_config"]
 
 
 # Set default route
-st.session_state["default_world"] = "Richmond"
-st.session_state["default_route"] = "Cobbled Climbs"
+st.session_state["default_world"] = "London"
+st.session_state["default_route"] = "Keith Hill After Party"
 
 
 st.set_page_config(
