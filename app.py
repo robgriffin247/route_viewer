@@ -32,7 +32,6 @@ with open("./webapp_files/style.css") as f:
 st.title(page_config["page_name"])
 st.html("<h4>Racing Notes for Zwift</h4>")
 
-
 # Define navigation and pages
 main_page = st.Page("webapp_files/index.py", title=f"{page_config['page_name']}")
 about_page = st.Page("webapp_files/about.py", title=f"About {page_config['page_name']}")
