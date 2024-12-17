@@ -35,7 +35,7 @@ def notes_table():
                 "note": st.column_config.TextColumn("Note", width="large"),
             },
         )
-        st.write(st.session_state["routes_focal"])
+        #st.write(st.session_state["routes_focal"])
 
     else:
         st.write(

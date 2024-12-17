@@ -9,8 +9,8 @@ page_config = st.secrets["page_config"]
 
 
 # Set default route
-st.session_state["default_world"] = "London"
-st.session_state["default_route"] = "Keith Hill After Party"
+st.session_state["default_world"] = "Watopia"
+st.session_state["default_route"] = "Tair Dringfa Fechan"
 
 
 st.set_page_config(
@@ -36,7 +36,6 @@ st.html("<h4>Racing Notes for Zwift</h4>")
 # Define navigation and pages
 main_page = st.Page("webapp_files/index.py", title=f"{page_config['page_name']}")
 about_page = st.Page("webapp_files/about.py", title=f"About {page_config['page_name']}")
-
 
 pg = st.navigation(
     [
