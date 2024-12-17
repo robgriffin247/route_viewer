@@ -53,9 +53,15 @@ def int_rides():
                             select * exclude(gradient),
                                 mean(gradient) over (partition by route, world order by distance rows between 0 preceding and 2 following) as gradient
                             from add_gradient
+                        ),
+
+                        tair_correction as (
+                            select * exclude(distance), 
+                                case when route='Tair Dringfa Fechan' then distance + 180 else distance end as distance
+                            from smooth_gradient
                         )
 
-                        select * from smooth_gradient
+                        select * from tair_correction
                     """
         ).to_df()
 
