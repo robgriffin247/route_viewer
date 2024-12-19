@@ -12,3 +12,10 @@ The route profile graph is interactive, allowing users to zoom in and out of sec
 - Create table (dim_basic) of routes with no detailed notes - add to data_page.py
 - Create upload feature in data_page.py; check if route needed
 - Focus work on notes to id routes that can be lapped (then reinstate can_lap flow control)
+
+
+
+
+
+- [x] task 1
+- [ ] task 2
